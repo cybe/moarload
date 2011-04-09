@@ -1,0 +1,15 @@
+style=allman
+indent=spaces=4
+brackets=break
+indent-switches
+indent-namespaces
+indent-col1-comments
+max-instatement-indent=60
+min-conditional-indent=0
+pad-oper 
+pad-header
+unpad-paren
+add-brackets
+convert-tabs
+align-pointer=type
+lineend=linux
