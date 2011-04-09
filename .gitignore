@@ -1,0 +1,16 @@
+# backup files
+*~
+
+# MacOS dir file
+*.DS_Store
+
+# vim swap file
+*.swp
+
+# codeblocks build files
+bin/
+obj/
+*.depend
+
+# codeblocks various
+*.layout
