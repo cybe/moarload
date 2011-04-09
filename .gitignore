@@ -14,3 +14,6 @@ obj/
 
 # codeblocks various
 *.layout
+
+# astyle
+*.orig
