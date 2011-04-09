@@ -21,11 +21,11 @@ bool moarloadApp::OnInit()
     //(*AppInitialize
     bool wxsOK = true;
     wxInitAllImageHandlers();
-    if ( wxsOK )
+    if (wxsOK)
     {
-    	moarloadFrame* Frame = new moarloadFrame(0);
-    	Frame->Show();
-    	SetTopWindow(Frame);
+        moarloadFrame* Frame = new moarloadFrame(0);
+        Frame->Show();
+        SetTopWindow(Frame);
     }
     //*)
     return wxsOK;

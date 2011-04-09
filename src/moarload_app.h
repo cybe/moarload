@@ -14,8 +14,8 @@
 
 class moarloadApp : public wxApp
 {
-    public:
-        virtual bool OnInit();
+public:
+    virtual bool OnInit();
 };
 
 #endif // MOARLOADAPP_H

@@ -16,14 +16,16 @@
 //*)
 
 //helper functions
-enum wxbuildinfoformat {
-    short_f, long_f };
+enum wxbuildinfoformat
+{
+    short_f, long_f
+};
 
 wxString wxbuildinfo(wxbuildinfoformat format)
 {
     wxString wxbuild(wxVERSION_STRING);
 
-    if (format == long_f )
+    if (format == long_f)
     {
 #if defined(__WXMSW__)
         wxbuild << _T("-Windows");
@@ -47,12 +49,12 @@ const long moarloadFrame::idMenuAbout = wxNewId();
 const long moarloadFrame::ID_STATUSBAR1 = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(moarloadFrame,wxFrame)
+BEGIN_EVENT_TABLE(moarloadFrame, wxFrame)
     //(*EventTable(moarloadFrame)
     //*)
 END_EVENT_TABLE()
 
-moarloadFrame::moarloadFrame(wxWindow* parent,wxWindowID id)
+moarloadFrame::moarloadFrame(wxWindow* parent, wxWindowID id)
 {
     //(*Initialize(moarloadFrame)
     wxMenuItem* MenuItem2;
@@ -75,12 +77,12 @@ moarloadFrame::moarloadFrame(wxWindow* parent,wxWindowID id)
     StatusBar1 = new wxStatusBar(this, ID_STATUSBAR1, 0, _T("ID_STATUSBAR1"));
     int __wxStatusBarWidths_1[1] = { -1 };
     int __wxStatusBarStyles_1[1] = { wxSB_NORMAL };
-    StatusBar1->SetFieldsCount(1,__wxStatusBarWidths_1);
-    StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
+    StatusBar1->SetFieldsCount(1, __wxStatusBarWidths_1);
+    StatusBar1->SetStatusStyles(1, __wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
 
-    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&moarloadFrame::OnQuit);
-    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&moarloadFrame::OnAbout);
+    Connect(idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&moarloadFrame::OnQuit);
+    Connect(idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&moarloadFrame::OnAbout);
     //*)
 }
 

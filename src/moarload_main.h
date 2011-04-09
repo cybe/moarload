@@ -18,29 +18,29 @@
 
 class moarloadFrame: public wxFrame
 {
-    public:
+public:
 
-        moarloadFrame(wxWindow* parent,wxWindowID id = -1);
-        virtual ~moarloadFrame();
+    moarloadFrame(wxWindow* parent, wxWindowID id = -1);
+    virtual ~moarloadFrame();
 
-    private:
+private:
 
-        //(*Handlers(moarloadFrame)
-        void OnQuit(wxCommandEvent& event);
-        void OnAbout(wxCommandEvent& event);
-        //*)
+    //(*Handlers(moarloadFrame)
+    void OnQuit(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
+    //*)
 
-        //(*Identifiers(moarloadFrame)
-        static const long idMenuQuit;
-        static const long idMenuAbout;
-        static const long ID_STATUSBAR1;
-        //*)
+    //(*Identifiers(moarloadFrame)
+    static const long idMenuQuit;
+    static const long idMenuAbout;
+    static const long ID_STATUSBAR1;
+    //*)
 
-        //(*Declarations(moarloadFrame)
-        wxStatusBar* StatusBar1;
-        //*)
+    //(*Declarations(moarloadFrame)
+    wxStatusBar* StatusBar1;
+    //*)
 
-        DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 #endif // MOARLOADMAIN_H
