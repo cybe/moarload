@@ -17,3 +17,6 @@ obj/
 
 # astyle
 *.orig
+
+# CMage build files
+/build
