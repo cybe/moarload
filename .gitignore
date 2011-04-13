@@ -18,5 +18,5 @@ obj/
 # astyle
 *.orig
 
-# CMage build files
-/build
+# CMake build files
+build/
