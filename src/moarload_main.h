@@ -10,8 +10,6 @@
 #ifndef MOARLOADMAIN_H
 #define MOARLOADMAIN_H
 
-#include <nonexistant.h>
-
 //(*Headers(moarloadFrame)
 #include <wx/menu.h>
 #include <wx/statusbr.h>
