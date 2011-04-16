@@ -26,7 +26,7 @@ void wait(int seconds)
 
 void thread()
 {
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 10; ++i)
     {
         wait(1);
         std::cout << i << std::endl;
