@@ -3,6 +3,8 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="moarload" />
+		<Option makefile_is_custom="1" />
+		<Option execution_dir="build" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -13,13 +15,24 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="`wx-config --cflags`" />
-					<Add option="-Wall" />					
 				</Compiler>
 				<Linker>
-					<Add option="`wx-config --libs`" />					
+					<Add option="`wx-config --libs`" />
 				</Linker>
+				<ExtraCommands>
+					<Add before='cmake -G &quot;Unix Makefiles&quot; -DCMAKE_BUILD_TYPE=Release ..' />
+				</ExtraCommands>
+				<MakeCommands>
+					<Build command="$make -f $makefile" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile" />
+					<SilentBuild command="$make -s -f $makefile" />
+				</MakeCommands>
 			</Target>
 			<Target title="GCC_Release">
 				<Option output="bin/Release/moarload" prefix_auto="1" extension_auto="1" />
@@ -29,17 +42,28 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-Wall" />
 					<Add option="`wx-config --cflags`" />
-					<Add option="-Wall" />						
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="`wx-config --libs`" />					
+					<Add option="`wx-config --libs`" />
 				</Linker>
-			</Target>		
+				<ExtraCommands>
+					<Add before='cmake -G &quot;Unix Makefiles&quot; -DCMAKE_BUILD_TYPE=RelWithDebInfo ..' />
+				</ExtraCommands>
+				<MakeCommands>
+					<Build command="$make -f $makefile" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile" />
+					<SilentBuild command="$make -s -f $makefile" />
+				</MakeCommands>
+			</Target>
 			<Target title="VC10_Debug">
-				<Option output="bin\Debug\moarload" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+				<Option output="bin/Debug/moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="msvc10" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -48,7 +72,6 @@
 					<Add option="/Zi" />
 					<Add option="/D_DEBUG" />
 					<Add option="/D__WXDEBUG__" />
-					<Add directory="$(#wx)\lib\vc_lib\mswud" />
 					<Add option="/EHc" />
 					<Add option="/EHs" />
 					<Add option="/W3" />
@@ -62,28 +85,27 @@
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
-					<Add directory="$(#wx)\include" />
-					<Add directory="$(#wx)\contrib\include" />					
+					<Add directory="$(#wx)/lib/vc_lib/mswud" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/contrib/include" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="$(#wx)\lib\vc_lib\mswud" />
-					<Add directory="$(#wx)\include" />
+					<Add directory="$(#wx)/lib/vc_lib/mswud" />
+					<Add directory="$(#wx)/include" />
 				</ResourceCompiler>
 				<Linker>
 					<Add option="/DEBUG" />
 					<Add option="/NODEFAULTLIB:libcmtd.lib" />
 					<Add option="/NODEFAULTLIB:msvcrt.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add option="/SUBSYSTEM:WINDOWS" />
 					<Add library="msvcrtd.lib" />
 					<Add library="wxmsw28ud_core.lib" />
 					<Add library="wxbase28ud.lib" />
 					<Add library="wxpngd.lib" />
 					<Add library="wxzlibd.lib" />
 					<Add library="wxtiffd.lib" />
-					<Add library="wxzlibd.lib" />
-					<Add library="wxjpegd.lib" />					
-					<Add directory="$(#wx)\lib\vc_lib" />
-					<Add option="/INCREMENTAL:NO" />
-					<Add option="/SUBSYSTEM:WINDOWS" />
+					<Add library="wxjpegd.lib" />
 					<Add library="winmm.lib" />
 					<Add library="rpcrt4.lib" />
 					<Add library="kernel32.lib" />
@@ -98,12 +120,13 @@
 					<Add library="uuid.lib" />
 					<Add library="comctl32.lib" />
 					<Add library="wsock32.lib" />
-					<Add library="odbc32.lib" />					
+					<Add library="odbc32.lib" />
+					<Add directory="$(#wx)/lib/vc_lib" />
 				</Linker>
 			</Target>
 			<Target title="VC10_Release">
-				<Option output="bin\Release\moarload" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
+				<Option output="bin/Release/moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="msvc10" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -112,7 +135,6 @@
 					<Add option="/DNDEBUG" />
 					<Add option="/MD" />
 					<Add option="/O2" />
-					<Add directory="$(#wx)\lib\vc_lib\mswu" />
 					<Add option="/EHc" />
 					<Add option="/EHs" />
 					<Add option="/W3" />
@@ -126,25 +148,24 @@
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
-					<Add directory="$(#wx)\include" />
-					<Add directory="$(#wx)\contrib\include" />					
+					<Add directory="$(#wx)/lib/vc_lib/mswu" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/contrib/include" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="$(#wx)\lib\vc_lib\mswu" />
+					<Add directory="$(#wx)/lib/vc_lib/mswu" />
 				</ResourceCompiler>
 				<Linker>
 					<Add option="/NODEFAULTLIB:libcmt.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add option="/SUBSYSTEM:WINDOWS" />
 					<Add library="msvcrt.lib" />
 					<Add library="wxmsw28u_core.lib" />
 					<Add library="wxbase28u.lib" />
 					<Add library="wxpng.lib" />
 					<Add library="wxzlib.lib" />
 					<Add library="wxtiff.lib" />
-					<Add library="wxzlib.lib" />
-					<Add library="wxjpeg.lib" />						
-					<Add directory="$(#wx)\lib\vc_lib" />
-					<Add option="/INCREMENTAL:NO" />
-					<Add option="/SUBSYSTEM:WINDOWS" />
+					<Add library="wxjpeg.lib" />
 					<Add library="winmm.lib" />
 					<Add library="rpcrt4.lib" />
 					<Add library="kernel32.lib" />
@@ -159,16 +180,11 @@
 					<Add library="uuid.lib" />
 					<Add library="comctl32.lib" />
 					<Add library="wsock32.lib" />
-					<Add library="odbc32.lib" />					
+					<Add library="odbc32.lib" />
+					<Add directory="$(#wx)/lib/vc_lib" />
 				</Linker>
 			</Target>
 		</Build>
-		<Compiler>
-		</Compiler>
-		<ResourceCompiler>
-		</ResourceCompiler>
-		<Linker>
-		</Linker>
 		<Unit filename="src/moarload_app.cc" />
 		<Unit filename="src/moarload_app.h" />
 		<Unit filename="src/moarload_main.cc" />
@@ -180,7 +196,7 @@
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="src/moarload_app.cc" main="moarloadFrame" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/moarloadframe.wxs" src="src/moarload_main.cc" hdr="src/moarload_main.h" fwddecl="0" i18n="1" name="moarloadFrame" language="CPP" />
+					<wxFrame wxs="wxsmith/moarloadframe.wxs" src="src/moarload_main.cc" hdr="src/moarload_main.h" name="moarloadFrame" language="CPP" />
 				</resources>
 			</wxsmith>
 			<debugger />
