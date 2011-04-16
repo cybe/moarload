@@ -9,12 +9,30 @@
 
 #include "moarload_app.h"
 
+#include <iostream>
+#include <boost/thread.hpp>
+
 //(*AppHeaders
 #include "moarload_main.h"
 #include <wx/image.h>
 //*)
 
 IMPLEMENT_APP(moarloadApp);
+
+void wait(int seconds)
+{
+    boost::this_thread::sleep(boost::posix_time::seconds(seconds));
+}
+
+void thread()
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        wait(1);
+        std::cout << i << std::endl;
+    }
+}
+
 
 bool moarloadApp::OnInit()
 {
@@ -28,5 +46,6 @@ bool moarloadApp::OnInit()
         SetTopWindow(Frame);
     }
     //*)
+    boost::thread t(thread);
     return wxsOK;
 }
