@@ -6,7 +6,7 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="GCC_Debug">
 				<Option output="bin/Debug/moarload" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
@@ -16,7 +16,7 @@
 					<Add option="-g" />
 				</Compiler>
 			</Target>
-			<Target title="Release">
+			<Target title="GCC_Release">
 				<Option output="bin/Release/moarload" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
@@ -28,27 +28,119 @@
 				<Linker>
 					<Add option="-s" />
 				</Linker>
+			</Target>		
+			<Target title="VC10_Debug">
+				<Option output="bin\Debug\moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="0" />
+				<Option compiler="msvc10" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/Zi" />
+					<Add option="/D_DEBUG" />
+					<Add option="/D__WXDEBUG__" />
+					<Add directory="$(#wx)\lib\vc_lib\mswud" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)\lib\vc_lib\mswud" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add option="/NODEFAULTLIB:libcmtd.lib" />
+					<Add option="/NODEFAULTLIB:msvcrt.lib" />
+					<Add library="msvcrtd.lib" />
+					<Add library="wxmsw28ud_core.lib" />
+					<Add library="wxbase28ud.lib" />
+					<Add library="wxpngd.lib" />
+					<Add library="wxzlibd.lib" />
+					<Add library="wxtiffd.lib" />
+					<Add library="wxzlibd.lib" />
+					<Add library="wxjpegd.lib" />					
+					<Add directory="$(#wx)\lib\vc_lib" />
+				</Linker>
+			</Target>
+			<Target title="VC10_Release">
+				<Option output="bin\Release\moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="0" />
+				<Option compiler="msvc10" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="/Ox" />
+					<Add option="/DNDEBUG" />
+					<Add option="/MD" />
+					<Add option="/O2" />
+					<Add directory="$(#wx)\lib\vc_lib\mswu" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)\lib\vc_lib\mswu" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/NODEFAULTLIB:libcmt.lib" />
+					<Add library="msvcrt.lib" />
+					<Add library="wxmsw28u_core.lib" />
+					<Add library="wxbase28u.lib" />
+					<Add library="wxpng.lib" />
+					<Add library="wxzlib.lib" />
+					<Add library="wxtiff.lib" />
+					<Add library="wxzlib.lib" />
+					<Add library="wxjpeg.lib" />						
+					<Add directory="$(#wx)\lib\vc_lib" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="`wx-config --cflags`" />
-			<Add option="-Wall" />
+			<Add option="/EHc" />
+			<Add option="/EHs" />
+			<Add option="/W3" />
+			<Add option="/Zc:auto" />
+			<Add option="/Zc:wchar_t" />
+			<Add option="/DWIN32" />
+			<Add option="/D__WIN32__" />
+			<Add option="/D__WXMSW__" />
+			<Add option="/DwxUSE_UNICODE" />
+			<Add option="/D_WINDOWS" />
+			<Add option="/D_CRT_SECURE_DEPRECATE" />
+			<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+			<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+			<Add directory="$(#wx)\include" />
+			<Add directory="$(#wx)\contrib\include" />
 		</Compiler>
+		<ResourceCompiler>
+			<Add directory="$(#wx)\include" />
+		</ResourceCompiler>
 		<Linker>
-			<Add option="`wx-config --libs`" />
+			<Add option="/INCREMENTAL:NO" />
+			<Add option="/SUBSYSTEM:WINDOWS" />
+			<Add library="winmm.lib" />
+			<Add library="rpcrt4.lib" />
+			<Add library="kernel32.lib" />
+			<Add library="user32.lib" />
+			<Add library="gdi32.lib" />
+			<Add library="winspool.lib" />
+			<Add library="comdlg32.lib" />
+			<Add library="advapi32.lib" />
+			<Add library="shell32.lib" />
+			<Add library="ole32.lib" />
+			<Add library="oleaut32.lib" />
+			<Add library="uuid.lib" />
+			<Add library="comctl32.lib" />
+			<Add library="wsock32.lib" />
+			<Add library="odbc32.lib" />
 		</Linker>
-		<Unit filename="src/moarload_app.cc" />
-		<Unit filename="src/moarload_app.h" />
-		<Unit filename="src/moarload_main.cc" />
-		<Unit filename="src/moarload_main.h" />
-		<Unit filename="wxsmith/moarloadframe.wxs" />
+		<Unit filename="src\moarload_app.cc" />
+		<Unit filename="src\moarload_app.h" />
+		<Unit filename="src\moarload_main.cc" />
+		<Unit filename="src\moarload_main.h" />
+		<Unit filename="wxsmith\moarloadframe.wxs" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="src/moarload_app.cc" main="moarloadFrame" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/moarloadframe.wxs" src="src/moarload_main.cc" hdr="src/moarload_main.h" name="moarloadFrame" language="CPP" />
+					<wxFrame wxs="wxsmith/moarloadframe.wxs" src="src/moarload_main.cc" hdr="src/moarload_main.h" fwddecl="0" i18n="1" name="moarloadFrame" language="CPP" />
 				</resources>
 			</wxsmith>
 			<debugger />
