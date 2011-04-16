@@ -14,7 +14,12 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="`wx-config --cflags`" />
+					<Add option="-Wall" />					
 				</Compiler>
+				<Linker>
+					<Add option="`wx-config --libs`" />					
+				</Linker>
 			</Target>
 			<Target title="GCC_Release">
 				<Option output="bin/Release/moarload" prefix_auto="1" extension_auto="1" />
@@ -24,9 +29,12 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="`wx-config --cflags`" />
+					<Add option="-Wall" />						
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="`wx-config --libs`" />					
 				</Linker>
 			</Target>		
 			<Target title="VC10_Debug">
@@ -41,9 +49,25 @@
 					<Add option="/D_DEBUG" />
 					<Add option="/D__WXDEBUG__" />
 					<Add directory="$(#wx)\lib\vc_lib\mswud" />
+					<Add option="/EHc" />
+					<Add option="/EHs" />
+					<Add option="/W3" />
+					<Add option="/Zc:auto" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/DWIN32" />
+					<Add option="/D__WIN32__" />
+					<Add option="/D__WXMSW__" />
+					<Add option="/DwxUSE_UNICODE" />
+					<Add option="/D_WINDOWS" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add directory="$(#wx)\include" />
+					<Add directory="$(#wx)\contrib\include" />					
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)\lib\vc_lib\mswud" />
+					<Add directory="$(#wx)\include" />
 				</ResourceCompiler>
 				<Linker>
 					<Add option="/DEBUG" />
@@ -58,6 +82,23 @@
 					<Add library="wxzlibd.lib" />
 					<Add library="wxjpegd.lib" />					
 					<Add directory="$(#wx)\lib\vc_lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add option="/SUBSYSTEM:WINDOWS" />
+					<Add library="winmm.lib" />
+					<Add library="rpcrt4.lib" />
+					<Add library="kernel32.lib" />
+					<Add library="user32.lib" />
+					<Add library="gdi32.lib" />
+					<Add library="winspool.lib" />
+					<Add library="comdlg32.lib" />
+					<Add library="advapi32.lib" />
+					<Add library="shell32.lib" />
+					<Add library="ole32.lib" />
+					<Add library="oleaut32.lib" />
+					<Add library="uuid.lib" />
+					<Add library="comctl32.lib" />
+					<Add library="wsock32.lib" />
+					<Add library="odbc32.lib" />					
 				</Linker>
 			</Target>
 			<Target title="VC10_Release">
@@ -72,6 +113,21 @@
 					<Add option="/MD" />
 					<Add option="/O2" />
 					<Add directory="$(#wx)\lib\vc_lib\mswu" />
+					<Add option="/EHc" />
+					<Add option="/EHs" />
+					<Add option="/W3" />
+					<Add option="/Zc:auto" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/DWIN32" />
+					<Add option="/D__WIN32__" />
+					<Add option="/D__WXMSW__" />
+					<Add option="/DwxUSE_UNICODE" />
+					<Add option="/D_WINDOWS" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add directory="$(#wx)\include" />
+					<Add directory="$(#wx)\contrib\include" />					
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)\lib\vc_lib\mswu" />
@@ -87,53 +143,37 @@
 					<Add library="wxzlib.lib" />
 					<Add library="wxjpeg.lib" />						
 					<Add directory="$(#wx)\lib\vc_lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add option="/SUBSYSTEM:WINDOWS" />
+					<Add library="winmm.lib" />
+					<Add library="rpcrt4.lib" />
+					<Add library="kernel32.lib" />
+					<Add library="user32.lib" />
+					<Add library="gdi32.lib" />
+					<Add library="winspool.lib" />
+					<Add library="comdlg32.lib" />
+					<Add library="advapi32.lib" />
+					<Add library="shell32.lib" />
+					<Add library="ole32.lib" />
+					<Add library="oleaut32.lib" />
+					<Add library="uuid.lib" />
+					<Add library="comctl32.lib" />
+					<Add library="wsock32.lib" />
+					<Add library="odbc32.lib" />					
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="/EHc" />
-			<Add option="/EHs" />
-			<Add option="/W3" />
-			<Add option="/Zc:auto" />
-			<Add option="/Zc:wchar_t" />
-			<Add option="/DWIN32" />
-			<Add option="/D__WIN32__" />
-			<Add option="/D__WXMSW__" />
-			<Add option="/DwxUSE_UNICODE" />
-			<Add option="/D_WINDOWS" />
-			<Add option="/D_CRT_SECURE_DEPRECATE" />
-			<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
-			<Add option="/D_CRT_SECURE_NO_WARNINGS" />
-			<Add directory="$(#wx)\include" />
-			<Add directory="$(#wx)\contrib\include" />
 		</Compiler>
 		<ResourceCompiler>
-			<Add directory="$(#wx)\include" />
 		</ResourceCompiler>
 		<Linker>
-			<Add option="/INCREMENTAL:NO" />
-			<Add option="/SUBSYSTEM:WINDOWS" />
-			<Add library="winmm.lib" />
-			<Add library="rpcrt4.lib" />
-			<Add library="kernel32.lib" />
-			<Add library="user32.lib" />
-			<Add library="gdi32.lib" />
-			<Add library="winspool.lib" />
-			<Add library="comdlg32.lib" />
-			<Add library="advapi32.lib" />
-			<Add library="shell32.lib" />
-			<Add library="ole32.lib" />
-			<Add library="oleaut32.lib" />
-			<Add library="uuid.lib" />
-			<Add library="comctl32.lib" />
-			<Add library="wsock32.lib" />
-			<Add library="odbc32.lib" />
 		</Linker>
-		<Unit filename="src\moarload_app.cc" />
-		<Unit filename="src\moarload_app.h" />
-		<Unit filename="src\moarload_main.cc" />
-		<Unit filename="src\moarload_main.h" />
-		<Unit filename="wxsmith\moarloadframe.wxs" />
+		<Unit filename="src/moarload_app.cc" />
+		<Unit filename="src/moarload_app.h" />
+		<Unit filename="src/moarload_main.cc" />
+		<Unit filename="src/moarload_main.h" />
+		<Unit filename="wxsmith/moarloadframe.wxs" />
 		<Extensions>
 			<code_completion />
 			<envvars />
