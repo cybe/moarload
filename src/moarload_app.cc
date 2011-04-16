@@ -29,5 +29,4 @@ bool moarloadApp::OnInit()
     }
     //*)
     return wxsOK;
-
 }
