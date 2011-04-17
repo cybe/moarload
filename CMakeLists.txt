@@ -21,7 +21,7 @@ IF(CMAKE_COMPILER_IS_GNUCXX)
     ADD_DEFINITIONS("-Wall -Wextra -ansi -pedantic")
 ENDIF()
 IF(MSVC)
-    MESSAGE(msvc compiler detected)
+    ADD_DEFINITIONS("/W4")
 ENDIF()
 
 # Subdirectories
