@@ -47,7 +47,5 @@ bool moarloadApp::OnInit()
     }
     //*)
     boost::thread t(thread);
-    char a[10];
-    a[10] = 0;
     return wxsOK;
 }
