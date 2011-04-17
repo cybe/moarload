@@ -17,7 +17,7 @@
 #include <wx/image.h>
 //*)
 
-IMPLEMENT_APP(moarloadApp);
+IMPLEMENT_APP(moarloadApp)
 
 void wait(int seconds)
 {
