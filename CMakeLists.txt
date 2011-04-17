@@ -17,6 +17,13 @@ project(moreload)
 # Minium CMake version
 cmake_minimum_required(VERSION 2.6)
 
+IF(CMAKE_COMPILER_IS_GNUCXX)
+    ADD_DEFINITIONS("-Wall -Wextra -ansi -pedantic")
+ENDIF()
+IF(MSVC)
+    MESSAGE(msvc compiler detected)
+ENDIF()
+
 # Subdirectories
 add_subdirectory(src)
 
