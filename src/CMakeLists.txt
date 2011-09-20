@@ -1,6 +1,9 @@
 set(SRCS
     moarload_app.cc
     moarload_main.cc
+    Pyload.cpp
+    pyload_constants.cpp
+    pyload_types.cpp
 )
 
 find_package(wxWidgets COMPONENTS core base REQUIRED)
@@ -21,6 +24,7 @@ if(Boost_FOUND)
 	find_package(Boost COMPONENTS thread REQUIRED)
 endif()
 
+include_directories("/usr/local/include/thrift/")
 
 if(UNIX)
     add_executable(moarload ${SRCS})
@@ -32,5 +36,6 @@ endif(WIN32)
 target_link_libraries(moarload
     ${wxWidgets_LIBRARIES}
     ${Boost_LIBRARIES}
+    /usr/local/lib/libthrift.a
 )
 

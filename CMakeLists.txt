@@ -18,7 +18,7 @@ project(moreload)
 cmake_minimum_required(VERSION 2.6)
 
 IF(CMAKE_COMPILER_IS_GNUCXX)
-    ADD_DEFINITIONS("-Wall -Wextra -ansi -pedantic")
+    ADD_DEFINITIONS("-Wall -Wextra -ansi")
 ENDIF()
 IF(MSVC)
     ADD_DEFINITIONS("/W4")

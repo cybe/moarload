@@ -9,8 +9,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="GCC_Debug">
-				<Option output="build\src\moarload" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+				<Option output="build/src/moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -35,8 +35,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="GCC_Release">
-				<Option output="build\src\moarload" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
+				<Option output="build/src/moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -62,8 +62,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="VC10_Debug">
-				<Option output="build\src\moarload" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+				<Option output="build/src/moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="msvc10" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -85,13 +85,13 @@
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
-					<Add directory="$(#wx)\lib\vc_lib\mswud" />
-					<Add directory="$(#wx)\include" />
-					<Add directory="$(#wx)\contrib\include" />
+					<Add directory="$(#wx)/lib/vc_lib/mswud" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/contrib/include" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="$(#wx)\lib\vc_lib\mswud" />
-					<Add directory="$(#wx)\include" />
+					<Add directory="$(#wx)/lib/vc_lib/mswud" />
+					<Add directory="$(#wx)/include" />
 				</ResourceCompiler>
 				<Linker>
 					<Add option="/DEBUG" />
@@ -121,7 +121,7 @@
 					<Add library="comctl32.lib" />
 					<Add library="wsock32.lib" />
 					<Add library="odbc32.lib" />
-					<Add directory="$(#wx)\lib\vc_lib" />
+					<Add directory="$(#wx)/lib/vc_lib" />
 				</Linker>
 				<ExtraCommands>
 					<Add before="..\build_debug.bat" />
@@ -136,8 +136,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="VC10_Release">
-				<Option output="build\src\moarload" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
+				<Option output="build/src/moarload" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="msvc10" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -159,12 +159,12 @@
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
-					<Add directory="$(#wx)\lib\vc_lib\mswu" />
-					<Add directory="$(#wx)\include" />
-					<Add directory="$(#wx)\contrib\include" />
+					<Add directory="$(#wx)/lib/vc_lib/mswu" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/contrib/include" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="$(#wx)\lib\vc_lib\mswu" />
+					<Add directory="$(#wx)/lib/vc_lib/mswu" />
 				</ResourceCompiler>
 				<Linker>
 					<Add option="/NODEFAULTLIB:libcmt.lib" />
@@ -192,7 +192,7 @@
 					<Add library="comctl32.lib" />
 					<Add library="wsock32.lib" />
 					<Add library="odbc32.lib" />
-					<Add directory="$(#wx)\lib\vc_lib" />
+					<Add directory="$(#wx)/lib/vc_lib" />
 				</Linker>
 				<ExtraCommands>
 					<Add before="..\build_release.bat" />
@@ -207,18 +207,24 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="src\moarload_app.cc" />
-		<Unit filename="src\moarload_app.h" />
-		<Unit filename="src\moarload_main.cc" />
-		<Unit filename="src\moarload_main.h" />
-		<Unit filename="wxsmith\moarloadframe.wxs" />
+		<Unit filename="src/Pyload.cpp" />
+		<Unit filename="src/Pyload.h" />
+		<Unit filename="src/moarload_app.cc" />
+		<Unit filename="src/moarload_app.h" />
+		<Unit filename="src/moarload_main.cc" />
+		<Unit filename="src/moarload_main.h" />
+		<Unit filename="src/pyload_constants.cpp" />
+		<Unit filename="src/pyload_constants.h" />
+		<Unit filename="src/pyload_types.cpp" />
+		<Unit filename="src/pyload_types.h" />
+		<Unit filename="wxsmith/moarloadframe.wxs" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="src/moarload_app.cc" main="moarloadFrame" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/moarloadframe.wxs" src="src/moarload_main.cc" hdr="src/moarload_main.h" fwddecl="0" i18n="1" name="moarloadFrame" language="CPP" />
+					<wxFrame wxs="wxsmith/moarloadframe.wxs" src="src/moarload_main.cc" hdr="src/moarload_main.h" name="moarloadFrame" language="CPP" />
 				</resources>
 			</wxsmith>
 			<debugger />
