@@ -12,12 +12,7 @@
 #include <iostream>
 #include <boost/thread.hpp>
 
-#define BOOST_NETWORK_NO_LIB
-#if defined(_WIN32)
-#define __func__ __FUNCTION__
-#endif
-#include <boost/optional.hpp>
-#include <boost/network/protocol/http/client.hpp>
+#include "moarload_net.h"
 
 //(*AppHeaders
 #include "moarload_main.h"
@@ -55,12 +50,7 @@ bool moarloadApp::OnInit()
     //*)
     boost::thread t(thread);
 
-    using namespace boost::network;
-    http::client client;
-    http::client::request request("http://google.de/");
-    request << header("Connection", "close");
-    http::client::response response = client.get(request);
-    std::cout << body(response) << std::endl;
+    Net net;
 
     return wxsOK;
 }

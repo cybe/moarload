@@ -211,6 +211,8 @@
 		<Unit filename="src/moarload_app.h" />
 		<Unit filename="src/moarload_main.cc" />
 		<Unit filename="src/moarload_main.h" />
+		<Unit filename="src/moarload_net.cc" />
+		<Unit filename="src/moarload_net.h" />
 		<Unit filename="wxsmith/moarloadframe.wxs" />
 		<Extensions>
 			<code_completion />

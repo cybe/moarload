@@ -3,6 +3,7 @@
 set(SRCS
     moarload_app.cc
     moarload_main.cc
+    moarload_net.cc
 )
 
 
