@@ -12,20 +12,10 @@
 #include <iostream>
 #include <boost/thread.hpp>
 
-#include "Pyload.h"  // As an example
-
-#include <transport/TSocket.h>
-#include <transport/TBufferTransports.h>
-#include <protocol/TBinaryProtocol.h>
-
 //(*AppHeaders
 #include "moarload_main.h"
 #include <wx/image.h>
 //*)
-
-using namespace apache::thrift;
-using namespace apache::thrift::protocol;
-using namespace apache::thrift::transport;
 
 IMPLEMENT_APP(moarloadApp)
 
@@ -58,21 +48,5 @@ bool moarloadApp::OnInit()
     //*)
     boost::thread t(thread);
 
-    boost::shared_ptr<TSocket> socket(new TSocket("10.10.2.1", 7227));
-    boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
-    boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
-
-    PyloadClient client(protocol);
-    try {
-        transport->open();
-        client.login("dennis", "foobar");
-        std::string version;
-        client.getServerVersion(version);
-        std::cout << "pyload version: " << version << std::endl;
-        transport->close();
-    }
-    catch (::apache::thrift::TException ex) {
-        std::cout << "Exception: " << ex.what() << std::endl;
-    }
     return wxsOK;
 }

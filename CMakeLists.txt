@@ -12,13 +12,13 @@ RelWithDebInfo MinSizeRel.")
 ENDIF()
 
 # Project name
-project(moreload)
+project(moarload)
 
 # Minium CMake version
 cmake_minimum_required(VERSION 2.6)
 
 IF(CMAKE_COMPILER_IS_GNUCXX)
-    ADD_DEFINITIONS("-Wall -Wextra -ansi")
+    ADD_DEFINITIONS("-Wall -Wextra -ansi -pendantic")
 ENDIF()
 IF(MSVC)
     ADD_DEFINITIONS("/W4")
