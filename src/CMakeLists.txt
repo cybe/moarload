@@ -32,6 +32,9 @@ endif()
 if(UNIX)
     include_directories("/usr/local/include/cpp-netlib")
 endif(UNIX)
+if(WIN32)
+    include_directories("C:/dev/libs/cpp-netlib")
+endif(WIN32)
 
 
 #--- compile & link
