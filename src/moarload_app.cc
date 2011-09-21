@@ -16,6 +16,7 @@
 #if defined(_WIN32)
 #define __func__ __FUNCTION__
 #endif
+#include <boost/optional.hpp>
 #include <boost/network/protocol/http/client.hpp>
 
 //(*AppHeaders
