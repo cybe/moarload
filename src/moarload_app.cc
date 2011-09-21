@@ -12,6 +12,9 @@
 #include <iostream>
 #include <boost/thread.hpp>
 
+#define BOOST_NETWORK_NO_LIB
+#include <boost/network/protocol/http/client.hpp>
+
 //(*AppHeaders
 #include "moarload_main.h"
 #include <wx/image.h>
@@ -47,6 +50,13 @@ bool moarloadApp::OnInit()
     }
     //*)
     boost::thread t(thread);
+
+    using namespace boost::network;
+    http::client client;
+    http::client::request request("http://google.de/");
+    request << header("Connection", "close");
+    http::client::response response = client.get(request);
+    std::cout << body(response) << std::endl;
 
     return wxsOK;
 }
