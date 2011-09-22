@@ -124,7 +124,7 @@
 					<Add directory="$(#wx)/lib/vc_lib" />
 				</Linker>
 				<ExtraCommands>
-					<Add before="build_debug.bat" />
+					<Add before='cmake -G &quot;NMake Makefiles&quot; -DCMAKE_BUILD_TYPE=RelWithDebInfo ..' />
 				</ExtraCommands>
 				<MakeCommands>
 					<Build command="$make -f $makefile" />
@@ -195,7 +195,7 @@
 					<Add directory="$(#wx)/lib/vc_lib" />
 				</Linker>
 				<ExtraCommands>
-					<Add before="../build_release.bat" />
+					<Add before='cmake -G &quot;NMake Makefiles&quot; -DCMAKE_BUILD_TYPE=Release ..' />
 				</ExtraCommands>
 				<MakeCommands>
 					<Build command="$make -f $makefile" />
