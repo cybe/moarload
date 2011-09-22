@@ -5,6 +5,7 @@
 #include <wx/menu.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
+#include <wx/textctrl.h>
 //*)
 
 class MainFrameView: public wxFrame
@@ -22,6 +23,7 @@ private:
     //*)
 
     //(*Identifiers(MainFrameView)
+    static const long ID_TEXTCTRL1;
     static const long idMenuQuit;
     static const long idMenuAbout;
     static const long ID_STATUSBAR1;
@@ -29,6 +31,7 @@ private:
 
     //(*Declarations(MainFrameView)
     wxStatusBar* StatusBar1;
+    wxTextCtrl* TextCtrl1;
     //*)
 
     DECLARE_EVENT_TABLE()

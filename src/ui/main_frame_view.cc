@@ -1,6 +1,8 @@
 #include "main_frame_view.h"
 #include <wx/msgdlg.h>
 
+#include "../net/http_client.h"
+
 //(*InternalHeaders(MainFrameView)
 #include <wx/string.h>
 #include <wx/intl.h>
@@ -35,6 +37,7 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 }
 
 //(*IdInit(MainFrameView)
+const long MainFrameView::ID_TEXTCTRL1 = wxNewId();
 const long MainFrameView::idMenuQuit = wxNewId();
 const long MainFrameView::idMenuAbout = wxNewId();
 const long MainFrameView::ID_STATUSBAR1 = wxNewId();
@@ -47,6 +50,9 @@ END_EVENT_TABLE()
 
 MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
 {
+    HttpClient client;
+    wxString body(client.getBody().c_str(), wxConvUTF8);
+
     //(*Initialize(MainFrameView)
     wxMenuItem* MenuItem2;
     wxMenuItem* MenuItem1;
@@ -55,6 +61,8 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     wxMenu* Menu2;
 
     Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
+    SetClientSize(wxSize(318, 260));
+    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, body, wxPoint(128, 144), wxDefaultSize, wxTE_MULTILINE, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
     MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);

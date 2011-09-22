@@ -220,7 +220,7 @@
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="src/ui/main_frame_view.cc" main="MainFrameView" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/main_frame_view.wxs" src="src/main_frame_view.cc" hdr="src/main_frame_view.h" name="MainFrameView" language="CPP" />
+					<wxFrame wxs="wxsmith/main_frame_view.wxs" src="src/ui/main_frame_view.cc" hdr="src/ui/main_frame_view.h" name="MainFrameView" language="CPP" />
 				</resources>
 			</wxsmith>
 			<debugger />

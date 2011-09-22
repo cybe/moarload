@@ -11,13 +11,19 @@ HttpClient::HttpClient()
 {
     using namespace boost::network;
     http::client client;
-    http::client::request request("http://google.de/");
-    request << header("Connection", "close");
-    http::client::response response = client.get(request);
-    std::cout << body(response) << std::endl;
+    http::client::request request_("http://checkip.dyndns.com/");
+    request_ << header("Connection", "close");
+    http::client::response response_ = client.get(request_);
+    requestBody = body(response_);
+    std::cout << requestBody << std::endl;
 }
 
 HttpClient::~HttpClient()
 {
     //dtor
+}
+
+std::string HttpClient::getBody()
+{
+    return requestBody;
 }
