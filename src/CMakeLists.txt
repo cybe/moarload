@@ -1,7 +1,7 @@
 #--- source files
 
 set(SRCS
-    moarload_app.cc
+    main.cc
     moarload_main.cc
     moarload_net.cc
 )

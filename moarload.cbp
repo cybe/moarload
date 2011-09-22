@@ -207,8 +207,8 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="src/moarload_app.cc" />
-		<Unit filename="src/moarload_app.h" />
+		<Unit filename="src/main.cc" />
+		<Unit filename="src/main.h" />
 		<Unit filename="src/moarload_main.cc" />
 		<Unit filename="src/moarload_main.h" />
 		<Unit filename="src/moarload_net.cc" />
