@@ -21,7 +21,7 @@ IF(CMAKE_COMPILER_IS_GNUCXX)
     ADD_DEFINITIONS("-Wall -Wextra -ansi -pedantic -isystem /usr/local/include/cpp-netlib")
 ENDIF()
 IF(MSVC)
-    ADD_DEFINITIONS("/W4")
+    ADD_DEFINITIONS("")
 ENDIF()
 
 # Subdirectories
