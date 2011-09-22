@@ -2,8 +2,8 @@
 
 set(SRCS
     main.cc
+    net/http_client.cc
     ui/main_frame_view.cc
-    moarload_net.cc
 )
 
 

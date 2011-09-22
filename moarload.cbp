@@ -209,8 +209,8 @@
 		</Build>
 		<Unit filename="src/main.cc" />
 		<Unit filename="src/main.h" />
-		<Unit filename="src/moarload_net.cc" />
-		<Unit filename="src/moarload_net.h" />
+		<Unit filename="src/net/http_client.cc" />
+		<Unit filename="src/net/http_client.h" />
 		<Unit filename="src/ui/main_frame_view.cc" />
 		<Unit filename="src/ui/main_frame_view.h" />
 		<Unit filename="wxsmith/main_frame_view.wxs" />
