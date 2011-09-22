@@ -3,8 +3,8 @@
 #define BOOST_NETWORK_NO_LIB
 #if defined(_WIN32)
 #define __func__ __FUNCTION__
-#endif
 #include <boost/optional.hpp>
+#endif
 #include <boost/network/protocol/http/client.hpp>
 
 Net::Net()
