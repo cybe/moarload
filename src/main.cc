@@ -3,10 +3,11 @@
 #include <iostream>
 
 //(*AppHeaders
-#include "moarload_main.h"
+#include "ui/main_frame_view.h"
 #include <wx/image.h>
 //*)
 
+// main in wxWidgets
 IMPLEMENT_APP(Main)
 
 bool Main::OnInit()
@@ -16,9 +17,9 @@ bool Main::OnInit()
     wxInitAllImageHandlers();
     if (wxsOK)
     {
-        moarloadFrame* Frame = new moarloadFrame(0);
-        Frame->Show();
-        SetTopWindow(Frame);
+        MainFrameView* view = new MainFrameView(0);
+        view->Show();
+        SetTopWindow(view);
     }
     //*)
 

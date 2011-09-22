@@ -209,18 +209,18 @@
 		</Build>
 		<Unit filename="src/main.cc" />
 		<Unit filename="src/main.h" />
-		<Unit filename="src/moarload_main.cc" />
-		<Unit filename="src/moarload_main.h" />
 		<Unit filename="src/moarload_net.cc" />
 		<Unit filename="src/moarload_net.h" />
-		<Unit filename="wxsmith/moarloadframe.wxs" />
+		<Unit filename="src/ui/main_frame_view.cc" />
+		<Unit filename="src/ui/main_frame_view.h" />
+		<Unit filename="wxsmith/main_frame_view.wxs" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<wxsmith version="1">
-				<gui name="wxWidgets" src="src/moarload_app.cc" main="moarloadFrame" init_handlers="necessary" language="CPP" />
+				<gui name="wxWidgets" src="src/ui/main_frame_view.cc" main="MainFrameView" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/moarloadframe.wxs" src="src/moarload_main.cc" hdr="src/moarload_main.h" name="moarloadFrame" language="CPP" />
+					<wxFrame wxs="wxsmith/main_frame_view.wxs" src="src/main_frame_view.cc" hdr="src/main_frame_view.h" name="MainFrameView" language="CPP" />
 				</resources>
 			</wxsmith>
 			<debugger />

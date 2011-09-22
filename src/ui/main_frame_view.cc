@@ -1,16 +1,7 @@
-/***************************************************************
- * Name:      moarloadMain.cpp
- * Purpose:   Code for Application Frame
- * Author:     ()
- * Created:   2011-04-09
- * Copyright:  ()
- * License:
- **************************************************************/
-
-#include "moarload_main.h"
+#include "main_frame_view.h"
 #include <wx/msgdlg.h>
 
-//(*InternalHeaders(moarloadFrame)
+//(*InternalHeaders(MainFrameView)
 #include <wx/string.h>
 #include <wx/intl.h>
 //*)
@@ -43,26 +34,26 @@ wxString wxbuildinfo(wxbuildinfoformat format)
     return wxbuild;
 }
 
-//(*IdInit(moarloadFrame)
-const long moarloadFrame::idMenuQuit = wxNewId();
-const long moarloadFrame::idMenuAbout = wxNewId();
-const long moarloadFrame::ID_STATUSBAR1 = wxNewId();
+//(*IdInit(MainFrameView)
+const long MainFrameView::idMenuQuit = wxNewId();
+const long MainFrameView::idMenuAbout = wxNewId();
+const long MainFrameView::ID_STATUSBAR1 = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(moarloadFrame, wxFrame)
-    //(*EventTable(moarloadFrame)
+BEGIN_EVENT_TABLE(MainFrameView, wxFrame)
+    //(*EventTable(MainFrameView)
     //*)
 END_EVENT_TABLE()
 
-moarloadFrame::moarloadFrame(wxWindow* parent, wxWindowID id)
+MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
 {
-    //(*Initialize(moarloadFrame)
+    //(*Initialize(MainFrameView)
     wxMenuItem* MenuItem2;
     wxMenuItem* MenuItem1;
     wxMenu* Menu1;
     wxMenuBar* MenuBar1;
     wxMenu* Menu2;
-    
+
     Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
@@ -77,27 +68,27 @@ moarloadFrame::moarloadFrame(wxWindow* parent, wxWindowID id)
     StatusBar1 = new wxStatusBar(this, ID_STATUSBAR1, 0, _T("ID_STATUSBAR1"));
     int __wxStatusBarWidths_1[1] = { -1 };
     int __wxStatusBarStyles_1[1] = { wxSB_NORMAL };
-    StatusBar1->SetFieldsCount(1,__wxStatusBarWidths_1);
-    StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
+    StatusBar1->SetFieldsCount(1, __wxStatusBarWidths_1);
+    StatusBar1->SetStatusStyles(1, __wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
-    
-    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&moarloadFrame::OnQuit);
-    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&moarloadFrame::OnAbout);
+
+    Connect(idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnQuit);
+    Connect(idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnAbout);
     //*)
 }
 
-moarloadFrame::~moarloadFrame()
+MainFrameView::~MainFrameView()
 {
-    //(*Destroy(moarloadFrame)
+    //(*Destroy(MainFrameView)
     //*)
 }
 
-void moarloadFrame::OnQuit(wxCommandEvent& event)
+void MainFrameView::OnQuit(wxCommandEvent& event)
 {
     Close();
 }
 
-void moarloadFrame::OnAbout(wxCommandEvent& event)
+void MainFrameView::OnAbout(wxCommandEvent& event)
 {
     wxString msg = wxbuildinfo(long_f);
     wxMessageBox(msg, _("Welcome to..."));

@@ -2,7 +2,7 @@
 
 set(SRCS
     main.cc
-    moarload_main.cc
+    ui/main_frame_view.cc
     moarload_net.cc
 )
 
