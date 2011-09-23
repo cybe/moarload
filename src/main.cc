@@ -14,9 +14,9 @@ IMPLEMENT_APP(Main)
 
 bool Main::OnInit()
 {
-    Logger::setPidName("main");
+    //Logger::setPidName("main");
     Logger::reportingLevel() = logDEBUG;
-    FILE* log_fd = stdout;
+    FILE* log_fd = fopen("application.log", "a");;
     FileLog::stream() = log_fd;
 
     LOG(logINFO) << "moarload start";
