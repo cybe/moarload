@@ -15,11 +15,11 @@ IMPLEMENT_APP(Main)
 bool Main::OnInit()
 {
     Logger::setPidName("main");
-    Logger::reportingLevel() = DEBUG;
+    Logger::reportingLevel() = logDEBUG;
     FILE* log_fd = stdout;
     FileLog::stream() = log_fd;
 
-    LOG(INFO) << "moarload start";
+    LOG(logINFO) << "moarload start";
 
     //(*AppInitialize
     bool wxsOK = true;

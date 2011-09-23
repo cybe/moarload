@@ -22,7 +22,7 @@ typedef std::map<int, std::string> PidNames;
 inline std::string time();
 inline int getPid();
 
-enum TLogLevel {ERROR, WARNING, INFO, DEBUG, IO, TRACE};
+enum TLogLevel {logERROR, logWARNING, logINFO, logDEBUG, logIO, logTRACE};
 
 template <typename T>
 class Log
@@ -30,7 +30,7 @@ class Log
 public:
     Log();
     virtual ~Log();
-    std::ostringstream& get(TLogLevel level = INFO);
+    std::ostringstream& get(TLogLevel level = logINFO);
 public:
     static TLogLevel& reportingLevel();
     static void setPidName(const std::string& name);
@@ -69,7 +69,7 @@ Log<T>::~Log()
 template <typename T>
 TLogLevel& Log<T>::reportingLevel()
 {
-    static TLogLevel reportingLevel = DEBUG;
+    static TLogLevel reportingLevel = logDEBUG;
     return reportingLevel;
 }
 
@@ -92,21 +92,21 @@ TLogLevel Log<T>::fromString(const std::string& level)
     switch (level)
     {
         case "TRACE" :
-            return TRACE;
+            return logTRACE;
         case "IO" :
-            return IO;
+            return logIO;
         case "DEBUG" :
-            return DEBUG;
+            return logDEBUG;
         case "INFO" :
-            return INFO;
+            return logINFO;
         case "WARNING" :
-            return WARNING;
+            return logWARNING;
         case "ERROR" :
-            return ERROR;
+            return logERROR;
         default :
-            Log<T>().Get(WARNING) << "Unknown logging level '" << level
+            Log<T>().Get(logWARNING) << "Unknown logging level '" << level
                                   << "'. Using INFO level as default.";
-            return INFO;
+            return logINFO;
     }
 }
 
@@ -168,7 +168,7 @@ class FILELOG_DECLSPEC Logger : public Log<FileLog> {};
 //typedef Log<FileLog> Logger;
 
 #ifndef LOG_MAX_LEVEL
-#define LOG_MAX_LEVEL TRACE
+#define LOG_MAX_LEVEL logTRACE
 #endif
 
 #define LOG(level) \
