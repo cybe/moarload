@@ -14,10 +14,7 @@ IMPLEMENT_APP(Main)
 
 bool Main::OnInit()
 {
-    //Logger::setPidName("main");
-    Logger::reportingLevel() = logDEBUG;
-    FILE* log_fd = fopen("application.log", "a");;
-    FileLog::stream() = log_fd;
+    configureLogging();
 
     LOG(logINFO) << "moarload start";
 
@@ -34,3 +31,13 @@ bool Main::OnInit()
 
     return wxsOK;
 }
+
+void Main::configureLogging()
+{
+    //Logger::setPidName("main");
+    Logger::reportingLevel() = logDEBUG;
+    FILE* log_fd = fopen("moarload.log", "a");
+    //FILE* log_fd = stdout;
+    FileLog::stream() = log_fd;
+}
+

@@ -9,6 +9,8 @@ public:
     virtual bool OnInit();
 
 private:
+    void configureLogging();
+
     // No assign (copy constructor inherited from wxApp)
     void operator=(const Main&);
 };

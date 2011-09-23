@@ -193,16 +193,13 @@ inline std::string time()
     char result[100] = {0};
     static DWORD first = GetTickCount();
     sprintf(result, "%s.%03ld", buffer, (long)(GetTickCount() - first) % 1000);
+    //sprintf(result, "%s", buffer);
     return result;
 }
 
 inline int getPid()
 {
-    // todo: implement. See GetCurrentProcessId:
-    // http://msdn.microsoft.com/en-us/library/ms683180%28VS.85%29.aspx
-    // untestet:
-    // return DWORD WINAPI GetCurrentProcessId();
-    return -1;
+    return GetCurrentProcessId();
 }
 
 #else
@@ -219,8 +216,8 @@ inline std::string time()
     struct timeval tv;
     gettimeofday(&tv, 0);
     char result[100] = {0};
-    //sprintf(result, "%s.%03ld", buffer, (long)tv.tv_usec / 1000);
-    sprintf(result, "%s", buffer);
+    sprintf(result, "%s.%03ld", buffer, (long)tv.tv_usec / 1000);
+    //sprintf(result, "%s", buffer);
     return result;
 }
 
