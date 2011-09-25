@@ -212,6 +212,8 @@
 		<Unit filename="src/main.h" />
 		<Unit filename="src/net/http_client.cc" />
 		<Unit filename="src/net/http_client.h" />
+		<Unit filename="src/net/py_load_connector.cc" />
+		<Unit filename="src/net/py_load_connector.h" />
 		<Unit filename="src/ui/main_frame_view.cc" />
 		<Unit filename="src/ui/main_frame_view.h" />
 		<Unit filename="wxsmith/main_frame_view.wxs" />

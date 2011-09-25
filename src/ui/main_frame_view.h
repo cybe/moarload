@@ -20,6 +20,7 @@ private:
     //(*Handlers(MainFrameView)
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
+    void OnTextCtrl1Text(wxCommandEvent& event);
     //*)
 
     //(*Identifiers(MainFrameView)

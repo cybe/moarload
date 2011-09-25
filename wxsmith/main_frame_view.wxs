@@ -6,6 +6,7 @@
 			<value>foobar</value>
 			<pos>128,144</pos>
 			<style>wxTE_MULTILINE</style>
+			<handler function="OnTextCtrl1Text" entry="EVT_TEXT" />
 		</object>
 		<object class="wxMenuBar" variable="MenuBar1" member="no">
 			<object class="wxMenu" variable="Menu1" member="no">

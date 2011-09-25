@@ -3,11 +3,14 @@
 #include <iostream>
 
 #include "log.h"
+#include "net/http_client.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
 #include <wx/image.h>
 //*)
+
+
 
 // main in wxWidgets
 IMPLEMENT_APP(Main)
@@ -28,6 +31,9 @@ bool Main::OnInit()
         SetTopWindow(view);
     }
     //*)
+
+    HttpClient testClient;
+    LOG(logINFO) << testClient.httpGet("http://zi0n.homelinux.net:8081/login");
 
     return wxsOK;
 }

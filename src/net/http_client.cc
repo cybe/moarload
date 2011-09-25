@@ -1,20 +1,11 @@
 #include "http_client.h"
 
-#define BOOST_NETWORK_NO_LIB
-#if defined(_WIN32)
-#define __func__ __FUNCTION__
-#include <boost/optional.hpp>
-#endif
-#include <boost/network/protocol/http/client.hpp>
-
 HttpClient::HttpClient()
 {
-    using namespace boost::network;
-    http::client client_;
-    http::client::request request_("http://checkip.dyndns.com/");
-    http::client::response response_ = client_.get(request_);
-    requestBody = body(response_);
-    std::cout << requestBody << std::endl;
+
+
+
+
 }
 
 HttpClient::~HttpClient()
@@ -22,7 +13,28 @@ HttpClient::~HttpClient()
     //dtor
 }
 
-std::string HttpClient::getBody()
+/** @brief httpGet
+  *
+  * @todo: document this function
+  */
+std::string HttpClient::httpGet(const std::string& url)
 {
-    return requestBody;
+    using namespace boost::network;
+    http::client::request request_(url);
+    http::client::response response_ = client_.get(request_);
+    return body(response_);
 }
+
+/** @brief httpPost
+  *
+  * @todo: document this function
+  */
+std::string HttpClient::httpPost(const std::string& url, const std::string& data)
+{
+    using namespace boost::network;
+    http::client::request request_(url);
+    http::client::response response_ = client_.post(request_, "application/json", data);
+    return body(response_);
+}
+
+
