@@ -10,11 +10,9 @@
 HttpClient::HttpClient()
 {
     using namespace boost::network;
-    typedef http::basic_client<http::tags::http_keepalive_8bit_udp_resolve, 1 ,1> Client;
-    Client client;
-    Client::request request_("http://checkip.dyndns.com/");
-    request_ << header("Connection", "close");
-    Client::response response_ = client.get(request_);
+    http::client client_;
+    http::client::request request_("http://checkip.dyndns.com/");
+    http::client::response response_ = client_.get(request_);
     requestBody = body(response_);
     std::cout << requestBody << std::endl;
 }
