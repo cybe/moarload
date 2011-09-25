@@ -2,6 +2,7 @@
 
 set(SRCS
     main.cc
+    util.cc
     net/http_client.cc
     net/py_load_connector.cc
     ui/main_frame_view.cc
