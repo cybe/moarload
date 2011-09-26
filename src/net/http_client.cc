@@ -28,7 +28,7 @@ std::string HttpClient::httpGet(const std::string& url)
   *
   * @todo: document this function
   */
-std::string HttpClient::httpPost(const std::string& url, const std::string& data, const std::vector<HeaderEntry>& additionalHeader )
+std::string HttpClient::httpPost(const std::string& url, const std::string& data, const std::vector<HeaderEntry>& additionalHeader)
 {
     using namespace boost::network;
     http::client::request request_(url);

@@ -105,7 +105,7 @@ TLogLevel Log<T>::fromString(const std::string& level)
             return logERROR;
         default :
             Log<T>().Get(logWARNING) << "Unknown logging level '" << level
-                                  << "'. Using INFO level as default.";
+                                     << "'. Using INFO level as default.";
             return logINFO;
     }
 }

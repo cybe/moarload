@@ -33,6 +33,4 @@ void PyLoadConnector::login()
 
     sessionID = client.httpPost(pyLoadURL + "login", "username=" + username + "&password=" + password, additionalHeader);
     LOG(logINFO) << sessionID;
-
-
 }

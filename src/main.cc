@@ -33,7 +33,7 @@ bool Main::OnInit()
     //*)
 
     //testing
-    PyLoadConnector pyLoadConnector("zi0n.homelinux.net",8081,"buildserver", "buildserver");
+    PyLoadConnector pyLoadConnector("zi0n.homelinux.net", 8081, "buildserver", "buildserver");
 
     return wxsOK;
 }
