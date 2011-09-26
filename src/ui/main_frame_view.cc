@@ -1,8 +1,6 @@
 #include "main_frame_view.h"
 #include <wx/msgdlg.h>
 
-#include "../net/http_client.h"
-
 //(*InternalHeaders(MainFrameView)
 #include <wx/string.h>
 #include <wx/intl.h>
