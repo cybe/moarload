@@ -10,13 +10,20 @@
 #endif
 #include <boost/network/protocol/http/client.hpp>
 
+struct HeaderEntry
+{
+    std::string name;
+    std::string value;
+};
+
+
 class HttpClient
 {
 public:
     HttpClient();
     virtual ~HttpClient();
     std::string httpGet(const std::string& url);
-    std::string httpPost(const std::string& url, const std::string& data);
+    std::string httpPost(const std::string& url, const std::string& data, const std::vector<HeaderEntry>& additionalHeader);
 
 protected:
 private:

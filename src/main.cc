@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "log.h"
-#include "net/http_client.h"
+#include "net/py_load_connector.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
@@ -32,8 +32,8 @@ bool Main::OnInit()
     }
     //*)
 
-    HttpClient testClient;
-    LOG(logINFO) << testClient.httpGet("http://zi0n.homelinux.net:8081/login");
+    //testing
+    PyLoadConnector pyLoadConnector("zi0n.homelinux.net",8081);
 
     return wxsOK;
 }
