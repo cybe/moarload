@@ -5,10 +5,14 @@
 
 
 
-PyLoadConnector::PyLoadConnector(const std::string& pyLoadHostname, const int pyLoadPort)
+PyLoadConnector::PyLoadConnector(const std::string& pyLoadHostname,
+                                 const int pyLoadPort,
+                                 const std::string& username,
+                                 const std::string& password)
+    : username(username), password(password)
 {
     pyLoadURL = "http://" + pyLoadHostname + ":" + util::intToString(pyLoadPort) + "/api/";
-    login("buildserver", "buildserver");
+    login();
 
     //LOG(logINFO) << testClient.httpGet("http://zi0n.homelinux.net:8081/login");
 }
@@ -18,7 +22,7 @@ PyLoadConnector::~PyLoadConnector()
     //dtor
 }
 
-void PyLoadConnector::login(const std::string& username, const std::string& password)
+void PyLoadConnector::login()
 {
     HeaderEntry contentType;
     contentType.name = "Content-Type";
@@ -27,7 +31,8 @@ void PyLoadConnector::login(const std::string& username, const std::string& pass
     std::vector<HeaderEntry> additionalHeader;
     additionalHeader.push_back(contentType);
 
-    LOG(logINFO) << client.httpPost(pyLoadURL + "login", "username=" + username + "&password=" + password, additionalHeader);
+    sessionID = client.httpPost(pyLoadURL + "login", "username=" + username + "&password=" + password, additionalHeader);
+    LOG(logINFO) << sessionID;
 
 
 }
