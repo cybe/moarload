@@ -20,3 +20,6 @@ obj/
 
 # CMake build files
 build/
+
+# moarload log
+moarload.log
