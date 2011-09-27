@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <map>
 
+#include <boost/thread.hpp>
+
 typedef std::map<int, std::string> PidNames;
 
 inline std::string time();
@@ -40,6 +42,7 @@ protected:
     std::ostringstream os;
     static PidNames pidNames;
     std::string getPidName(int pid);
+    static boost::shared_mutex pidNamesMutex;
 private:
     Log(const Log&);
     Log& operator =(const Log&);
@@ -76,6 +79,7 @@ TLogLevel& Log<T>::reportingLevel()
 template <typename T>
 void Log<T>::setPidName(const std::string& name)
 {
+    boost::unique_lock<boost::shared_mutex> lock(pidNamesMutex);
     pidNames[getPid()] = name;
 }
 
@@ -114,14 +118,19 @@ template <typename T>
 PidNames Log<T>::pidNames = PidNames();
 
 template <typename T>
+boost::shared_mutex Log<T>::pidNamesMutex;
+
+template <typename T>
 std::string Log<T>::getPidName(int pid)
 {
+    boost::shared_lock<boost::shared_mutex> lock(pidNamesMutex);
     if (pidNames.find(pid) != pidNames.end())
     {
         return pidNames.at(pid);
     }
     else
     {
+        lock.unlock();
         std::stringstream buffer;
         buffer << pid;
         return buffer.str();
