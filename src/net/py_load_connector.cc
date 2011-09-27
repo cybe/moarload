@@ -13,8 +13,6 @@ PyLoadConnector::PyLoadConnector(const std::string& pyLoadHostname,
 {
     pyLoadURL = "http://" + pyLoadHostname + ":" + util::intToString(pyLoadPort) + "/api/";
     login();
-
-    //LOG(logINFO) << testClient.httpGet("http://zi0n.homelinux.net:8081/login");
 }
 
 PyLoadConnector::~PyLoadConnector()
@@ -32,5 +30,5 @@ void PyLoadConnector::login()
     additionalHeader.push_back(contentType);
 
     sessionID = client.httpPost(pyLoadURL + "login", "username=" + username + "&password=" + password, additionalHeader);
-    LOG(logINFO) << sessionID;
+    LOG(logIO) << sessionID;
 }

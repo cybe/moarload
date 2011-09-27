@@ -19,7 +19,7 @@ bool Main::OnInit()
 {
     configureLogging();
 
-    LOG(logINFO) << "moarload start";
+    LOG(logINFO) << "- moarload start -";
 
     //(*AppInitialize
     bool wxsOK = true;
@@ -33,15 +33,21 @@ bool Main::OnInit()
     //*)
 
     //testing
-    PyLoadConnector pyLoadConnector("zi0n.homelinux.net", 8081, "buildserver", "buildserver");
+    PyLoadConnector pyLoadConnector("buildserver", 8081, "buildserver", "buildserver");
 
     return wxsOK;
 }
 
+int Main::OnExit()
+{
+     LOG(logINFO) << "- moarload exit -" << std::endl;
+     return 1;
+}
+
 void Main::configureLogging()
 {
-    //Logger::setPidName("main");
-    Logger::reportingLevel() = logDEBUG;
+    Logger::setPidName("main");
+    Logger::reportingLevel() = logIO;
     FILE* log_fd = fopen("moarload.log", "a");
     //FILE* log_fd = stdout;
     FileLog::stream() = log_fd;
