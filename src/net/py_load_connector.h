@@ -20,7 +20,6 @@ private:
     std::string pyLoadURL;
     std::string username;
     std::string password;
-    std::string sessionID;
 
     void login();
 };

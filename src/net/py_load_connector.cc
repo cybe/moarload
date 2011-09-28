@@ -29,6 +29,12 @@ void PyLoadConnector::login()
     std::vector<HeaderEntry> additionalHeader;
     additionalHeader.push_back(contentType);
 
-    sessionID = client.httpPost(pyLoadURL + "login", "username=" + username + "&password=" + password, additionalHeader);
-    LOG(logIO) << sessionID;
+    HttpRequest httpRequest;
+    httpRequest.method = POST;
+    httpRequest.url = pyLoadURL + "login";
+    httpRequest.header = additionalHeader;
+    httpRequest.data = "username=" + username + "&password=" + password;
+
+    HttpResponse httpResponse = client.dispatch(httpRequest);
+    LOG(logIO) << httpResponse.body;
 }
