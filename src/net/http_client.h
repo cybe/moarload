@@ -2,6 +2,7 @@
 #define HTTP_CLIENT_H
 
 #include <string>
+#include <map>
 
 #define BOOST_NETWORK_NO_LIB
 #if defined(_WIN32)
@@ -12,23 +13,17 @@
 
 enum Method {GET, POST};
 
-struct HeaderEntry
-{
-    std::string name;
-    std::string value;
-};
-
 struct HttpRequest
 {
     Method method;
     std::string url;
-    std::vector<HeaderEntry> header;
+    std::multimap<std::string, std::string> header;
     std::string data;
 };
 
 struct HttpResponse
 {
-    std::vector<HeaderEntry> header;
+    std::multimap<std::string, std::string> header;
     std::string body;
 };
 
@@ -42,9 +37,9 @@ public:
 
 protected:
 private:
-    boost::network::http::client client_;
+    boost::network::http::client client;
 
-    std::vector<HeaderEntry> parseHeader(const boost::network::http::client::response& response);
+    std::multimap<std::string, std::string> parseHeader(const boost::network::http::client::response& response);
 };
 
 #endif // HTTP_CLIENT_H

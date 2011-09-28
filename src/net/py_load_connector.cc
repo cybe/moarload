@@ -3,6 +3,7 @@
 #include "../log.h"
 #include "../util.h"
 
+#include <map>
 
 
 PyLoadConnector::PyLoadConnector(const std::string& pyLoadHostname,
@@ -22,12 +23,9 @@ PyLoadConnector::~PyLoadConnector()
 
 void PyLoadConnector::login()
 {
-    HeaderEntry contentType;
-    contentType.name = "Content-Type";
-    contentType.value = "application/x-www-form-urlencoded";
-
-    std::vector<HeaderEntry> additionalHeader;
-    additionalHeader.push_back(contentType);
+    using namespace std;
+    multimap<string, string> additionalHeader;
+    additionalHeader.insert(pair<string, string>("Content-Type", "application/x-www-form-urlencoded"));
 
     HttpRequest httpRequest;
     httpRequest.method = POST;
@@ -35,6 +33,6 @@ void PyLoadConnector::login()
     httpRequest.header = additionalHeader;
     httpRequest.data = "username=" + username + "&password=" + password;
 
-    HttpResponse httpResponse = client.dispatch(httpRequest);
+    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
     LOG(logIO) << httpResponse.body;
 }

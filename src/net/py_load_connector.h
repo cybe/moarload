@@ -16,7 +16,7 @@ public:
     virtual ~PyLoadConnector();
 protected:
 private:
-    HttpClient client;
+    HttpClient httpClient;
     std::string pyLoadURL;
     std::string username;
     std::string password;
