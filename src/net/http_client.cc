@@ -28,6 +28,7 @@ HttpResponse HttpClient::dispatch(const HttpRequest& httpRequest)
         request << header(it->first, it->second);
     }
 
+
     if (httpRequest.data.length() > 0)
     {
         request << header("Content-Length", util::intToString(httpRequest.data.length()));
@@ -58,6 +59,7 @@ HttpResponse HttpClient::dispatch(const HttpRequest& httpRequest)
 
     saveCookies(httpResponse.header);
 
+    LOG(logIO) << cookies.size();
     return httpResponse;
 }
 
@@ -91,4 +93,25 @@ void HttpClient::saveCookies(const std::multimap<std::string, std::string>& head
             cookies.push_back(Cookie::parse(cookieString->second));
         }
     }
+}
+
+void HttpClient::appendValidCookies(boost::network::http::client::request& request)
+{
+    std::vector<Cookie>::const_iterator it;
+    std::string cookieString;
+
+    for (it = cookies.begin(); it != cookies.end(); ++it)
+    {
+        //TODO insert here real values (domain, path)
+        if (it->isValid(std::string(), std::string()))
+        {
+            cookieString += it->build();
+            if (it+1 != cookies.end())
+            {
+                cookieString += "; ";
+            }
+        }
+
+    }
+    request << boost::network::header("Cookie", cookieString);
 }

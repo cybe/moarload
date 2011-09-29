@@ -46,6 +46,7 @@ private:
 
     std::multimap<std::string, std::string> parseHeader(const boost::network::http::client::response& response);
     void saveCookies(const std::multimap<std::string, std::string>& header);
+    void appendValidCookies(boost::network::http::client::request& request);
 };
 
 #endif // HTTP_CLIENT_H

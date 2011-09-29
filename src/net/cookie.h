@@ -8,7 +8,11 @@ class Cookie
     public:
         Cookie();
         virtual ~Cookie();
+
         static Cookie parse(const std::string& cookieString);
+        std::string build() const;
+        bool isValid(const std::string& path, const std::string& domain) const;
+
 
         std::string name;
         std::string value;

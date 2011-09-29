@@ -66,3 +66,13 @@ Cookie Cookie::parse(const std::string& cookieString)
     }
     return cookie;
 }
+
+std::string Cookie::build() const
+{
+    return name + "=" + value;
+}
+
+bool Cookie::isValid(const std::string& path, const std::string& domain) const
+{
+    return true;
+}
