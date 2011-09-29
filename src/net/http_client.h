@@ -11,6 +11,10 @@
 #endif
 #include <boost/network/protocol/http/client.hpp>
 
+#include <map>
+
+#include "cookie.h"
+
 enum Method {GET, POST};
 
 struct HttpRequest
@@ -38,8 +42,10 @@ public:
 protected:
 private:
     boost::network::http::client client;
+    std::vector<Cookie> cookies;
 
     std::multimap<std::string, std::string> parseHeader(const boost::network::http::client::response& response);
+    void saveCookies(const std::multimap<std::string, std::string>& header);
 };
 
 #endif // HTTP_CLIENT_H
