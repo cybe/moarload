@@ -6,6 +6,8 @@
 #include "net/py_load_connector.h"
 #include "net/cookie.h"
 
+#include "lib/json/json-forwards.h"
+
 //(*AppHeaders
 #include "ui/main_frame_view.h"
 #include <wx/image.h>
