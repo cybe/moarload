@@ -35,10 +35,8 @@ bool Main::OnInit()
 
     //testing
     PyLoadConnector pyLoadConnector("zi0n.homelinux.net", 8081, "buildserver", "buildserver");
+    LOG(logIO) << pyLoadConnector.getServerVersion();
 
-
-
-    //Cookie cookie = Cookie::parse("beaker.session.id=ec5a316a58f5ec1ef77ead2a9b5fb582; expires=Tue, 19-Jan-2038 04:14:07 GMT; Path=/");
     return wxsOK;
 }
 

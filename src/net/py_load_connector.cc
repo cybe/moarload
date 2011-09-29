@@ -34,5 +34,14 @@ void PyLoadConnector::login()
     httpRequest.data = "username=" + username + "&password=" + password;
 
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
-    LOG(logIO) << httpResponse.body;
+}
+
+std::string PyLoadConnector::getServerVersion()
+{
+    HttpRequest httpRequest;
+    httpRequest.method = GET;
+    httpRequest.url = pyLoadURL + "getServerVersion";
+
+    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
+    return httpResponse.body;
 }

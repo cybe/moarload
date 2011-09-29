@@ -28,6 +28,7 @@ HttpResponse HttpClient::dispatch(const HttpRequest& httpRequest)
         request << header(it->first, it->second);
     }
 
+    appendValidCookies(request);
 
     if (httpRequest.data.length() > 0)
     {
@@ -40,15 +41,13 @@ HttpResponse HttpClient::dispatch(const HttpRequest& httpRequest)
     switch (httpRequest.method)
     {
         case GET:
-            LOG(logDEBUG) << "using get";
             response = client.get(request);
             break;
         case POST:
-            LOG(logDEBUG) << "using post";
             response = client.post(request);
             break;
         default:
-            LOG(logWARNING) << "unknown http method or method not set, using GET as fallback";
+            LOG(logWARNING) << "unknown http method \"" << httpRequest.method << "\", using GET as fallback";
             response = client.get(request);
             break;
     }
@@ -59,7 +58,6 @@ HttpResponse HttpClient::dispatch(const HttpRequest& httpRequest)
 
     saveCookies(httpResponse.header);
 
-    LOG(logIO) << cookies.size();
     return httpResponse;
 }
 

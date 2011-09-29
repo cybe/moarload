@@ -14,6 +14,8 @@ public:
                     const std::string& username,
                     const std::string& password);
     virtual ~PyLoadConnector();
+
+    std::string getServerVersion();
 protected:
 private:
     HttpClient httpClient;
