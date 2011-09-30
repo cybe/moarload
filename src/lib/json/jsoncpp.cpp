@@ -2051,7 +2051,7 @@ Value::swap( Value &other )
    type_ = other.type_;
    other.type_ = temp;
    std::swap( value_, other.value_ );
-   int temp2 = allocated_;
+   bool temp2 = allocated_;
    allocated_ = other.allocated_;
    other.allocated_ = temp2;
 }

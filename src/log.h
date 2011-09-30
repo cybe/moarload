@@ -201,7 +201,7 @@ inline std::string time()
 
     char result[100] = {0};
     static DWORD first = GetTickCount();
-    sprintf(result, "%s.%03ld", buffer, (long)(GetTickCount() - first) % 1000);
+    sprintf_s(result, "%s.%03ld", buffer, (long)(GetTickCount() - first) % 1000);
     //sprintf(result, "%s", buffer);
     return result;
 }
