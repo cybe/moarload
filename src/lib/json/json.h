@@ -805,7 +805,7 @@ namespace Json {
 # endif
       } value_;
       ValueType type_ : 8;
-      int allocated_ : 1;     // Notes: if declared as bool, bitfield is useless.
+      bool allocated_ : 1;     // Notes: if declared as bool, bitfield is useless.
 # ifdef JSON_VALUE_USE_INTERNAL_MAP
       unsigned int itemIsUsed_ : 1;      // used by the ValueInternalMap container.
       int memberNameIsStatic_ : 1;       // used by the ValueInternalMap container.
@@ -871,12 +871,9 @@ namespace Json {
 
       void makePath( const std::string &path,
                      const InArgs &in );
-      void addPathInArg( const std::string &path,
-                         const InArgs &in,
+      void addPathInArg( const InArgs &in,
                          InArgs::const_iterator &itInArg,
                          PathArgument::Kind kind );
-      void invalidPath( const std::string &path,
-                        int location );
 
       Args args_;
    };

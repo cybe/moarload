@@ -762,7 +762,7 @@ Reader::decodeNumber( Token &token )
                                                    : Value::maxLargestUInt;
    Value::LargestUInt threshold = maxIntegerValue / 10;
    Value::UInt lastDigitThreshold = Value::UInt( maxIntegerValue % 10 );
-   assert( lastDigitThreshold >=0  &&  lastDigitThreshold <= 9 );
+   assert( lastDigitThreshold <= 9 );
    Value::LargestUInt value = 0;
    while ( current < token.end_ )
    {
@@ -1696,7 +1696,7 @@ Value::CZString::CZString( const CZString &other )
 : cstr_( other.index_ != noDuplication &&  other.cstr_ != 0
                 ?  duplicateStringValue( other.cstr_ )
                 : other.cstr_ )
-   , index_( other.cstr_ ? (other.index_ == noDuplication ? noDuplication : duplicate)
+   , index_( other.cstr_ ? (other.index_ == noDuplication ? (int) noDuplication : duplicate)
                          : other.index_ )
 {
 }
@@ -3219,7 +3219,7 @@ Path::makePath( const std::string &path,
       {
          ++current;
          if ( *current == '%' )
-            addPathInArg( path, in, itInArg, PathArgument::kindIndex );
+            addPathInArg( in, itInArg, PathArgument::kindIndex );
          else
          {
             ArrayIndex index = 0;
@@ -3227,12 +3227,10 @@ Path::makePath( const std::string &path,
                index = index * 10 + ArrayIndex(*current - '0');
             args_.push_back( index );
          }
-         if ( current == end  ||  *current++ != ']' )
-            invalidPath( path, int(current - path.c_str()) );
       }
       else if ( *current == '%' )
       {
-         addPathInArg( path, in, itInArg, PathArgument::kindKey );
+         addPathInArg( in, itInArg, PathArgument::kindKey );
          ++current;
       }
       else if ( *current == '.' )
@@ -3251,8 +3249,7 @@ Path::makePath( const std::string &path,
 
 
 void
-Path::addPathInArg( const std::string &path,
-                    const InArgs &in,
+Path::addPathInArg( const InArgs &in,
                     InArgs::const_iterator &itInArg,
                     PathArgument::Kind kind )
 {
@@ -3269,15 +3266,6 @@ Path::addPathInArg( const std::string &path,
       args_.push_back( **itInArg );
    }
 }
-
-
-void
-Path::invalidPath( const std::string &path,
-                   int location )
-{
-   // Error: invalid path.
-}
-
 
 const Value &
 Path::resolve( const Value &root ) const
