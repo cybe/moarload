@@ -18,7 +18,7 @@ project(moarload)
 cmake_minimum_required(VERSION 2.6)
 
 IF(CMAKE_COMPILER_IS_GNUCXX)
-    ADD_DEFINITIONS("-Wall -Wextra -pedantic -isystem /usr/local/include/cpp-netlib")
+    ADD_DEFINITIONS("-Wall -Wextra -ansi -pedantic -isystem /usr/local/include/cpp-netlib")
 ENDIF()
 IF(MSVC)
     ADD_DEFINITIONS("-D _WIN32_WINNT=0x0501")
