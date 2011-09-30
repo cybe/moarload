@@ -9,10 +9,10 @@
 struct ServerStatus
 {
     bool pause;
-    short active;
-    short queue;
-    short total;
-    int64_t speed;
+    int active;
+    int queue;
+    int total;
+    long long int speed;
     bool download;
     bool reconnect;
 };
@@ -28,8 +28,8 @@ public:
                     const std::string& password);
     virtual ~PyLoadConnector();
 
-    Json::Value* getServerVersion();
-    Json::Value* statusServer();
+    std::string getServerVersion();
+    ServerStatus statusServer();
 protected:
 private:
     HttpClient httpClient;

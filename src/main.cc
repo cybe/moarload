@@ -5,14 +5,11 @@
 #include "log.h"
 #include "net/py_load_connector.h"
 #include "net/cookie.h"
-#include "lib/json/json.h"
-
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
 #include <wx/image.h>
 //*)
-
 
 
 // main in wxWidgets
@@ -37,21 +34,20 @@ bool Main::OnInit()
 
     //testing
     PyLoadConnector pyLoadConnector("zi0n.homelinux.net", 8081, "buildserver", "buildserver");
-    Json::Value* versionJson = pyLoadConnector.getServerVersion();
-    LOG(logIO) << versionJson->asString();
-    delete versionJson;
+    std::string versionJson = pyLoadConnector.getServerVersion();
+    LOG(logIO) << versionJson;
 
-    Json::Value* statusServer = pyLoadConnector.statusServer();
-    LOG(logIO) << statusServer->toStyledString();
-    delete statusServer;
+    ServerStatus statusServer = pyLoadConnector.statusServer();
+    LOG(logIO) << statusServer.speed;
+    LOG(logIO) << statusServer.download;
 
     return wxsOK;
 }
 
 int Main::OnExit()
 {
-     LOG(logINFO) << "- moarload exit -" << std::endl;
-     return 1;
+    LOG(logINFO) << "- moarload exit -" << std::endl;
+    return 1;
 }
 
 void Main::configureLogging()
@@ -62,4 +58,3 @@ void Main::configureLogging()
     //FILE* log_fd = stdout;
     FileLog::stream() = log_fd;
 }
-

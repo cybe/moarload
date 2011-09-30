@@ -37,7 +37,7 @@ void PyLoadConnector::login()
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
 }
 
-Json::Value* PyLoadConnector::getServerVersion()
+std::string PyLoadConnector::getServerVersion()
 {
     HttpRequest httpRequest;
     httpRequest.method = GET;
@@ -45,18 +45,19 @@ Json::Value* PyLoadConnector::getServerVersion()
 
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
 
-    Json::Value* root = new Json::Value(); // del in:
+    Json::Value root;
     Json::Reader reader;
-    bool parsingSuccessful = reader.parse(httpResponse.body, *root);
+    bool parsingSuccessful = reader.parse(httpResponse.body, root);
     if (!parsingSuccessful)
     {
         LOG(logERROR) << "Failed to parse input:\n"
-                      << reader.getFormatedErrorMessages();
+        << reader.getFormatedErrorMessages();
     }
-    return root;
+
+    return root.asString();
 }
 
-Json::Value* PyLoadConnector::statusServer()
+ServerStatus PyLoadConnector::statusServer()
 {
     HttpRequest httpRequest;
     httpRequest.method = GET;
@@ -64,13 +65,22 @@ Json::Value* PyLoadConnector::statusServer()
 
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
 
-    Json::Value* root = new Json::Value(); // del in:
+    Json::Value root;
     Json::Reader reader;
-    bool parsingSuccessful = reader.parse(httpResponse.body, *root);
+    bool parsingSuccessful = reader.parse(httpResponse.body, root);
     if (!parsingSuccessful)
     {
         LOG(logERROR) << "Failed to parse input:\n"
-                      << reader.getFormatedErrorMessages();
+        << reader.getFormatedErrorMessages();
     }
-    return root;
+
+    ServerStatus serverStatus;
+    serverStatus.active = root["active"].asInt();
+    serverStatus.download = root["download"].asBool();
+    serverStatus.pause = root["pause"].asBool();
+    serverStatus.queue = root["queue"].asInt();
+    serverStatus.reconnect = root["reconnect"].asBool();
+    serverStatus.speed = root["speed"].asInt64();
+    serverStatus.total = root["total"].asInt();
+    return serverStatus;
 }

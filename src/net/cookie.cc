@@ -56,7 +56,7 @@ Cookie Cookie::parse(const std::string& cookieString)
 
             if (entries.find(entryName) != entries.end())
             {
-                 *(entries[entryName]) = nameValuePair.at(1);
+                *(entries[entryName]) = nameValuePair.at(1);
             }
             else
             {
