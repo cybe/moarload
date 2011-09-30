@@ -207,6 +207,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="src/lib/json/json-forwards.h" />
+		<Unit filename="src/lib/json/json.h" />
+		<Unit filename="src/lib/json/jsoncpp.cpp" />
 		<Unit filename="src/log.h" />
 		<Unit filename="src/main.cc" />
 		<Unit filename="src/main.h" />

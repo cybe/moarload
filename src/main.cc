@@ -5,8 +5,8 @@
 #include "log.h"
 #include "net/py_load_connector.h"
 #include "net/cookie.h"
+#include "lib/json/json.h"
 
-#include "lib/json/json-forwards.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
@@ -37,7 +37,13 @@ bool Main::OnInit()
 
     //testing
     PyLoadConnector pyLoadConnector("zi0n.homelinux.net", 8081, "buildserver", "buildserver");
-    LOG(logIO) << pyLoadConnector.getServerVersion();
+    Json::Value* versionJson = pyLoadConnector.getServerVersion();
+    LOG(logIO) << versionJson->asString();
+    delete versionJson;
+
+    Json::Value* statusServer = pyLoadConnector.statusServer();
+    LOG(logIO) << statusServer->toStyledString();
+    delete statusServer;
 
     return wxsOK;
 }

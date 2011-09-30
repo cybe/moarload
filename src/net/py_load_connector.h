@@ -3,7 +3,20 @@
 
 #include <string>
 
+#include "../lib/json/json-forwards.h"
 #include "http_client.h"
+
+struct ServerStatus
+{
+    bool pause;
+    short active;
+    short queue;
+    short total;
+    int64_t speed;
+    bool download;
+    bool reconnect;
+};
+
 
 
 class PyLoadConnector
@@ -15,7 +28,8 @@ public:
                     const std::string& password);
     virtual ~PyLoadConnector();
 
-    std::string getServerVersion();
+    Json::Value* getServerVersion();
+    Json::Value* statusServer();
 protected:
 private:
     HttpClient httpClient;

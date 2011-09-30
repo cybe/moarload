@@ -2,6 +2,7 @@
 
 #include "../log.h"
 #include "../util.h"
+#include "../lib/json/json.h"
 
 #include <map>
 
@@ -36,12 +37,40 @@ void PyLoadConnector::login()
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
 }
 
-std::string PyLoadConnector::getServerVersion()
+Json::Value* PyLoadConnector::getServerVersion()
 {
     HttpRequest httpRequest;
     httpRequest.method = GET;
     httpRequest.url = pyLoadURL + "getServerVersion";
 
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
-    return httpResponse.body;
+
+    Json::Value* root = new Json::Value(); // del in:
+    Json::Reader reader;
+    bool parsingSuccessful = reader.parse(httpResponse.body, *root);
+    if (!parsingSuccessful)
+    {
+        LOG(logERROR) << "Failed to parse input:\n"
+                      << reader.getFormatedErrorMessages();
+    }
+    return root;
+}
+
+Json::Value* PyLoadConnector::statusServer()
+{
+    HttpRequest httpRequest;
+    httpRequest.method = GET;
+    httpRequest.url = pyLoadURL + "statusServer";
+
+    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
+
+    Json::Value* root = new Json::Value(); // del in:
+    Json::Reader reader;
+    bool parsingSuccessful = reader.parse(httpResponse.body, *root);
+    if (!parsingSuccessful)
+    {
+        LOG(logERROR) << "Failed to parse input:\n"
+                      << reader.getFormatedErrorMessages();
+    }
+    return root;
 }
