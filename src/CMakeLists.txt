@@ -1,13 +1,13 @@
 #--- source files
 
 set(SRCS
-    main.cc
-    util.cc
+    main.cpp
+    util.cpp
     lib/json/jsoncpp.cpp
-    net/http/cookie.cc
-    net/http/http_client.cc
-    net/http/py_load_connector.cc
-    ui/main_frame_view.cc
+    net/http/cookie.cpp
+    net/http/http_client.cpp
+    net/http/py_load_connector.cpp
+    ui/main_frame_view.cpp
 )
 
 

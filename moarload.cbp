@@ -211,26 +211,26 @@
 		<Unit filename="src/lib/json/json.h" />
 		<Unit filename="src/lib/json/jsoncpp.cpp" />
 		<Unit filename="src/log.h" />
-		<Unit filename="src/main.cc" />
+		<Unit filename="src/main.cpp" />
 		<Unit filename="src/main.h" />
-		<Unit filename="src/net/http/cookie.cc" />
+		<Unit filename="src/net/http/cookie.cpp" />
 		<Unit filename="src/net/http/cookie.h" />
-		<Unit filename="src/net/http/http_client.cc" />
+		<Unit filename="src/net/http/http_client.cpp" />
 		<Unit filename="src/net/http/http_client.h" />
-		<Unit filename="src/net/http/py_load_connector.cc" />
+		<Unit filename="src/net/http/py_load_connector.cpp" />
 		<Unit filename="src/net/http/py_load_connector.h" />
-		<Unit filename="src/ui/main_frame_view.cc" />
+		<Unit filename="src/ui/main_frame_view.cpp" />
 		<Unit filename="src/ui/main_frame_view.h" />
-		<Unit filename="src/util.cc" />
+		<Unit filename="src/util.cpp" />
 		<Unit filename="src/util.h" />
 		<Unit filename="wxsmith/main_frame_view.wxs" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<wxsmith version="1">
-				<gui name="wxWidgets" src="src/ui/main_frame_view.cc" main="MainFrameView" init_handlers="necessary" language="CPP" />
+				<gui name="wxWidgets" src="src/ui/main_frame_view.cpp" main="MainFrameView" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/main_frame_view.wxs" src="src/ui/main_frame_view.cc" hdr="src/ui/main_frame_view.h" name="MainFrameView" language="CPP" />
+					<wxFrame wxs="wxsmith/main_frame_view.wxs" src="src/ui/main_frame_view.cpp" hdr="src/ui/main_frame_view.h" name="MainFrameView" language="CPP" />
 				</resources>
 			</wxsmith>
 			<debugger />
