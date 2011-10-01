@@ -2,8 +2,8 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include "../util.h"
-#include "../log.h"
+#include "../../util.h"
+#include "../../log.h"
 
 HttpClient::HttpClient()
 {

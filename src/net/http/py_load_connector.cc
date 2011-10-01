@@ -1,8 +1,8 @@
 #include "py_load_connector.h"
 
-#include "../log.h"
-#include "../util.h"
-#include "../lib/json/json.h"
+#include "../../log.h"
+#include "../../util.h"
+#include "../../lib/json/json.h"
 
 #include <map>
 

@@ -3,8 +3,8 @@
 #include <iostream>
 
 #include "log.h"
-#include "net/py_load_connector.h"
-#include "net/cookie.h"
+#include "net/http/py_load_connector.h"
+#include "net/http/cookie.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"

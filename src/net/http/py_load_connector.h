@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../lib/json/json-forwards.h"
+#include "../../lib/json/json-forwards.h"
 #include "http_client.h"
 
 struct ServerStatus

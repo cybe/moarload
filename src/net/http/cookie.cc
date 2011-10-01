@@ -4,7 +4,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include "../log.h"
+#include "../../log.h"
 
 
 Cookie::Cookie()
