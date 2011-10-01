@@ -213,10 +213,12 @@
 		<Unit filename="src/log.h" />
 		<Unit filename="src/main.cc" />
 		<Unit filename="src/main.h" />
-		<Unit filename="src/net/http_client.cc" />
-		<Unit filename="src/net/http_client.h" />
-		<Unit filename="src/net/py_load_connector.cc" />
-		<Unit filename="src/net/py_load_connector.h" />
+		<Unit filename="src/net/http/cookie.cc" />
+		<Unit filename="src/net/http/cookie.h" />
+		<Unit filename="src/net/http/http_client.cc" />
+		<Unit filename="src/net/http/http_client.h" />
+		<Unit filename="src/net/http/py_load_connector.cc" />
+		<Unit filename="src/net/http/py_load_connector.h" />
 		<Unit filename="src/ui/main_frame_view.cc" />
 		<Unit filename="src/ui/main_frame_view.h" />
 		<Unit filename="src/util.cc" />
