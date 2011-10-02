@@ -5,7 +5,6 @@
 #include "thrift/pyload.h"
 
 
-
 class PyLoadThriftConnector : public PyLoadConnector
 {
 public:

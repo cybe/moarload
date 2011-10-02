@@ -11,8 +11,6 @@
 #endif
 #include <boost/network/protocol/http/client.hpp>
 
-#include <map>
-
 #include "cookie.h"
 
 enum Method {GET, POST};

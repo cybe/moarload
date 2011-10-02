@@ -35,21 +35,21 @@ bool Main::OnInit()
 
     //testing
     LOG(logIO) << "-----http:";
-    PyLoadHttpConnector pyLoadHttpConnector("zi0n.homelinux.net", 8081);
-    bool loginSuccesfull = pyLoadHttpConnector.login("buildserver", "buildserver");
+    PyLoadConnector* con = new PyLoadHttpConnector("buildserver", 8081);
+    bool loginSuccesfull = con->login("buildserver", "buildserver");
     LOG(logIO) << "Login: " << loginSuccesfull;
-    std::string version = pyLoadHttpConnector.getServerVersion();
+    std::string version;
+    con->getServerVersion(version);
     LOG(logIO) << "version: " << version;
-    ServerStatus_ statusServer = pyLoadHttpConnector.statusServer();
-    LOG(logIO) << "speed: " << statusServer.speed;
-    LOG(logIO) << "download: " << statusServer.download;
+    delete con;
 
     LOG(logIO) << "-----thrift:";
-    PyLoadConnector* con = new PyLoadThriftConnector("buildserver", 7227);
+    con = new PyLoadThriftConnector("buildserver", 7227);
     loginSuccesfull = con->login("buildserver", "buildserver");
     LOG(logIO) << "Login: " << loginSuccesfull;
     con->getServerVersion(version);
     LOG(logIO) << "version: " << version;
+    delete con;
 
     return wxsOK;
 }

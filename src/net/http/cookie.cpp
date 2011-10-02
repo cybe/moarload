@@ -27,7 +27,7 @@ Cookie Cookie::parse(const std::string& cookieString)
     Cookie cookie;
 
     std::vector<std::string>::iterator itOuter;
-    for(itOuter = nameValuePairs.begin(); itOuter != nameValuePairs.end(); itOuter++)
+    for (itOuter = nameValuePairs.begin(); itOuter != nameValuePairs.end(); itOuter++)
     {
         boost::trim_left(*itOuter);
 

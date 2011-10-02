@@ -22,8 +22,8 @@ HttpResponse HttpClient::dispatch(const HttpRequest& httpRequest)
     http::client::request request(httpRequest.url);
 
     for (std::multimap<std::string, std::string>::const_iterator it = httpRequest.header.begin();
-            it != httpRequest.header.end();
-            ++it)
+         it != httpRequest.header.end();
+         ++it)
     {
         request << header(it->first, it->second);
     }
@@ -85,8 +85,8 @@ void HttpClient::saveCookies(const std::multimap<std::string, std::string>& head
         std::pair<std::multimap<std::string, std::string>::const_iterator, std::multimap<std::string, std::string>::const_iterator> range;
         range = header.equal_range("set-cookie");
         for (std::multimap<std::string, std::string>::const_iterator cookieString = range.first;
-                cookieString != range.second;
-                ++cookieString)
+             cookieString != range.second;
+             ++cookieString)
         {
             cookies.push_back(Cookie::parse(cookieString->second));
         }
@@ -104,7 +104,7 @@ void HttpClient::appendValidCookies(boost::network::http::client::request& reque
         if (it->isValid(std::string(), std::string()))
         {
             cookieString += it->build();
-            if (it+1 != cookies.end())
+            if (it + 1 != cookies.end())
             {
                 cookieString += "; ";
             }

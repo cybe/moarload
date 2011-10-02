@@ -24,7 +24,7 @@ PyLoadThriftConnector::PyLoadThriftConnector(const std::string& hostname,
 }
 
 PyLoadThriftConnector::~PyLoadThriftConnector()
-{;
+{
     delete client;
 }
 
