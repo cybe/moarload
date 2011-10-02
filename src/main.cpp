@@ -3,8 +3,9 @@
 #include <iostream>
 
 #include "log.h"
-#include "net/http/py_load_connector.h"
-#include "net/http/cookie.h"
+#include "net/py_load_connector.h"
+#include "net/py_load_http_connector.h"
+#include "net/py_load_thrift_connector.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
@@ -33,13 +34,22 @@ bool Main::OnInit()
     //*)
 
     //testing
-    PyLoadConnector pyLoadConnector("zi0n.homelinux.net", 8081, "buildserver", "buildserver");
-    std::string versionJson = pyLoadConnector.getServerVersion();
-    LOG(logIO) << versionJson;
+    LOG(logIO) << "-----http:";
+    PyLoadHttpConnector pyLoadHttpConnector("zi0n.homelinux.net", 8081);
+    bool loginSuccesfull = pyLoadHttpConnector.login("buildserver", "buildserver");
+    LOG(logIO) << "Login: " << loginSuccesfull;
+    std::string version = pyLoadHttpConnector.getServerVersion();
+    LOG(logIO) << "version: " << version;
+    ServerStatus_ statusServer = pyLoadHttpConnector.statusServer();
+    LOG(logIO) << "speed: " << statusServer.speed;
+    LOG(logIO) << "download: " << statusServer.download;
 
-    ServerStatus statusServer = pyLoadConnector.statusServer();
-    LOG(logIO) << statusServer.speed;
-    LOG(logIO) << statusServer.download;
+    LOG(logIO) << "-----thrift:";
+    PyLoadConnector* con = new PyLoadThriftConnector("buildserver", 7227);
+    loginSuccesfull = con->login("buildserver", "buildserver");
+    LOG(logIO) << "Login: " << loginSuccesfull;
+    con->getServerVersion(version);
+    LOG(logIO) << "version: " << version;
 
     return wxsOK;
 }

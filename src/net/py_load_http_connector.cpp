@@ -1,28 +1,24 @@
-#include "py_load_connector.h"
+#include "py_load_http_connector.h"
 
-#include "../../log.h"
-#include "../../util.h"
-#include "../../lib/json/json.h"
+#include "../log.h"
+#include "../util.h"
+#include "../lib/json/json.h"
 
 #include <map>
 
 
-PyLoadConnector::PyLoadConnector(const std::string& pyLoadHostname,
-                                 const int pyLoadPort,
-                                 const std::string& username,
-                                 const std::string& password)
-    : username(username), password(password)
+PyLoadHttpConnector::PyLoadHttpConnector(const std::string& hostname,
+                                         const int port) :
+    url("http://" + hostname + ":" + util::intToString(port) + "/api/")
 {
-    pyLoadURL = "http://" + pyLoadHostname + ":" + util::intToString(pyLoadPort) + "/api/";
-    login();
 }
 
-PyLoadConnector::~PyLoadConnector()
+PyLoadHttpConnector::~PyLoadHttpConnector()
 {
     //dtor
 }
 
-void PyLoadConnector::login()
+bool PyLoadHttpConnector::login(const std::string& username, const std::string& password)
 {
     using namespace std;
     multimap<string, string> additionalHeader;
@@ -30,18 +26,9 @@ void PyLoadConnector::login()
 
     HttpRequest httpRequest;
     httpRequest.method = POST;
-    httpRequest.url = pyLoadURL + "login";
+    httpRequest.url = url + "login";
     httpRequest.header = additionalHeader;
     httpRequest.data = "username=" + username + "&password=" + password;
-
-    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
-}
-
-std::string PyLoadConnector::getServerVersion()
-{
-    HttpRequest httpRequest;
-    httpRequest.method = GET;
-    httpRequest.url = pyLoadURL + "getServerVersion";
 
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
 
@@ -51,17 +38,37 @@ std::string PyLoadConnector::getServerVersion()
     if (!parsingSuccessful)
     {
         LOG(logERROR) << "Failed to parse input:\n"
-        << reader.getFormatedErrorMessages();
+                      << reader.getFormatedErrorMessages();
+    }
+
+    return root.asBool();
+}
+
+std::string PyLoadHttpConnector::getServerVersion()
+{
+    HttpRequest httpRequest;
+    httpRequest.method = GET;
+    httpRequest.url = url + "getServerVersion";
+
+    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
+
+    Json::Value root;
+    Json::Reader reader;
+    bool parsingSuccessful = reader.parse(httpResponse.body, root);
+    if (!parsingSuccessful)
+    {
+        LOG(logERROR) << "Failed to parse input:\n"
+                      << reader.getFormatedErrorMessages();
     }
 
     return root.asString();
 }
 
-ServerStatus PyLoadConnector::statusServer()
+ServerStatus_ PyLoadHttpConnector::statusServer()
 {
     HttpRequest httpRequest;
     httpRequest.method = GET;
-    httpRequest.url = pyLoadURL + "statusServer";
+    httpRequest.url = url + "statusServer";
 
     HttpResponse httpResponse = httpClient.dispatch(httpRequest);
 
@@ -71,10 +78,10 @@ ServerStatus PyLoadConnector::statusServer()
     if (!parsingSuccessful)
     {
         LOG(logERROR) << "Failed to parse input:\n"
-        << reader.getFormatedErrorMessages();
+                      << reader.getFormatedErrorMessages();
     }
 
-    ServerStatus serverStatus;
+    ServerStatus_ serverStatus;
     serverStatus.active = root["active"].asInt();
     serverStatus.download = root["download"].asBool();
     serverStatus.pause = root["pause"].asBool();

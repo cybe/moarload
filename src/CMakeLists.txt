@@ -4,9 +4,14 @@ set(SRCS
     main.cpp
     util.cpp
     lib/json/jsoncpp.cpp
+    net/py_load_connector.cpp
+    net/py_load_http_connector.cpp
+    net/py_load_thrift_connector.cpp
     net/http/cookie.cpp
     net/http/http_client.cpp
-    net/http/py_load_connector.cpp
+    net/thrift/pyload.cpp
+    net/thrift/pyload_constants.cpp
+    net/thrift/pyload_types.cpp
     ui/main_frame_view.cpp
 )
 
@@ -41,6 +46,19 @@ if(WIN32)
     include_directories("C:/dev/libs/cpp-netlib")
 endif(WIN32)
 
+# thrift
+if(UNIX)
+    include_directories("/usr/local/include/thrift")
+    set(thrift_LIBRARIES /usr/local/lib/libthrift.a)
+endif(UNIX)
+if(WIN32)
+    include_directories("C:/dev/libs/thrift-trunk/lib/cpp/src")
+	include_directories("C:/dev/libs/pthreads/Pre-built.2/include")
+	set(thrift_LIBRARIES
+		C:/dev/libs/thrift-trunk/lib/cpp/Release/libthrift.lib
+		C:/dev/libs/pthreads/Pre-built.2/lib/pthreadVCE2.lib
+	)
+endif(WIN32)
 
 #--- compile & link
 
@@ -56,5 +74,6 @@ endif(WIN32)
 target_link_libraries(moarload
     ${wxWidgets_LIBRARIES}
     ${Boost_LIBRARIES}
+    ${thrift_LIBRARIES}
 )
 
