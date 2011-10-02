@@ -52,10 +52,10 @@ if(UNIX)
     set(thrift_LIBRARIES /usr/local/lib/libthrift.a)
 endif(UNIX)
 if(WIN32)
-    include_directories("C:/dev/libs/thrift-old/lib/cpp/src")
+    include_directories("C:/dev/libs/thrift-trunk/lib/cpp/src")
 	include_directories("C:/dev/libs/pthreads/Pre-built.2/include")
 	set(thrift_LIBRARIES
-		C:/dev/libs/thrift-old/lib/cpp/Release/libthrift.lib
+		C:/dev/libs/thrift-trunk/lib/cpp/Release/libthrift.lib
 		C:/dev/libs/pthreads/Pre-built.2/lib/pthreadVCE2.lib
 	)
 endif(WIN32)
