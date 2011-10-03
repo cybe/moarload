@@ -1,16 +1,16 @@
+#include "configuration_service.h"
+
 #include <fstream>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 
-#include "configuration_service.h"
 
-
-ConfigurationService::ConfigurationService(const std::string &logFilename)
+ConfigurationService::ConfigurationService(const std::string& filename) :
+    filename(filename)
 {
-    filename = logFilename;
-    std::ifstream logfile("moarload.ini");
-    if(!logfile)
+    std::ifstream logfile(filename);
+    if (!logfile)
     {
         writeEmptyConfigFile();
     }
@@ -36,20 +36,20 @@ void ConfigurationService::load()
 
 void ConfigurationService::save()
 {
-   using boost::property_tree::ptree;
-   ptree pt;
-   pt.put("global.backendType", backendType);
-   pt.put("thrift.hostname", thriftHostname);
-   pt.put("thrift.port", thriftPort);
-   pt.put("http.hostname", httpHostname);
-   pt.put("http.port", httpPort);
-   write_ini(filename, pt);
+    using boost::property_tree::ptree;
+    ptree pt;
+    pt.put("global.backendType", backendType);
+    pt.put("thrift.hostname", thriftHostname);
+    pt.put("thrift.port", thriftPort);
+    pt.put("http.hostname", httpHostname);
+    pt.put("http.port", httpPort);
+    write_ini(filename, pt);
 }
 
 void ConfigurationService::writeEmptyConfigFile()
 {
     std::fstream f;
-    f.open("moarload.ini", std::ios::out);
+    f.open(filename, std::ios::out);
     f << std::endl;
     f.close();
 }

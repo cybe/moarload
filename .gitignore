@@ -23,3 +23,6 @@ build/
 
 # moarload log
 moarload.log
+
+# config
+moarload.ini
