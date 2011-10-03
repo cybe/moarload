@@ -44,7 +44,7 @@ if(UNIX)
     include_directories("/usr/local/include/cpp-netlib")
 endif(UNIX)
 if(WIN32)
-    include_directories("C:/dev/libs/cpp-netlib")
+    include_directories("C:/dev/libs/cpp-netlib-0.9.2")
 endif(WIN32)
 
 # thrift
@@ -54,10 +54,10 @@ if(UNIX)
 endif(UNIX)
 if(WIN32)
     include_directories("C:/dev/libs/thrift-trunk/lib/cpp/src")
-	include_directories("C:/dev/libs/pthreads/Pre-built.2/include")
+	include_directories("C:/dev/libs/pthreads-w32-2.8.0/include")
 	set(thrift_LIBRARIES
 		C:/dev/libs/thrift-trunk/lib/cpp/Release/libthrift.lib
-		C:/dev/libs/pthreads/Pre-built.2/lib/pthreadVCE2.lib
+		C:/dev/libs/pthreads-w32-2.8.0/lib/pthreadVCE2.lib
 	)
 endif(WIN32)
 
