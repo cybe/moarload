@@ -8,7 +8,7 @@
 
 
 PyLoadHttpConnector::PyLoadHttpConnector(const std::string& hostname,
-                                         const int port) :
+                                         const unsigned short port) :
     url("http://" + hostname + ":" + util::intToString(port) + "/api/")
 {
 }

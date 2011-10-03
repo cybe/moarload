@@ -9,7 +9,7 @@ class PyLoadThriftConnector : public PyLoadConnector
 {
 public:
     PyLoadThriftConnector(const std::string& hostname,
-                          const short port);
+                          const unsigned short port);
     virtual ~PyLoadThriftConnector();
 
     virtual void getConfigValue(std::string& _return, const std::string& category, const std::string& option, const std::string& section);

@@ -7,7 +7,7 @@
 #include "../log.h"
 
 PyLoadThriftConnector::PyLoadThriftConnector(const std::string& hostname,
-                                             const short port) :
+                                             const unsigned short port) :
     client(NULL)
 {
     using namespace apache::thrift;

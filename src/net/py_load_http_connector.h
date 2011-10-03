@@ -12,7 +12,7 @@ class PyLoadHttpConnector : public PyLoadConnector
 {
 public:
     PyLoadHttpConnector(const std::string& hostname,
-                        const int port);
+                        const unsigned short port);
     virtual ~PyLoadHttpConnector();
 
     virtual void getConfigValue(std::string& _return, const std::string& category, const std::string& option, const std::string& section);
