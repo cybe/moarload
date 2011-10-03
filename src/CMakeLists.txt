@@ -12,6 +12,7 @@ set(SRCS
     net/thrift/pyload.cpp
     net/thrift/pyload_constants.cpp
     net/thrift/pyload_types.cpp
+    services/configuration_service.cpp
     ui/main_frame_view.cpp
 )
 

@@ -6,6 +6,7 @@
 #include "net/py_load_connector.h"
 #include "net/py_load_http_connector.h"
 #include "net/py_load_thrift_connector.h"
+#include "services/configuration_service.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
@@ -34,8 +35,12 @@ bool Main::OnInit()
     //*)
 
     //testing
+
+    ConfigurationService cs("moarload.ini");
+    LOG(logIO) << cs.getBackendType();
+
     LOG(logIO) << "-----http:";
-    PyLoadConnector* con = new PyLoadHttpConnector("buildserver", 8081);
+    PyLoadConnector* con = new PyLoadHttpConnector(cs.getHttpHostname(), cs.getHttpPort());
     bool loginSuccesfull = con->login("buildserver", "buildserver");
     LOG(logIO) << "Login: " << loginSuccesfull;
     std::string version;
@@ -44,7 +49,7 @@ bool Main::OnInit()
     delete con;
 
     LOG(logIO) << "-----thrift:";
-    con = new PyLoadThriftConnector("buildserver", 7227);
+    con = new PyLoadThriftConnector(cs.getThriftHostname(), cs.getThriftPort());
     loginSuccesfull = con->login("buildserver", "buildserver");
     LOG(logIO) << "Login: " << loginSuccesfull;
     con->getServerVersion(version);
