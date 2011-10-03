@@ -20,39 +20,36 @@ Cookie::~Cookie()
 Cookie Cookie::parse(const std::string& cookieString)
 {
     std::vector<std::string> nameValuePairs;
-
     boost::split(nameValuePairs, cookieString, boost::is_any_of(";"));
 
-    bool firstRun = true;
     Cookie cookie;
 
-    std::vector<std::string>::iterator itOuter;
-    for (itOuter = nameValuePairs.begin(); itOuter != nameValuePairs.end(); itOuter++)
+    std::map<std::string, std::string*> entries;
+    entries.insert(std::pair<std::string, std::string*>("expires", &cookie.expires));
+    entries.insert(std::pair<std::string, std::string*>("comment", &cookie.comment));
+    entries.insert(std::pair<std::string, std::string*>("domain", &cookie.domain));
+    entries.insert(std::pair<std::string, std::string*>("max-age", &cookie.maxAge));
+    entries.insert(std::pair<std::string, std::string*>("path", &cookie.path));
+    entries.insert(std::pair<std::string, std::string*>("secure", &cookie.secure));
+    entries.insert(std::pair<std::string, std::string*>("version", &cookie.version));
+
+    std::vector<std::string>::iterator nameValuePairsIt;
+    for (nameValuePairsIt = nameValuePairs.begin(); nameValuePairsIt != nameValuePairs.end(); nameValuePairsIt++)
     {
-        boost::trim_left(*itOuter);
+        boost::trim_left(*nameValuePairsIt);
 
         std::vector<std::string> nameValuePair;
-        boost::split(nameValuePair, *itOuter, boost::is_any_of("="));
+        boost::split(nameValuePair, *nameValuePairsIt, boost::is_any_of("="));
 
-        if (firstRun)
+        if (nameValuePairsIt == nameValuePairs.begin())
         {
             cookie.name = nameValuePair.at(0);
             cookie.value = nameValuePair.at(1);
-            firstRun = false;
         }
         else
         {
             std::string entryName = nameValuePair.at(0);
             boost::algorithm::to_lower(entryName);
-
-            std::map<std::string, std::string*> entries;
-            entries.insert(std::pair<std::string, std::string*>("expires", &cookie.expires));
-            entries.insert(std::pair<std::string, std::string*>("comment", &cookie.comment));
-            entries.insert(std::pair<std::string, std::string*>("domain", &cookie.domain));
-            entries.insert(std::pair<std::string, std::string*>("max-age", &cookie.maxAge));
-            entries.insert(std::pair<std::string, std::string*>("path", &cookie.path));
-            entries.insert(std::pair<std::string, std::string*>("secure", &cookie.secure));
-            entries.insert(std::pair<std::string, std::string*>("version", &cookie.version));
 
             if (entries.find(entryName) != entries.end())
             {
