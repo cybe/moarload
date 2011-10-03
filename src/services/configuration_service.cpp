@@ -9,8 +9,8 @@
 ConfigurationService::ConfigurationService(const std::string& filename) :
     filename(filename)
 {
-    std::ifstream logfile(filename);
-    if (!logfile)
+    std::ifstream configfile(filename);
+    if (!configfile)
     {
         writeEmptyConfigFile();
     }
