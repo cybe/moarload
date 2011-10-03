@@ -229,6 +229,8 @@
 		<Unit filename="src/net/thrift/pyload_constants.h" />
 		<Unit filename="src/net/thrift/pyload_types.cpp" />
 		<Unit filename="src/net/thrift/pyload_types.h" />
+		<Unit filename="src/services/configuration_service.cpp" />
+		<Unit filename="src/services/configuration_service.h" />
 		<Unit filename="src/ui/main_frame_view.cpp" />
 		<Unit filename="src/ui/main_frame_view.h" />
 		<Unit filename="src/util.cpp" />
