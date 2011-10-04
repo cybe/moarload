@@ -348,6 +348,11 @@ void PyLoadThriftConnector::getUserData(UserData& _return, const std::string& us
     return client->getUserData(_return, username, password);
 }
 
+void PyLoadThriftConnector::getAllUserData(std::map<std::string, UserData> & _return)
+{
+    return client->getAllUserData(_return);
+}
+
 void PyLoadThriftConnector::getServices(std::map<PluginName, std::map<std::string, std::string> > & _return)
 {
     return client->getServices(_return);

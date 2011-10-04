@@ -79,6 +79,7 @@ public:
     virtual void removeAccount(const PluginName& plugin, const std::string& account);
     virtual bool login(const std::string& username, const std::string& password);
     virtual void getUserData(UserData& _return, const std::string& username, const std::string& password);
+    virtual void getAllUserData(std::map<std::string, UserData> & _return);
     virtual void getServices(std::map<PluginName, std::map<std::string, std::string> > & _return);
     virtual bool hasService(const PluginName& plugin, const std::string& func);
     virtual void call(std::string& _return, const ServiceCall& info);

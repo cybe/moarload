@@ -130,7 +130,7 @@ struct UserData {
   2: string email,
   3: i32 role,
   4: i32 permission,
-  5: string template_
+  5: string templateName
 }
 
 struct AccountInfo {
@@ -276,6 +276,7 @@ service Pyload {
   //auth
   bool login(1: string username, 2: string password),
   UserData getUserData(1: string username, 2:string password),
+  map<string, UserData> getAllUserData(),
 
   //services
 
@@ -293,3 +294,4 @@ service Pyload {
   //scheduler
 
 }
+

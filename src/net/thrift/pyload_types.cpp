@@ -1248,8 +1248,8 @@ uint32_t UserData::read(::apache::thrift::protocol::TProtocol* iprot) {
         break;
       case 5:
         if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->template_);
-          this->__isset.template_ = true;
+          xfer += iprot->readString(this->templateName);
+          this->__isset.templateName = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -1281,8 +1281,8 @@ uint32_t UserData::write(::apache::thrift::protocol::TProtocol* oprot) const {
   xfer += oprot->writeFieldBegin("permission", ::apache::thrift::protocol::T_I32, 4);
   xfer += oprot->writeI32(this->permission);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("template_", ::apache::thrift::protocol::T_STRING, 5);
-  xfer += oprot->writeString(this->template_);
+  xfer += oprot->writeFieldBegin("templateName", ::apache::thrift::protocol::T_STRING, 5);
+  xfer += oprot->writeString(this->templateName);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();

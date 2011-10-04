@@ -871,12 +871,12 @@ class EventInfo {
 };
 
 typedef struct _UserData__isset {
-  _UserData__isset() : name(false), email(false), role(false), permission(false), template_(false) {}
+  _UserData__isset() : name(false), email(false), role(false), permission(false), templateName(false) {}
   bool name;
   bool email;
   bool role;
   bool permission;
-  bool template_;
+  bool templateName;
 } _UserData__isset;
 
 class UserData {
@@ -885,7 +885,7 @@ class UserData {
   static const char* ascii_fingerprint; // = "79B8231729AAFA85B85FA74A964A20B5";
   static const uint8_t binary_fingerprint[16]; // = {0x79,0xB8,0x23,0x17,0x29,0xAA,0xFA,0x85,0xB8,0x5F,0xA7,0x4A,0x96,0x4A,0x20,0xB5};
 
-  UserData() : name(""), email(""), role(0), permission(0), template_("") {
+  UserData() : name(""), email(""), role(0), permission(0), templateName("") {
   }
 
   virtual ~UserData() throw() {}
@@ -894,7 +894,7 @@ class UserData {
   std::string email;
   int32_t role;
   int32_t permission;
-  std::string template_;
+  std::string templateName;
 
   _UserData__isset __isset;
 
@@ -914,8 +914,8 @@ class UserData {
     permission = val;
   }
 
-  void __set_template_(const std::string& val) {
-    template_ = val;
+  void __set_templateName(const std::string& val) {
+    templateName = val;
   }
 
   bool operator == (const UserData & rhs) const
@@ -928,7 +928,7 @@ class UserData {
       return false;
     if (!(permission == rhs.permission))
       return false;
-    if (!(template_ == rhs.template_))
+    if (!(templateName == rhs.templateName))
       return false;
     return true;
   }

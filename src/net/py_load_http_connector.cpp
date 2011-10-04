@@ -402,6 +402,11 @@ void PyLoadHttpConnector::getUserData(UserData& _return, const std::string& user
     return;
 }
 
+void PyLoadHttpConnector::getAllUserData(std::map<std::string, UserData> & _return)
+{
+    return;
+}
+
 void PyLoadHttpConnector::getServices(std::map<PluginName, std::map<std::string, std::string> > & _return)
 {
     return;

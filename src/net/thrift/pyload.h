@@ -79,6 +79,7 @@ class PyloadIf {
   virtual void removeAccount(const PluginName& plugin, const std::string& account) = 0;
   virtual bool login(const std::string& username, const std::string& password) = 0;
   virtual void getUserData(UserData& _return, const std::string& username, const std::string& password) = 0;
+  virtual void getAllUserData(std::map<std::string, UserData> & _return) = 0;
   virtual void getServices(std::map<PluginName, std::map<std::string, std::string> > & _return) = 0;
   virtual bool hasService(const PluginName& plugin, const std::string& func) = 0;
   virtual void call(std::string& _return, const ServiceCall& info) = 0;
@@ -311,6 +312,9 @@ class PyloadNull : virtual public PyloadIf {
     return _return;
   }
   void getUserData(UserData& /* _return */, const std::string& /* username */, const std::string& /* password */) {
+    return;
+  }
+  void getAllUserData(std::map<std::string, UserData> & /* _return */) {
     return;
   }
   void getServices(std::map<PluginName, std::map<std::string, std::string> > & /* _return */) {
@@ -6666,6 +6670,100 @@ class Pyload_getUserData_presult {
 };
 
 
+class Pyload_getAllUserData_args {
+ public:
+
+  Pyload_getAllUserData_args() {
+  }
+
+  virtual ~Pyload_getAllUserData_args() throw() {}
+
+
+  bool operator == (const Pyload_getAllUserData_args & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const Pyload_getAllUserData_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const Pyload_getAllUserData_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class Pyload_getAllUserData_pargs {
+ public:
+
+
+  virtual ~Pyload_getAllUserData_pargs() throw() {}
+
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _Pyload_getAllUserData_result__isset {
+  _Pyload_getAllUserData_result__isset() : success(false) {}
+  bool success;
+} _Pyload_getAllUserData_result__isset;
+
+class Pyload_getAllUserData_result {
+ public:
+
+  Pyload_getAllUserData_result() {
+  }
+
+  virtual ~Pyload_getAllUserData_result() throw() {}
+
+  std::map<std::string, UserData>  success;
+
+  _Pyload_getAllUserData_result__isset __isset;
+
+  void __set_success(const std::map<std::string, UserData> & val) {
+    success = val;
+  }
+
+  bool operator == (const Pyload_getAllUserData_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const Pyload_getAllUserData_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const Pyload_getAllUserData_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _Pyload_getAllUserData_presult__isset {
+  _Pyload_getAllUserData_presult__isset() : success(false) {}
+  bool success;
+} _Pyload_getAllUserData_presult__isset;
+
+class Pyload_getAllUserData_presult {
+ public:
+
+
+  virtual ~Pyload_getAllUserData_presult() throw() {}
+
+  std::map<std::string, UserData> * success;
+
+  _Pyload_getAllUserData_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+
 class Pyload_getServices_args {
  public:
 
@@ -7418,6 +7516,9 @@ class PyloadClient : virtual public PyloadIf {
   void getUserData(UserData& _return, const std::string& username, const std::string& password);
   void send_getUserData(const std::string& username, const std::string& password);
   void recv_getUserData(UserData& _return);
+  void getAllUserData(std::map<std::string, UserData> & _return);
+  void send_getAllUserData();
+  void recv_getAllUserData(std::map<std::string, UserData> & _return);
   void getServices(std::map<PluginName, std::map<std::string, std::string> > & _return);
   void send_getServices();
   void recv_getServices(std::map<PluginName, std::map<std::string, std::string> > & _return);
@@ -7510,6 +7611,7 @@ class PyloadProcessor : public ::apache::thrift::TProcessor {
   void process_removeAccount(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_login(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_getUserData(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_getAllUserData(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_getServices(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_hasService(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_call(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -7582,6 +7684,7 @@ class PyloadProcessor : public ::apache::thrift::TProcessor {
     processMap_["removeAccount"] = &PyloadProcessor::process_removeAccount;
     processMap_["login"] = &PyloadProcessor::process_login;
     processMap_["getUserData"] = &PyloadProcessor::process_getUserData;
+    processMap_["getAllUserData"] = &PyloadProcessor::process_getAllUserData;
     processMap_["getServices"] = &PyloadProcessor::process_getServices;
     processMap_["hasService"] = &PyloadProcessor::process_hasService;
     processMap_["call"] = &PyloadProcessor::process_call;
@@ -8237,6 +8340,18 @@ class PyloadMultiface : virtual public PyloadIf {
         return;
       } else {
         ifaces_[i]->getUserData(_return, username, password);
+      }
+    }
+  }
+
+  void getAllUserData(std::map<std::string, UserData> & _return) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->getAllUserData(_return);
+        return;
+      } else {
+        ifaces_[i]->getAllUserData(_return);
       }
     }
   }

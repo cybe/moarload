@@ -10747,6 +10747,189 @@ uint32_t Pyload_getUserData_presult::read(::apache::thrift::protocol::TProtocol*
   return xfer;
 }
 
+uint32_t Pyload_getAllUserData_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t Pyload_getAllUserData_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("Pyload_getAllUserData_args");
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t Pyload_getAllUserData_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("Pyload_getAllUserData_pargs");
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t Pyload_getAllUserData_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_MAP) {
+          {
+            this->success.clear();
+            uint32_t _size399;
+            ::apache::thrift::protocol::TType _ktype400;
+            ::apache::thrift::protocol::TType _vtype401;
+            iprot->readMapBegin(_ktype400, _vtype401, _size399);
+            uint32_t _i403;
+            for (_i403 = 0; _i403 < _size399; ++_i403)
+            {
+              std::string _key404;
+              xfer += iprot->readString(_key404);
+              UserData& _val405 = this->success[_key404];
+              xfer += _val405.read(iprot);
+            }
+            iprot->readMapEnd();
+          }
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t Pyload_getAllUserData_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("Pyload_getAllUserData_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_MAP, 0);
+    {
+      xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->success.size()));
+      std::map<std::string, UserData> ::const_iterator _iter406;
+      for (_iter406 = this->success.begin(); _iter406 != this->success.end(); ++_iter406)
+      {
+        xfer += oprot->writeString(_iter406->first);
+        xfer += _iter406->second.write(oprot);
+      }
+      xfer += oprot->writeMapEnd();
+    }
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t Pyload_getAllUserData_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_MAP) {
+          {
+            (*(this->success)).clear();
+            uint32_t _size407;
+            ::apache::thrift::protocol::TType _ktype408;
+            ::apache::thrift::protocol::TType _vtype409;
+            iprot->readMapBegin(_ktype408, _vtype409, _size407);
+            uint32_t _i411;
+            for (_i411 = 0; _i411 < _size407; ++_i411)
+            {
+              std::string _key412;
+              xfer += iprot->readString(_key412);
+              UserData& _val413 = (*(this->success))[_key412];
+              xfer += _val413.read(iprot);
+            }
+            iprot->readMapEnd();
+          }
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
 uint32_t Pyload_getServices_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
@@ -10819,29 +11002,29 @@ uint32_t Pyload_getServices_result::read(::apache::thrift::protocol::TProtocol* 
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->success.clear();
-            uint32_t _size399;
-            ::apache::thrift::protocol::TType _ktype400;
-            ::apache::thrift::protocol::TType _vtype401;
-            iprot->readMapBegin(_ktype400, _vtype401, _size399);
-            uint32_t _i403;
-            for (_i403 = 0; _i403 < _size399; ++_i403)
+            uint32_t _size414;
+            ::apache::thrift::protocol::TType _ktype415;
+            ::apache::thrift::protocol::TType _vtype416;
+            iprot->readMapBegin(_ktype415, _vtype416, _size414);
+            uint32_t _i418;
+            for (_i418 = 0; _i418 < _size414; ++_i418)
             {
-              PluginName _key404;
-              xfer += iprot->readString(_key404);
-              std::map<std::string, std::string> & _val405 = this->success[_key404];
+              PluginName _key419;
+              xfer += iprot->readString(_key419);
+              std::map<std::string, std::string> & _val420 = this->success[_key419];
               {
-                _val405.clear();
-                uint32_t _size406;
-                ::apache::thrift::protocol::TType _ktype407;
-                ::apache::thrift::protocol::TType _vtype408;
-                iprot->readMapBegin(_ktype407, _vtype408, _size406);
-                uint32_t _i410;
-                for (_i410 = 0; _i410 < _size406; ++_i410)
+                _val420.clear();
+                uint32_t _size421;
+                ::apache::thrift::protocol::TType _ktype422;
+                ::apache::thrift::protocol::TType _vtype423;
+                iprot->readMapBegin(_ktype422, _vtype423, _size421);
+                uint32_t _i425;
+                for (_i425 = 0; _i425 < _size421; ++_i425)
                 {
-                  std::string _key411;
-                  xfer += iprot->readString(_key411);
-                  std::string& _val412 = _val405[_key411];
-                  xfer += iprot->readString(_val412);
+                  std::string _key426;
+                  xfer += iprot->readString(_key426);
+                  std::string& _val427 = _val420[_key426];
+                  xfer += iprot->readString(_val427);
                 }
                 iprot->readMapEnd();
               }
@@ -10875,17 +11058,17 @@ uint32_t Pyload_getServices_result::write(::apache::thrift::protocol::TProtocol*
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_MAP, 0);
     {
       xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_MAP, static_cast<uint32_t>(this->success.size()));
-      std::map<PluginName, std::map<std::string, std::string> > ::const_iterator _iter413;
-      for (_iter413 = this->success.begin(); _iter413 != this->success.end(); ++_iter413)
+      std::map<PluginName, std::map<std::string, std::string> > ::const_iterator _iter428;
+      for (_iter428 = this->success.begin(); _iter428 != this->success.end(); ++_iter428)
       {
-        xfer += oprot->writeString(_iter413->first);
+        xfer += oprot->writeString(_iter428->first);
         {
-          xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(_iter413->second.size()));
-          std::map<std::string, std::string> ::const_iterator _iter414;
-          for (_iter414 = _iter413->second.begin(); _iter414 != _iter413->second.end(); ++_iter414)
+          xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(_iter428->second.size()));
+          std::map<std::string, std::string> ::const_iterator _iter429;
+          for (_iter429 = _iter428->second.begin(); _iter429 != _iter428->second.end(); ++_iter429)
           {
-            xfer += oprot->writeString(_iter414->first);
-            xfer += oprot->writeString(_iter414->second);
+            xfer += oprot->writeString(_iter429->first);
+            xfer += oprot->writeString(_iter429->second);
           }
           xfer += oprot->writeMapEnd();
         }
@@ -10923,29 +11106,29 @@ uint32_t Pyload_getServices_presult::read(::apache::thrift::protocol::TProtocol*
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             (*(this->success)).clear();
-            uint32_t _size415;
-            ::apache::thrift::protocol::TType _ktype416;
-            ::apache::thrift::protocol::TType _vtype417;
-            iprot->readMapBegin(_ktype416, _vtype417, _size415);
-            uint32_t _i419;
-            for (_i419 = 0; _i419 < _size415; ++_i419)
+            uint32_t _size430;
+            ::apache::thrift::protocol::TType _ktype431;
+            ::apache::thrift::protocol::TType _vtype432;
+            iprot->readMapBegin(_ktype431, _vtype432, _size430);
+            uint32_t _i434;
+            for (_i434 = 0; _i434 < _size430; ++_i434)
             {
-              PluginName _key420;
-              xfer += iprot->readString(_key420);
-              std::map<std::string, std::string> & _val421 = (*(this->success))[_key420];
+              PluginName _key435;
+              xfer += iprot->readString(_key435);
+              std::map<std::string, std::string> & _val436 = (*(this->success))[_key435];
               {
-                _val421.clear();
-                uint32_t _size422;
-                ::apache::thrift::protocol::TType _ktype423;
-                ::apache::thrift::protocol::TType _vtype424;
-                iprot->readMapBegin(_ktype423, _vtype424, _size422);
-                uint32_t _i426;
-                for (_i426 = 0; _i426 < _size422; ++_i426)
+                _val436.clear();
+                uint32_t _size437;
+                ::apache::thrift::protocol::TType _ktype438;
+                ::apache::thrift::protocol::TType _vtype439;
+                iprot->readMapBegin(_ktype438, _vtype439, _size437);
+                uint32_t _i441;
+                for (_i441 = 0; _i441 < _size437; ++_i441)
                 {
-                  std::string _key427;
-                  xfer += iprot->readString(_key427);
-                  std::string& _val428 = _val421[_key427];
-                  xfer += iprot->readString(_val428);
+                  std::string _key442;
+                  xfer += iprot->readString(_key442);
+                  std::string& _val443 = _val436[_key442];
+                  xfer += iprot->readString(_val443);
                 }
                 iprot->readMapEnd();
               }
@@ -11411,29 +11594,29 @@ uint32_t Pyload_getAllInfo_result::read(::apache::thrift::protocol::TProtocol* i
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->success.clear();
-            uint32_t _size429;
-            ::apache::thrift::protocol::TType _ktype430;
-            ::apache::thrift::protocol::TType _vtype431;
-            iprot->readMapBegin(_ktype430, _vtype431, _size429);
-            uint32_t _i433;
-            for (_i433 = 0; _i433 < _size429; ++_i433)
+            uint32_t _size444;
+            ::apache::thrift::protocol::TType _ktype445;
+            ::apache::thrift::protocol::TType _vtype446;
+            iprot->readMapBegin(_ktype445, _vtype446, _size444);
+            uint32_t _i448;
+            for (_i448 = 0; _i448 < _size444; ++_i448)
             {
-              PluginName _key434;
-              xfer += iprot->readString(_key434);
-              std::map<std::string, std::string> & _val435 = this->success[_key434];
+              PluginName _key449;
+              xfer += iprot->readString(_key449);
+              std::map<std::string, std::string> & _val450 = this->success[_key449];
               {
-                _val435.clear();
-                uint32_t _size436;
-                ::apache::thrift::protocol::TType _ktype437;
-                ::apache::thrift::protocol::TType _vtype438;
-                iprot->readMapBegin(_ktype437, _vtype438, _size436);
-                uint32_t _i440;
-                for (_i440 = 0; _i440 < _size436; ++_i440)
+                _val450.clear();
+                uint32_t _size451;
+                ::apache::thrift::protocol::TType _ktype452;
+                ::apache::thrift::protocol::TType _vtype453;
+                iprot->readMapBegin(_ktype452, _vtype453, _size451);
+                uint32_t _i455;
+                for (_i455 = 0; _i455 < _size451; ++_i455)
                 {
-                  std::string _key441;
-                  xfer += iprot->readString(_key441);
-                  std::string& _val442 = _val435[_key441];
-                  xfer += iprot->readString(_val442);
+                  std::string _key456;
+                  xfer += iprot->readString(_key456);
+                  std::string& _val457 = _val450[_key456];
+                  xfer += iprot->readString(_val457);
                 }
                 iprot->readMapEnd();
               }
@@ -11467,17 +11650,17 @@ uint32_t Pyload_getAllInfo_result::write(::apache::thrift::protocol::TProtocol* 
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_MAP, 0);
     {
       xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_MAP, static_cast<uint32_t>(this->success.size()));
-      std::map<PluginName, std::map<std::string, std::string> > ::const_iterator _iter443;
-      for (_iter443 = this->success.begin(); _iter443 != this->success.end(); ++_iter443)
+      std::map<PluginName, std::map<std::string, std::string> > ::const_iterator _iter458;
+      for (_iter458 = this->success.begin(); _iter458 != this->success.end(); ++_iter458)
       {
-        xfer += oprot->writeString(_iter443->first);
+        xfer += oprot->writeString(_iter458->first);
         {
-          xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(_iter443->second.size()));
-          std::map<std::string, std::string> ::const_iterator _iter444;
-          for (_iter444 = _iter443->second.begin(); _iter444 != _iter443->second.end(); ++_iter444)
+          xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(_iter458->second.size()));
+          std::map<std::string, std::string> ::const_iterator _iter459;
+          for (_iter459 = _iter458->second.begin(); _iter459 != _iter458->second.end(); ++_iter459)
           {
-            xfer += oprot->writeString(_iter444->first);
-            xfer += oprot->writeString(_iter444->second);
+            xfer += oprot->writeString(_iter459->first);
+            xfer += oprot->writeString(_iter459->second);
           }
           xfer += oprot->writeMapEnd();
         }
@@ -11515,29 +11698,29 @@ uint32_t Pyload_getAllInfo_presult::read(::apache::thrift::protocol::TProtocol* 
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             (*(this->success)).clear();
-            uint32_t _size445;
-            ::apache::thrift::protocol::TType _ktype446;
-            ::apache::thrift::protocol::TType _vtype447;
-            iprot->readMapBegin(_ktype446, _vtype447, _size445);
-            uint32_t _i449;
-            for (_i449 = 0; _i449 < _size445; ++_i449)
+            uint32_t _size460;
+            ::apache::thrift::protocol::TType _ktype461;
+            ::apache::thrift::protocol::TType _vtype462;
+            iprot->readMapBegin(_ktype461, _vtype462, _size460);
+            uint32_t _i464;
+            for (_i464 = 0; _i464 < _size460; ++_i464)
             {
-              PluginName _key450;
-              xfer += iprot->readString(_key450);
-              std::map<std::string, std::string> & _val451 = (*(this->success))[_key450];
+              PluginName _key465;
+              xfer += iprot->readString(_key465);
+              std::map<std::string, std::string> & _val466 = (*(this->success))[_key465];
               {
-                _val451.clear();
-                uint32_t _size452;
-                ::apache::thrift::protocol::TType _ktype453;
-                ::apache::thrift::protocol::TType _vtype454;
-                iprot->readMapBegin(_ktype453, _vtype454, _size452);
-                uint32_t _i456;
-                for (_i456 = 0; _i456 < _size452; ++_i456)
+                _val466.clear();
+                uint32_t _size467;
+                ::apache::thrift::protocol::TType _ktype468;
+                ::apache::thrift::protocol::TType _vtype469;
+                iprot->readMapBegin(_ktype468, _vtype469, _size467);
+                uint32_t _i471;
+                for (_i471 = 0; _i471 < _size467; ++_i471)
                 {
-                  std::string _key457;
-                  xfer += iprot->readString(_key457);
-                  std::string& _val458 = _val451[_key457];
-                  xfer += iprot->readString(_val458);
+                  std::string _key472;
+                  xfer += iprot->readString(_key472);
+                  std::string& _val473 = _val466[_key472];
+                  xfer += iprot->readString(_val473);
                 }
                 iprot->readMapEnd();
               }
@@ -11647,17 +11830,17 @@ uint32_t Pyload_getInfoByPlugin_result::read(::apache::thrift::protocol::TProtoc
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->success.clear();
-            uint32_t _size459;
-            ::apache::thrift::protocol::TType _ktype460;
-            ::apache::thrift::protocol::TType _vtype461;
-            iprot->readMapBegin(_ktype460, _vtype461, _size459);
-            uint32_t _i463;
-            for (_i463 = 0; _i463 < _size459; ++_i463)
+            uint32_t _size474;
+            ::apache::thrift::protocol::TType _ktype475;
+            ::apache::thrift::protocol::TType _vtype476;
+            iprot->readMapBegin(_ktype475, _vtype476, _size474);
+            uint32_t _i478;
+            for (_i478 = 0; _i478 < _size474; ++_i478)
             {
-              std::string _key464;
-              xfer += iprot->readString(_key464);
-              std::string& _val465 = this->success[_key464];
-              xfer += iprot->readString(_val465);
+              std::string _key479;
+              xfer += iprot->readString(_key479);
+              std::string& _val480 = this->success[_key479];
+              xfer += iprot->readString(_val480);
             }
             iprot->readMapEnd();
           }
@@ -11688,11 +11871,11 @@ uint32_t Pyload_getInfoByPlugin_result::write(::apache::thrift::protocol::TProto
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_MAP, 0);
     {
       xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->success.size()));
-      std::map<std::string, std::string> ::const_iterator _iter466;
-      for (_iter466 = this->success.begin(); _iter466 != this->success.end(); ++_iter466)
+      std::map<std::string, std::string> ::const_iterator _iter481;
+      for (_iter481 = this->success.begin(); _iter481 != this->success.end(); ++_iter481)
       {
-        xfer += oprot->writeString(_iter466->first);
-        xfer += oprot->writeString(_iter466->second);
+        xfer += oprot->writeString(_iter481->first);
+        xfer += oprot->writeString(_iter481->second);
       }
       xfer += oprot->writeMapEnd();
     }
@@ -11727,17 +11910,17 @@ uint32_t Pyload_getInfoByPlugin_presult::read(::apache::thrift::protocol::TProto
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             (*(this->success)).clear();
-            uint32_t _size467;
-            ::apache::thrift::protocol::TType _ktype468;
-            ::apache::thrift::protocol::TType _vtype469;
-            iprot->readMapBegin(_ktype468, _vtype469, _size467);
-            uint32_t _i471;
-            for (_i471 = 0; _i471 < _size467; ++_i471)
+            uint32_t _size482;
+            ::apache::thrift::protocol::TType _ktype483;
+            ::apache::thrift::protocol::TType _vtype484;
+            iprot->readMapBegin(_ktype483, _vtype484, _size482);
+            uint32_t _i486;
+            for (_i486 = 0; _i486 < _size482; ++_i486)
             {
-              std::string _key472;
-              xfer += iprot->readString(_key472);
-              std::string& _val473 = (*(this->success))[_key472];
-              xfer += iprot->readString(_val473);
+              std::string _key487;
+              xfer += iprot->readString(_key487);
+              std::string& _val488 = (*(this->success))[_key487];
+              xfer += iprot->readString(_val488);
             }
             iprot->readMapEnd();
           }
@@ -15348,6 +15531,63 @@ void PyloadClient::recv_getUserData(UserData& _return)
     return;
   }
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "getUserData failed: unknown result");
+}
+
+void PyloadClient::getAllUserData(std::map<std::string, UserData> & _return)
+{
+  send_getAllUserData();
+  recv_getAllUserData(_return);
+}
+
+void PyloadClient::send_getAllUserData()
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("getAllUserData", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  Pyload_getAllUserData_pargs args;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+void PyloadClient::recv_getAllUserData(std::map<std::string, UserData> & _return)
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("getAllUserData") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  Pyload_getAllUserData_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    // _return pointer has now been filled
+    return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "getAllUserData failed: unknown result");
 }
 
 void PyloadClient::getServices(std::map<PluginName, std::map<std::string, std::string> > & _return)
@@ -19128,6 +19368,60 @@ void PyloadProcessor::process_getUserData(int32_t seqid, ::apache::thrift::proto
 
   if (this->eventHandler_.get() != NULL) {
     this->eventHandler_->postWrite(ctx, "Pyload.getUserData", bytes);
+  }
+}
+
+void PyloadProcessor::process_getAllUserData(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (this->eventHandler_.get() != NULL) {
+    ctx = this->eventHandler_->getContext("Pyload.getAllUserData", callContext);
+  }
+  apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "Pyload.getAllUserData");
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->preRead(ctx, "Pyload.getAllUserData");
+  }
+
+  Pyload_getAllUserData_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->postRead(ctx, "Pyload.getAllUserData", bytes);
+  }
+
+  Pyload_getAllUserData_result result;
+  try {
+    iface_->getAllUserData(result.success);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (this->eventHandler_.get() != NULL) {
+      this->eventHandler_->handlerError(ctx, "Pyload.getAllUserData");
+    }
+
+    apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("getAllUserData", apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->preWrite(ctx, "Pyload.getAllUserData");
+  }
+
+  oprot->writeMessageBegin("getAllUserData", apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (this->eventHandler_.get() != NULL) {
+    this->eventHandler_->postWrite(ctx, "Pyload.getAllUserData", bytes);
   }
 }
 
