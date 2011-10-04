@@ -25,13 +25,13 @@ Cookie Cookie::parse(const std::string& cookieString)
     Cookie cookie;
 
     std::map<std::string, std::string*> entries;
-    entries.insert(std::pair<std::string, std::string*>("expires", &cookie.expires));
-    entries.insert(std::pair<std::string, std::string*>("comment", &cookie.comment));
-    entries.insert(std::pair<std::string, std::string*>("domain", &cookie.domain));
-    entries.insert(std::pair<std::string, std::string*>("max-age", &cookie.maxAge));
-    entries.insert(std::pair<std::string, std::string*>("path", &cookie.path));
-    entries.insert(std::pair<std::string, std::string*>("secure", &cookie.secure));
-    entries.insert(std::pair<std::string, std::string*>("version", &cookie.version));
+    entries.insert(make_pair("expires", &cookie.expires));
+    entries.insert(make_pair("comment", &cookie.comment));
+    entries.insert(make_pair("domain", &cookie.domain));
+    entries.insert(make_pair("max-age", &cookie.maxAge));
+    entries.insert(make_pair("path", &cookie.path));
+    entries.insert(make_pair("secure", &cookie.secure));
+    entries.insert(make_pair("version", &cookie.version));
 
     std::vector<std::string>::iterator nameValuePairsIt;
     for (nameValuePairsIt = nameValuePairs.begin(); nameValuePairsIt != nameValuePairs.end(); nameValuePairsIt++)
