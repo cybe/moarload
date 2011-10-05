@@ -18,10 +18,14 @@ project(moarload)
 cmake_minimum_required(VERSION 2.6)
 
 IF(CMAKE_COMPILER_IS_GNUCXX)
-    ADD_DEFINITIONS("-Wall -Wextra -ansi -std=c++0x -pedantic -isystem /usr/local/include/cpp-netlib" -DHAVE_NETINET_IN_H)
+    ADD_DEFINITIONS("-Wall -Wextra -ansi -pedantic")
+    ADD_DEFINITIONS("-std=c++0x")
+    ADD_DEFINITIONS("-isystem /usr/local/include/cpp-netlib")
+    ADD_DEFINITIONS("-DHAVE_NETINET_IN_H")
 ENDIF()
 IF(MSVC)
-    ADD_DEFINITIONS("-D _WIN32_WINNT=0x0501")
+    ADD_DEFINITIONS("/D _WIN32_WINNT=0x0501 /wd 4065")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL")
 ENDIF()
 
 # Subdirectories
