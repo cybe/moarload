@@ -8,15 +8,15 @@ class ConfigurationService
 public:
     ConfigurationService(const std::string& filename);
     virtual ~ConfigurationService();
-    std::string getBackendType();
+    std::string getBackendType() const;
     void setBackendType(const std::string& _backendType);
-    std::string getThriftHostname();
+    std::string getThriftHostname() const;
     void setThriftHostname(const std::string& _thriftHostname);
-    unsigned short getThriftPort();
+    unsigned short getThriftPort() const;
     void setThriftPort(unsigned short _thriftPort);
-    std::string getHttpHostname();
+    std::string getHttpHostname() const;
     void setHttpHostname(const std::string& _httpHostname);
-    unsigned short getHttpPort();
+    unsigned short getHttpPort() const;
     void setHttpPort(unsigned short _httpPort);
     void load();
     void save();

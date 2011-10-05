@@ -54,7 +54,7 @@ void ConfigurationService::writeEmptyConfigFile()
     f.close();
 }
 
-std::string ConfigurationService::getBackendType()
+std::string ConfigurationService::getBackendType() const
 {
     return backendType;
 }
@@ -64,7 +64,7 @@ void ConfigurationService::setBackendType(const std::string& _backendType)
     backendType = _backendType;
 }
 
-std::string ConfigurationService::getThriftHostname()
+std::string ConfigurationService::getThriftHostname() const
 {
     return thriftHostname;
 }
@@ -75,7 +75,7 @@ void ConfigurationService::setThriftHostname(const std::string& _thriftHostname)
 }
 
 
-unsigned short ConfigurationService::getThriftPort()
+unsigned short ConfigurationService::getThriftPort() const
 {
     return thriftPort;
 }
@@ -87,7 +87,7 @@ void ConfigurationService::setThriftPort(unsigned short _thriftPort)
 }
 
 
-std::string ConfigurationService::getHttpHostname()
+std::string ConfigurationService::getHttpHostname() const
 {
     return httpHostname;
 }
@@ -98,7 +98,7 @@ void ConfigurationService::setHttpHostname(const std::string& _httpHostname)
     httpHostname = _httpHostname;
 }
 
-unsigned short ConfigurationService::getHttpPort()
+unsigned short ConfigurationService::getHttpPort() const
 {
     return httpPort;
 }
