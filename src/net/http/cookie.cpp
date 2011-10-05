@@ -34,7 +34,7 @@ Cookie Cookie::parse(const std::string& cookieString)
     entries.insert(make_pair("version", &cookie.version));
 
     std::vector<std::string>::iterator nameValuePairsIt;
-    for (nameValuePairsIt = nameValuePairs.begin(); nameValuePairsIt != nameValuePairs.end(); nameValuePairsIt++)
+    for (nameValuePairsIt = nameValuePairs.begin(); nameValuePairsIt != nameValuePairs.end(); ++nameValuePairsIt)
     {
         boost::trim_left(*nameValuePairsIt);
 

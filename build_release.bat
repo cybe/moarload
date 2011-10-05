@@ -3,4 +3,4 @@ rd build /S /Q
 mkdir build
 cd build
 cmake -G "NMake Makefiles JOM" -DCMAKE_BUILD_TYPE=Release ..
-jom -j2
+jom -j1
