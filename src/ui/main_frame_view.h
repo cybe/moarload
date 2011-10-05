@@ -6,6 +6,7 @@
 #include <wx/sizer.h>
 #include <wx/notebook.h>
 #include <wx/menu.h>
+#include "page_download_view.h"
 #include <wx/panel.h>
 #include <wx/frame.h>
 #include <wx/stattext.h>
@@ -28,10 +29,7 @@ private:
     //*)
 
     //(*Identifiers(MainFrameView)
-    static const long ID_PANEL2;
-    static const long ID_PANEL3;
-    static const long ID_PANEL4;
-    static const long ID_PANEL5;
+    static const long ID_DOWNLOAD_PANEL;
     static const long ID_MAIN_NOTEBOOK;
     static const long ID_STATICTEXT1;
     static const long ID_STATICTEXT2;
@@ -50,14 +48,11 @@ private:
 
     //(*Declarations(MainFrameView)
     wxToolBarToolBase* ToolBarItem5;
-    wxPanel* settingsPanel;
-    wxPanel* logPanel;
-    wxPanel* downloadPanel;
+    PageDownloadView* downloadPanel;
     wxStaticText* StaticText1;
     wxToolBarToolBase* ToolBarItem2;
     wxStaticText* StaticText3;
     wxPanel* mainFramePanel;
-    wxPanel* addPanel;
     wxToolBarToolBase* ToolBarItem4;
     wxToolBar* mainToolBar;
     wxToolBarToolBase* ToolBarItem1;

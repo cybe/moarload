@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxFrame" name="MainFrameView">
 		<title>Moarload</title>
-		<size>318,260</size>
+		<size>640,480</size>
 		<id_arg>0</id_arg>
 		<object class="wxPanel" name="ID_MAIN_FRAME_PANEL" variable="mainFramePanel" member="yes">
 			<pos>80,56</pos>
@@ -11,20 +11,12 @@
 				<object class="sizeritem">
 					<object class="wxNotebook" name="ID_MAIN_NOTEBOOK" variable="mainNotebook" member="yes">
 						<object class="notebookpage">
-							<object class="wxPanel" name="ID_PANEL2" variable="downloadPanel" member="yes" />
-							<label>Download</label>
-						</object>
-						<object class="notebookpage">
-							<object class="wxPanel" name="ID_PANEL3" variable="addPanel" member="yes" />
-							<label>Add</label>
-						</object>
-						<object class="notebookpage">
-							<object class="wxPanel" name="ID_PANEL4" variable="settingsPanel" member="yes" />
-							<label>Settings</label>
-						</object>
-						<object class="notebookpage">
-							<object class="wxPanel" name="ID_PANEL5" variable="logPanel" member="yes" />
-							<label>Log</label>
+							<object class="Custom" name="ID_DOWNLOAD_PANEL" subclass="PageDownloadView" variable="downloadPanel" member="yes">
+								<creating_code>$(THIS) = new $(CLASS)($(PARENT),$(ID));</creating_code>
+								<include_file>page__download__view.h</include_file>
+								<local_include>1</local_include>
+							</object>
+							<label>Downloads</label>
 						</object>
 					</object>
 					<flag>wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>

@@ -38,10 +38,7 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 }
 
 //(*IdInit(MainFrameView)
-const long MainFrameView::ID_PANEL2 = wxNewId();
-const long MainFrameView::ID_PANEL3 = wxNewId();
-const long MainFrameView::ID_PANEL4 = wxNewId();
-const long MainFrameView::ID_PANEL5 = wxNewId();
+const long MainFrameView::ID_DOWNLOAD_PANEL = wxNewId();
 const long MainFrameView::ID_MAIN_NOTEBOOK = wxNewId();
 const long MainFrameView::ID_STATICTEXT1 = wxNewId();
 const long MainFrameView::ID_STATICTEXT2 = wxNewId();
@@ -74,20 +71,14 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     wxBoxSizer* mainStatusPanelSizer;
     wxMenuBar* mainMenuBar;
     wxMenu* Menu2;
-    
+
     Create(parent, wxID_ANY, _("Moarload"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
-    SetClientSize(wxSize(318,260));
+    SetClientSize(wxSize(640,480));
     mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80,56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
     mainFrameSizer = new wxBoxSizer(wxVERTICAL);
     mainNotebook = new wxNotebook(mainFramePanel, ID_MAIN_NOTEBOOK, wxDefaultPosition, wxDefaultSize, 0, _T("ID_MAIN_NOTEBOOK"));
-    downloadPanel = new wxPanel(mainNotebook, ID_PANEL2, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL2"));
-    addPanel = new wxPanel(mainNotebook, ID_PANEL3, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL3"));
-    settingsPanel = new wxPanel(mainNotebook, ID_PANEL4, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL4"));
-    logPanel = new wxPanel(mainNotebook, ID_PANEL5, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL5"));
-    mainNotebook->AddPage(downloadPanel, _("Download"), false);
-    mainNotebook->AddPage(addPanel, _("Add"), false);
-    mainNotebook->AddPage(settingsPanel, _("Settings"), false);
-    mainNotebook->AddPage(logPanel, _("Log"), false);
+    downloadPanel = new PageDownloadView(mainNotebook,ID_DOWNLOAD_PANEL);
+    mainNotebook->AddPage(downloadPanel, _("Downloads"), false);
     mainFrameSizer->Add(mainNotebook, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     mainStatusPanel = new wxPanel(mainFramePanel, ID_MAIN_STATUS_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_STATUS_PANEL"));
     mainStatusPanel->SetMinSize(wxSize(-1,24));
@@ -126,7 +117,7 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     ToolBarItem5 = mainToolBar->AddTool(ID_TOOLBARITEM6, _("Reconnect Now"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->Realize();
     SetToolBar(mainToolBar);
-    
+
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnAbout);
     //*)

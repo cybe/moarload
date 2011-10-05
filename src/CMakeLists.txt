@@ -14,6 +14,7 @@ set(SRCS
     net/thrift/pyload_types.cpp
     services/configuration_service.cpp
     ui/main_frame_view.cpp
+    ui/page_download_view.cpp
 )
 
 
