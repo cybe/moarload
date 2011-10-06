@@ -21,7 +21,7 @@ set(SRCS
 #--- dependencies
 
 # wxWidgets
-find_package(wxWidgets COMPONENTS core base REQUIRED)
+find_package(wxWidgets COMPONENTS adv core base REQUIRED)
 INCLUDE(${wxWidgets_USE_FILE})
 
 # boost
@@ -74,8 +74,7 @@ endif(WIN32)
 
 # link
 target_link_libraries(moarload
-    ${wxWidgets_LIBRARIES}
     ${Boost_LIBRARIES}
     ${thrift_LIBRARIES}
+    ${wxWidgets_LIBRARIES}
 )
-

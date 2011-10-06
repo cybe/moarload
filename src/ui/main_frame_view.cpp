@@ -38,6 +38,11 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 }
 
 //(*IdInit(MainFrameView)
+const long MainFrameView::ID_LISTBOX1 = wxNewId();
+const long MainFrameView::ID_FILTER_PANEL = wxNewId();
+const long MainFrameView::ID_CUSTOM1 = wxNewId();
+const long MainFrameView::ID_DOWNLOAD_LIST_PANEL = wxNewId();
+const long MainFrameView::ID_SPLITTERWINDOW1 = wxNewId();
 const long MainFrameView::ID_DOWNLOAD_PANEL = wxNewId();
 const long MainFrameView::ID_MAIN_NOTEBOOK = wxNewId();
 const long MainFrameView::ID_STATICTEXT1 = wxNewId();
@@ -67,8 +72,11 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     wxMenuItem* MenuItem2;
     wxBoxSizer* mainFrameSizer;
     wxMenuItem* MenuItem1;
+    wxBoxSizer* BoxSizer3;
     wxMenu* Menu1;
+    wxBoxSizer* BoxSizer2;
     wxBoxSizer* mainStatusPanelSizer;
+    wxBoxSizer* BoxSizer1;
     wxMenuBar* mainMenuBar;
     wxMenu* Menu2;
 
@@ -77,7 +85,34 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80,56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
     mainFrameSizer = new wxBoxSizer(wxVERTICAL);
     mainNotebook = new wxNotebook(mainFramePanel, ID_MAIN_NOTEBOOK, wxDefaultPosition, wxDefaultSize, 0, _T("ID_MAIN_NOTEBOOK"));
-    downloadPanel = new PageDownloadView(mainNotebook,ID_DOWNLOAD_PANEL);
+    downloadPanel = new wxPanel(mainNotebook, ID_DOWNLOAD_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_PANEL"));
+    BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
+    SplitterWindow1 = new wxSplitterWindow(downloadPanel, ID_SPLITTERWINDOW1, wxDefaultPosition, wxDefaultSize, wxSP_3D, _T("ID_SPLITTERWINDOW1"));
+    SplitterWindow1->SetMinSize(wxSize(10,10));
+    SplitterWindow1->SetMinimumPaneSize(10);
+    filterPanel = new wxPanel(SplitterWindow1, ID_FILTER_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_FILTER_PANEL"));
+    BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+    ListBox1 = new wxListBox(filterPanel, ID_LISTBOX1, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_LISTBOX1"));
+    ListBox1->Append(_("All"));
+    ListBox1->Append(_("Downloading"));
+    ListBox1->Append(_("Completed"));
+    ListBox1->Append(_("Paused"));
+    BoxSizer2->Add(ListBox1, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+    filterPanel->SetSizer(BoxSizer2);
+    BoxSizer2->Fit(filterPanel);
+    BoxSizer2->SetSizeHints(filterPanel);
+    downloadListPanel = new wxPanel(SplitterWindow1, ID_DOWNLOAD_LIST_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_LIST_PANEL"));
+    BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
+    Custom1 = new wxDataViewTreeCtrl(downloadListPanel,ID_CUSTOM1);
+    BoxSizer3->Add(Custom1, 1, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    downloadListPanel->SetSizer(BoxSizer3);
+    BoxSizer3->Fit(downloadListPanel);
+    BoxSizer3->SetSizeHints(downloadListPanel);
+    SplitterWindow1->SplitVertically(filterPanel, downloadListPanel);
+    BoxSizer1->Add(SplitterWindow1, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+    downloadPanel->SetSizer(BoxSizer1);
+    BoxSizer1->Fit(downloadPanel);
+    BoxSizer1->SetSizeHints(downloadPanel);
     mainNotebook->AddPage(downloadPanel, _("Downloads"), false);
     mainFrameSizer->Add(mainNotebook, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     mainStatusPanel = new wxPanel(mainFramePanel, ID_MAIN_STATUS_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_STATUS_PANEL"));
@@ -118,6 +153,7 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     mainToolBar->Realize();
     SetToolBar(mainToolBar);
 
+    Connect(ID_LISTBOX1,wxEVT_COMMAND_LISTBOX_SELECTED,(wxObjectEventFunction)&MainFrameView::OnListBox1Select1);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnAbout);
     //*)
@@ -141,5 +177,13 @@ void MainFrameView::OnAbout(wxCommandEvent& event)
 }
 
 void MainFrameView::OnTextCtrl1Text(wxCommandEvent& event)
+{
+}
+
+void MainFrameView::OnListBox1Select(wxCommandEvent& event)
+{
+}
+
+void MainFrameView::OnListBox1Select1(wxCommandEvent& event)
 {
 }

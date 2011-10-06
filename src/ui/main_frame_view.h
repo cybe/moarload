@@ -2,14 +2,16 @@
 #define MAIN_FRAME_VIEW_H
 
 //(*Headers(MainFrameView)
+#include <wx/dataview.h>
 #include <wx/toolbar.h>
 #include <wx/sizer.h>
 #include <wx/notebook.h>
 #include <wx/menu.h>
-#include "page_download_view.h"
 #include <wx/panel.h>
+#include <wx/splitter.h>
 #include <wx/frame.h>
 #include <wx/stattext.h>
+#include <wx/listbox.h>
 //*)
 
 class MainFrameView: public wxFrame
@@ -26,9 +28,18 @@ private:
     void OnAbout(wxCommandEvent& event);
     void OnTextCtrl1Text(wxCommandEvent& event);
     void OnNotebook1PageChanged(wxNotebookEvent& event);
+    void OnPanel2Paint(wxPaintEvent& event);
+    void OnmainNotebookPageChanged(wxNotebookEvent& event);
+    void OnListBox1Select(wxCommandEvent& event);
+    void OnListBox1Select1(wxCommandEvent& event);
     //*)
 
     //(*Identifiers(MainFrameView)
+    static const long ID_LISTBOX1;
+    static const long ID_FILTER_PANEL;
+    static const long ID_CUSTOM1;
+    static const long ID_DOWNLOAD_LIST_PANEL;
+    static const long ID_SPLITTERWINDOW1;
     static const long ID_DOWNLOAD_PANEL;
     static const long ID_MAIN_NOTEBOOK;
     static const long ID_STATICTEXT1;
@@ -48,17 +59,22 @@ private:
 
     //(*Declarations(MainFrameView)
     wxToolBarToolBase* ToolBarItem5;
-    PageDownloadView* downloadPanel;
+    wxListBox* ListBox1;
+    wxPanel* downloadPanel;
     wxStaticText* StaticText1;
     wxToolBarToolBase* ToolBarItem2;
+    wxSplitterWindow* SplitterWindow1;
     wxStaticText* StaticText3;
     wxPanel* mainFramePanel;
+    wxPanel* downloadListPanel;
+    wxDataViewTreeCtrl* Custom1;
     wxToolBarToolBase* ToolBarItem4;
     wxToolBar* mainToolBar;
     wxToolBarToolBase* ToolBarItem1;
     wxStaticText* StaticText2;
     wxToolBarToolBase* ToolBarItem3;
     wxPanel* mainStatusPanel;
+    wxPanel* filterPanel;
     wxNotebook* mainNotebook;
     //*)
 
