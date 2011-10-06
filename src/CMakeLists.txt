@@ -22,6 +22,9 @@ set(SRCS
 #--- dependencies
 
 # wxWidgets
+if(WIN32)
+    SET(wxWidgets_ROOT_DIR "C:/dev/libs/wxWidgets-2.9.2")
+endif(WIN32)
 find_package(wxWidgets COMPONENTS adv core base REQUIRED)
 INCLUDE(${wxWidgets_USE_FILE})
 
