@@ -5,17 +5,19 @@
 #include "../log.h"
 #include "../util.h"
 #include "../lib/json/json.h"
+#include "http/http_client.h"
 
 
 PyLoadHttpConnector::PyLoadHttpConnector(const std::string& hostname,
                                          const unsigned short port) :
-    url("http://" + hostname + ":" + util::intToString(port) + "/api/")
+    url("http://" + hostname + ":" + util::intToString(port) + "/api/"),
+    httpClient(new HttpClient)
 {
 }
 
 PyLoadHttpConnector::~PyLoadHttpConnector()
 {
-    //dtor
+    delete httpClient;
 }
 
 void PyLoadHttpConnector::getConfigValue(std::string& _return, const std::string& category, const std::string& option, const std::string& section)
@@ -60,7 +62,7 @@ void PyLoadHttpConnector::statusServer(ServerStatus& _return)
     httpRequest.method = GET;
     httpRequest.url = url + "statusServer";
 
-    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
+    HttpResponse httpResponse = httpClient->dispatch(httpRequest);
 
     Json::Value root;
     Json::Reader reader;
@@ -92,7 +94,7 @@ void PyLoadHttpConnector::getServerVersion(std::string& _return)
     httpRequest.method = GET;
     httpRequest.url = url + "getServerVersion";
 
-    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
+    HttpResponse httpResponse = httpClient->dispatch(httpRequest);
 
     Json::Value root;
     Json::Reader reader;
@@ -383,7 +385,7 @@ bool PyLoadHttpConnector::login(const std::string& username, const std::string& 
     httpRequest.header = additionalHeader;
     httpRequest.data = "username=" + username + "&password=" + password;
 
-    HttpResponse httpResponse = httpClient.dispatch(httpRequest);
+    HttpResponse httpResponse = httpClient->dispatch(httpRequest);
 
     Json::Value root;
     Json::Reader reader;
