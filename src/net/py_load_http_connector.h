@@ -3,10 +3,10 @@
 
 #include <string>
 
+#include "http/http_client.h"
 #include "py_load_connector.h"
 #include "thrift/pyload_types.h"
 
-class HttpClient;
 
 class PyLoadHttpConnector : public PyLoadConnector
 {
@@ -88,8 +88,8 @@ public:
 
 protected:
 private:
+    HttpClient httpClient;
     std::string url;
-    HttpClient* httpClient;
 };
 
 #endif // PY_LOAD_HTTP_CONNECTOR_H
