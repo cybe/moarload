@@ -40,8 +40,8 @@
 											<object class="wxPanel" name="ID_DOWNLOAD_LIST_PANEL" variable="downloadListPanel" member="yes">
 												<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 													<object class="sizeritem">
-														<object class="Custom" name="ID_CUSTOM1" subclass="wxDataViewTreeCtrl" variable="Custom1" member="yes">
-															<creating_code>$(THIS) = new $(CLASS)($(PARENT),$(ID));</creating_code>
+														<object class="Custom" name="ID_CUSTOM1" subclass="wxDataViewCtrl" variable="Custom1" member="yes">
+															<creating_code>$(THIS) = new $(CLASS)($(PARENT),$(ID));&#x0A;$(THIS)-&gt;AssociateModel(model);</creating_code>
 															<include_file>wx/dataview.h</include_file>
 															<style></style>
 														</object>

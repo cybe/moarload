@@ -32,6 +32,7 @@ private:
     void OnmainNotebookPageChanged(wxNotebookEvent& event);
     void OnListBox1Select(wxCommandEvent& event);
     void OnListBox1Select1(wxCommandEvent& event);
+    void OnmainNotebookPageChanged1(wxNotebookEvent& event);
     //*)
 
     //(*Identifiers(MainFrameView)
@@ -67,7 +68,6 @@ private:
     wxStaticText* StaticText3;
     wxPanel* mainFramePanel;
     wxPanel* downloadListPanel;
-    wxDataViewTreeCtrl* Custom1;
     wxToolBarToolBase* ToolBarItem4;
     wxToolBar* mainToolBar;
     wxToolBarToolBase* ToolBarItem1;
@@ -75,6 +75,7 @@ private:
     wxToolBarToolBase* ToolBarItem3;
     wxPanel* mainStatusPanel;
     wxPanel* filterPanel;
+    wxDataViewCtrl* Custom1;
     wxNotebook* mainNotebook;
     //*)
 

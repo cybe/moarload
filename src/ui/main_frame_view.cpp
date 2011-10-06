@@ -8,6 +8,7 @@
 #include <wx/image.h>
 #include <wx/artprov.h>
 //*)
+#include "download_list_data_model.h"
 
 //helper functions
 enum wxbuildinfoformat
@@ -67,7 +68,7 @@ END_EVENT_TABLE()
 
 MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
 {
-
+    wxDataViewModel* model = new wxDataViewTreeStore();
     //(*Initialize(MainFrameView)
     wxMenuItem* MenuItem2;
     wxBoxSizer* mainFrameSizer;
@@ -103,7 +104,8 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     BoxSizer2->SetSizeHints(filterPanel);
     downloadListPanel = new wxPanel(SplitterWindow1, ID_DOWNLOAD_LIST_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_LIST_PANEL"));
     BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-    Custom1 = new wxDataViewTreeCtrl(downloadListPanel,ID_CUSTOM1);
+    Custom1 = new wxDataViewCtrl(downloadListPanel,ID_CUSTOM1);
+    Custom1->AssociateModel(model);
     BoxSizer3->Add(Custom1, 1, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     downloadListPanel->SetSizer(BoxSizer3);
     BoxSizer3->Fit(downloadListPanel);
@@ -185,5 +187,9 @@ void MainFrameView::OnListBox1Select(wxCommandEvent& event)
 }
 
 void MainFrameView::OnListBox1Select1(wxCommandEvent& event)
+{
+}
+
+void MainFrameView::OnmainNotebookPageChanged1(wxNotebookEvent& event)
 {
 }
