@@ -27,7 +27,7 @@ wxString DownloadListDataModel::GetColumnType(unsigned int col) const
 
 wxDataViewItem DownloadListDataModel::GetParent(const wxDataViewItem &item) const
 {
-
+    return NULL;
 }
 
 void DownloadListDataModel::GetValue(wxVariant &variant, const wxDataViewItem &item, unsigned int col) const
