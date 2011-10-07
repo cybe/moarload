@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="moarload" InternalType="">
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <VirtualDirectory Name="net">
+      <VirtualDirectory Name="http">
+        <File Name="src/net/http/cookie.cpp"/>
+        <File Name="src/net/http/cookie.h"/>
+        <File Name="src/net/http/http_client.cpp"/>
+        <File Name="src/net/http/http_client.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="thrift">
+        <File Name="src/net/thrift/pyload_types.cpp"/>
+        <File Name="src/net/thrift/pyload_constants.h"/>
+        <File Name="src/net/thrift/pyload_types.h"/>
+        <File Name="src/net/thrift/pyload.h"/>
+        <File Name="src/net/thrift/pyload.cpp"/>
+        <File Name="src/net/thrift/pyload_constants.cpp"/>
+      </VirtualDirectory>
+      <File Name="src/net/py_load_thrift_connector.cpp"/>
+      <File Name="src/net/py_load_connector.cpp"/>
+      <File Name="src/net/py_load_http_connector.h"/>
+      <File Name="src/net/py_load_connector.h"/>
+      <File Name="src/net/py_load_http_connector.cpp"/>
+      <File Name="src/net/py_load_thrift_connector.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="lib">
+      <VirtualDirectory Name="json">
+        <File Name="src/lib/json/json-forwards.h"/>
+        <File Name="src/lib/json/jsoncpp.cpp"/>
+        <File Name="src/lib/json/json.h"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <File Name="src/main.h"/>
+    <File Name="src/main.cpp"/>
+    <File Name="src/util.cpp"/>
+    <File Name="src/util.h"/>
+    <File Name="src/log.h"/>
+    <VirtualDirectory Name="ui">
+      <File Name="src/ui/download_list_data_model.h"/>
+      <File Name="src/ui/page_download_view.h"/>
+      <File Name="src/ui/main_frame_view.h"/>
+      <File Name="src/ui/main_frame_view.cpp"/>
+      <File Name="src/ui/page_download_view.cpp"/>
+      <File Name="src/ui/download_list_data_model.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="services">
+      <File Name="src/services/configuration_service.cpp"/>
+      <File Name="src/services/configuration_service.h"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <Settings Type="Dynamic Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" C_Options="-g" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild>
+        <Command Enabled="yes">cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo ..</Command>
+      </PreBuild>
+      <PostBuild/>
+      <CustomBuild Enabled="yes">
+        <RebuildCommand/>
+        <CleanCommand>make clean</CleanCommand>
+        <BuildCommand>make -j 2</BuildCommand>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory>$(ProjectPath)build</WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" C_Options="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="-O2" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="no"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild>
+        <Command Enabled="yes">cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..</Command>
+      </PreBuild>
+      <PostBuild/>
+      <CustomBuild Enabled="yes">
+        <RebuildCommand/>
+        <CleanCommand>make clean</CleanCommand>
+        <BuildCommand>make -j 2</BuildCommand>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory>$(ProjectPath)build</WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>
