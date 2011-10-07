@@ -3,10 +3,14 @@
 
 #include <string>
 
-#include "http/http_client.h"
+// Dirty hack to avoid winsock.h being included twice.
+// asio has to be included before wxwidgets.
+#include <boost/asio.hpp>
+
 #include "py_load_connector.h"
 #include "thrift/pyload_types.h"
 
+class HttpClient;
 
 class PyLoadHttpConnector : public PyLoadConnector
 {
@@ -88,8 +92,8 @@ public:
 
 protected:
 private:
-    HttpClient httpClient;
     std::string url;
+    HttpClient* httpClient;
 };
 
 #endif // PY_LOAD_HTTP_CONNECTOR_H
