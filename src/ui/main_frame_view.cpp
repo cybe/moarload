@@ -8,7 +8,6 @@
 #include <wx/image.h>
 #include <wx/artprov.h>
 //*)
-#include "download_list_data_model.h"
 
 //helper functions
 enum wxbuildinfoformat
