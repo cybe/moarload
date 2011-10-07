@@ -15,9 +15,9 @@ class DownloadListModelNode
 private:
     DownloadListModelNode(const DownloadListModelNode& rhs);
     DownloadListModelNode& operator=(const DownloadListModelNode& rhs);
-    DownloadListModelNode* parentNode;
-    DownloadListModelNodePtrArray childrenNodes;
 
+    DownloadListModelNode* m_parentNode;
+    DownloadListModelNodePtrArray m_childrenNodes;
     short                   m_order;
     wxString                m_name;
     wxString                m_hoster;
@@ -28,23 +28,23 @@ private:
     bool                    m_container;
 
 public:
-    DownloadListModelNode(DownloadListModelNode* parent, wxString& backendName) {
-        parentNode = parent;
+    DownloadListModelNode(DownloadListModelNode* parent, const wxString& backendName) {
+        m_parentNode = parent;
         m_name = backendName;
         m_container = true;
     }
 
     DownloadListModelNode(DownloadListModelNode* parent,
                           short order,
-                          const wxString& name,
-                          const wxString& hoster,
-                          const Priority& priority,
-                          const wxString& status,
-                          const wxString& progressText,
-                          const int progress,
-                          const bool container = false) {
-        
-        parentNode = parent;
+                          wxString& name,
+                          wxString& hoster,
+                          Priority& priority,
+                          wxString& status,
+                          wxString& progressText,
+                          int progress,
+                          bool container = false) {
+
+        m_parentNode = parent;
         m_order = order;
         m_name = name;
         m_hoster = hoster;
@@ -55,11 +55,10 @@ public:
         m_container = container;
     }
 
-    virtual ~DownloadListModelNode(){
-        size_t count = childrenNodes.GetCount();
-        for (size_t i = 0; i < count; i++)
-        {
-            DownloadListModelNode *child = childrenNodes[i];
+    virtual ~DownloadListModelNode() {
+        size_t count = m_childrenNodes.GetCount();
+        for (size_t i = 0; i < count; i++) {
+            DownloadListModelNode* child = m_childrenNodes[i];
             delete child;
         }
     }
@@ -69,24 +68,84 @@ public:
     }
 
     DownloadListModelNode* GetParent() {
-        return parentNode;
+        return m_parentNode;
     }
     DownloadListModelNodePtrArray& GetChildren() {
-        return childrenNodes;
+        return m_childrenNodes;
     }
     DownloadListModelNode* GetNthChild(unsigned int n) {
-        return childrenNodes.Item(n);
+        return m_childrenNodes.Item(n);
     }
     void Insert(DownloadListModelNode* child, unsigned int n) {
-        childrenNodes.Insert(child, n);
+        m_childrenNodes.Insert(child, n);
     }
     void Append(DownloadListModelNode* child) {
-        childrenNodes.Add(child);
+        m_childrenNodes.Add(child);
     }
     unsigned int GetChildCount() const {
-        return childrenNodes.GetCount();
+        return m_childrenNodes.GetCount();
     }
 
+    void setChildrenNodes(const DownloadListModelNodePtrArray& childrenNodes) {
+        this->m_childrenNodes = childrenNodes;
+    }
+    void setContainer(bool container) {
+        this->m_container = container;
+    }
+    void setHoster(const wxString& hoster) {
+        this->m_hoster = hoster;
+    }
+    void setName(const wxString& name) {
+        this->m_name = name;
+    }
+    void setOrder(short order) {
+        this->m_order = order;
+    }
+    void setParentNode(DownloadListModelNode* parentNode) {
+        this->m_parentNode = parentNode;
+    }
+    void setPriority(const Priority& priority) {
+        this->m_priority = priority;
+    }
+    void setProgress(int progress) {
+        this->m_progress = progress;
+    }
+    void setProgressText(const wxString& progressText) {
+        this->m_progressText = progressText;
+    }
+    void setStatus(const wxString& status) {
+        this->m_status = status;
+    }
+    const DownloadListModelNodePtrArray& getChildrenNodes() const {
+        return m_childrenNodes;
+    }
+    bool getContainer() const {
+        return m_container;
+    }
+    const wxString& getHoster() const {
+        return m_hoster;
+    }
+    const wxString& getName() const {
+        return m_name;
+    }
+    short getOrder() const {
+        return m_order;
+    }
+    DownloadListModelNode* getParentNode() {
+        return m_parentNode;
+    }
+    const Priority& getPriority() const {
+        return m_priority;
+    }
+    int getProgress() const {
+        return m_progress;
+    }
+    const wxString& getProgressText() const {
+        return m_progressText;
+    }
+    const wxString& getStatus() const {
+        return m_status;
+    }
 };
 
 #endif // DOWNLOAD_LIST_MODEL_NODE_H
