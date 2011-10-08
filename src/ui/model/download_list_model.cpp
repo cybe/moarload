@@ -71,12 +71,12 @@ void DownloadListModel::GetValue(wxVariant& variant, const wxDataViewItem& item,
 
     DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
     switch (col) {
-        case 1:
-            variant = (long) node->getOrder();
-            break;
         case 0:
             variant = node->getName();
-            break;
+        break;
+        case 1:
+            variant = (long) node->getOrder();
+        break;
         case 2:
             variant = node->getHoster();
             break;

@@ -182,6 +182,7 @@ wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent)
     //wxASSERT(!downloadDataViewCtrl);
 
     DownloadListModel* downloadListModel = new DownloadListModel;
+    
     downloadDataViewCtrl->AssociateModel(downloadListModel);
 
 #if wxUSE_DRAG_AND_DROP && wxUSE_UNICODE

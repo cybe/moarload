@@ -7,6 +7,7 @@
 #include "net/py_load_http_connector.h"
 #include "net/py_load_thrift_connector.h"
 #include "services/configuration_service.h"
+#include "services/pyload_data_store.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
@@ -36,26 +37,30 @@ bool Main::OnInit()
 
     //testing
 
-    ConfigurationService cs("moarload.ini");
-    LOG(logIO) << cs.getBackendType();
-
-    LOG(logIO) << "-----http:";
-    PyLoadConnector* con = new PyLoadHttpConnector(cs.getHttpHostname(), cs.getHttpPort());
-    bool loginSuccesfull = con->login("buildserver", "buildserver");
-    LOG(logIO) << "Login: " << loginSuccesfull;
-    std::string version;
-    con->getServerVersion(version);
-    LOG(logIO) << "version: " << version;
-    delete con;
-
-    LOG(logIO) << "-----thrift:";
-    con = new PyLoadThriftConnector(cs.getThriftHostname(), cs.getThriftPort());
-    loginSuccesfull = con->login("buildserver", "buildserver");
-    LOG(logIO) << "Login: " << loginSuccesfull;
-    con->getServerVersion(version);
-    LOG(logIO) << "version: " << version;
-    delete con;
-
+//    ConfigurationService cs("moarload.ini");
+//    LOG(logIO) << cs.getBackendType();
+//
+//    LOG(logIO) << "-----http:";
+//    PyLoadConnector* con = new PyLoadHttpConnector(cs.getHttpHostname(), cs.getHttpPort());
+//    bool loginSuccesfull = con->login("buildserver", "buildserver");
+//    LOG(logIO) << "Login: " << loginSuccesfull;
+//    std::string version;
+//    con->getServerVersion(version);
+//    LOG(logIO) << "version: " << version;
+//    delete con;
+//
+//    LOG(logIO) << "-----thrift:";
+//    con = new PyLoadThriftConnector(cs.getThriftHostname(), cs.getThriftPort());
+//    loginSuccesfull = con->login("buildserver", "buildserver");
+//    LOG(logIO) << "Login: " << loginSuccesfull;
+//    con->getServerVersion(version);
+//    LOG(logIO) << "version: " << version;
+//    delete con;
+    
+    PyloadDataStore ds;
+    ds.updateQueuePackageData();
+    LOG(logIO) << ds.getQueuePackages().at(0).name;
+    
     return wxsOK;
 }
 

@@ -24,17 +24,17 @@ public:
 
     virtual wxString GetColumnType(unsigned int col) const {
         switch (col) {
-            case 1 :
-                return wxT("long");
-                break;
             case 0 :
                 return wxT("string");
+                break;
+            case 1 :
+                return wxT("long");
                 break;
             case 2 :
                 return wxT("string");
                 break;
             case 3 :
-                return wxT("long"); //here long
+                return wxT("long");
                 break;
             case 4 :
                 return wxT("string");

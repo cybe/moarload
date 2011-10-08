@@ -13,6 +13,7 @@ set(SRCS
     net/thrift/pyload_constants.cpp
     net/thrift/pyload_types.cpp
     services/configuration_service.cpp
+    services/pyload_data_store.cpp
     ui/model/download_list_model_node.cpp
     ui/model/download_list_model.cpp
     ui/main_frame_view.cpp
