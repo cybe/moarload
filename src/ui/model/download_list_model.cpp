@@ -3,7 +3,22 @@
 
 DownloadListModel::DownloadListModel()
 {
-    m_root = new DownloadListModelNode(NULL, "PyLoad");
+    m_root = new DownloadListModelNode(NULL, wxString("PyLoad"));
+    
+    DownloadListModelNode* m_pop = new DownloadListModelNode( m_root, 874, "XXXXXX", "You are not alone", 843, "You are not alone", "You are not alone", 23, true );
+    //DownloadListModelNode* m_pop = new DownloadListModelNode( m_root, "XXXXXX");
+    
+    // liste von paketen
+    // iter liste
+    // setze parent auf root
+    // estelle node
+    // gehe für jedes package alle dateien durch
+    // erstelle dateien als nodes mit mutter paket
+    // packete appende files
+    
+    m_pop->Append(
+        new DownloadListModelNode( m_pop, 874, "Michael Jackson", "You are not alone", 843, "You are not alone", "You are not alone", 23 ) );
+    m_root->Append( m_pop );
 
 }
 
@@ -56,10 +71,10 @@ void DownloadListModel::GetValue(wxVariant& variant, const wxDataViewItem& item,
 
     DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
     switch (col) {
-        case 0:
+        case 1:
             variant = (long) node->getOrder();
             break;
-        case 1:
+        case 0:
             variant = node->getName();
             break;
         case 2:
@@ -89,6 +104,10 @@ bool DownloadListModel::IsContainer(const wxDataViewItem& item) const
     DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
     return node->IsContainer();
 }
+bool DownloadListModel::HasContainerColumns(const wxDataViewItem&	item) const
+{
+    return true;
+} 
 
 bool DownloadListModel::IsEnabled(const wxDataViewItem& item, unsigned int col) const
 {

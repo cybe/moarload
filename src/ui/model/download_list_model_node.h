@@ -29,18 +29,21 @@ private:
 
 public:
     DownloadListModelNode(DownloadListModelNode* parent, const wxString& backendName) {
+        m_order = -1;
+        m_priority = -1;
+        m_progress = -1;
         m_parentNode = parent;
         m_name = backendName;
         m_container = true;
     }
 
     DownloadListModelNode(DownloadListModelNode* parent,
-                          short order,
-                          wxString& name,
-                          wxString& hoster,
-                          Priority& priority,
-                          wxString& status,
-                          wxString& progressText,
+                          int order,
+                          const wxString& name,
+                          const wxString& hoster,
+                          int priority,
+                          const wxString& status,
+                          const wxString& progressText,
                           int progress,
                           bool container = false) {
 

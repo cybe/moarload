@@ -34,6 +34,7 @@ private:
     void OnListBox1Select1(wxCommandEvent& event);
     void OnmainNotebookPageChanged1(wxNotebookEvent& event);
     //*)
+    wxDataViewCtrl* BuildDataViewCtrl(wxPanel* parent);
 
     //(*Identifiers(MainFrameView)
     static const long ID_LISTBOX1;
@@ -75,7 +76,7 @@ private:
     wxToolBarToolBase* ToolBarItem3;
     wxPanel* mainStatusPanel;
     wxPanel* filterPanel;
-    wxDataViewCtrl* Custom1;
+    wxDataViewCtrl* downloadDataViewCtrl;
     wxNotebook* mainNotebook;
     //*)
 

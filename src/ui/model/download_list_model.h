@@ -24,17 +24,17 @@ public:
 
     virtual wxString GetColumnType(unsigned int col) const {
         switch (col) {
-            case 0 :
+            case 1 :
                 return wxT("long");
                 break;
-            case 1 :
+            case 0 :
                 return wxT("string");
                 break;
             case 2 :
                 return wxT("string");
                 break;
             case 3 :
-                return wxT("long");
+                return wxT("long"); //here long
                 break;
             case 4 :
                 return wxT("string");
@@ -58,6 +58,7 @@ public:
 
     virtual wxDataViewItem GetParent(const wxDataViewItem& item) const;
     virtual bool IsContainer(const wxDataViewItem& item) const;
+    virtual bool HasContainerColumns (const wxDataViewItem &  item) const;
     virtual unsigned int GetChildren(const wxDataViewItem& parent,
                                      wxDataViewItemArray& array) const;
 
