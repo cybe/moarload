@@ -1,9 +1,26 @@
-#include "../../log.h"
 #include "download_list_model.h"
+
+#include "../../log.h"
+#include "../../services/pyload_data_store.h"
+
 
 DownloadListModel::DownloadListModel()
 {
+    PyloadDataStore ds;
+    ds.updateQueuePackageData();
+    //LOG(logIO) << ds.getQueuePackages().at(0).name;
+    
     m_backendNode = new DownloadListModelNodeBackend();
+    
+    std::vector<PackageData> packages = ds.getQueuePackages();
+    std::vector<PackageData>::iterator package;
+    for (package=packages.begin() ; package!=packages.end(); ++package)
+    {
+        DownloadListModelNode* packageNode = new DownloadListModelNodePackage(m_backendNode, *package);
+        m_backendNode->appendChild(packageNode);
+    }
+
+    
     
 //    m_root = new DownloadListModelNode(NULL, wxString("PyLoad"));
 //    

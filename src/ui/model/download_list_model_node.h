@@ -9,6 +9,7 @@
 
 #include "../../net/thrift/pyload_types.h"
 #include "../../log.h"
+#include "../../services/pyload_data_store.h"
 
 class DownloadListModelNode;
 
@@ -196,7 +197,7 @@ private:
 class DownloadListModelNodePackage : public DownloadListModelNode
 {
 public:
-    DownloadListModelNodePackage(DownloadListModelNode* parent) : DownloadListModelNode(parent) {};
+    DownloadListModelNodePackage(DownloadListModelNode* parent, PackageData& packageData) : DownloadListModelNode(parent), m_packageData(packageData) {};
     virtual ~DownloadListModelNodePackage() {};
 
     virtual bool isContainer() const {
@@ -227,27 +228,28 @@ public:
     }
 
     virtual void getName(wxVariant& name) const {
-        name = wxString();
+        name = m_packageData.name;
     }
 
     virtual void getOrder(wxVariant& order) const {
-        order = wxString();
+        order = wxString(wxString::Format(wxT("%i"), m_packageData.order));
     }
 
     virtual void getPriority(wxVariant& priority) const {
-        priority = wxString();
+        priority = wxString("todo");
     }
 
     virtual void getProgress(wxVariant& progress) const {
-        progress = wxString();
+        progress = wxString::Format(wxT("%i / %i"), m_packageData.sizedone, m_packageData.sizetotal);
     }
 
     virtual void getProgressText(wxVariant& progressText) const {
-        progressText = wxString();
+        LOG(logDEBUG) << m_packageData.sizetotal;
+        progressText = wxString::Format(wxT("%i / %i"), m_packageData.sizedone, m_packageData.sizetotal);
     }
 
     virtual void getStatus(wxVariant& status) const {
-        status = wxString();
+        status = wxString("todo");
     }
 
     virtual void setHoster(const wxVariant& hoster) {
@@ -282,6 +284,8 @@ private:
     // Neither copy nor assign
     DownloadListModelNodePackage(const DownloadListModelNodePackage&);
     void operator=(const DownloadListModelNodePackage&);
+    
+    PackageData m_packageData;
 };
 
 class DownloadListModelNodeFile : public DownloadListModelNode

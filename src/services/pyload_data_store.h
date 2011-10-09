@@ -25,7 +25,7 @@ public:
 
     void updateQueuePackageData();
 
-    const std::vector<PackageData>& getQueuePackages() const {
+    std::vector<PackageData>& getQueuePackages() {
         return m_queuePackages;
     }
 };

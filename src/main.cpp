@@ -57,9 +57,7 @@ bool Main::OnInit()
 //    LOG(logIO) << "version: " << version;
 //    delete con;
     
-    PyloadDataStore ds;
-    ds.updateQueuePackageData();
-    LOG(logIO) << ds.getQueuePackages().at(0).name;
+    
     
     return wxsOK;
 }
