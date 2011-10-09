@@ -47,7 +47,6 @@
         <File Name="src/ui/model/download_list_model_node.cpp"/>
         <File Name="src/ui/model/download_list_model.h"/>
         <File Name="src/ui/model/download_list_model.cpp"/>
-        <File Name="src/ui/model/node.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="services">
