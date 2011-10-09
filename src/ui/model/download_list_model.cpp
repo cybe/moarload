@@ -3,7 +3,7 @@
 
 DownloadListModel::DownloadListModel()
 {
-    m_backendNode = new DownloadListModelNodeBackend("Pyload");
+    m_backendNode = new DownloadListModelNodeBackend();
     
 //    m_root = new DownloadListModelNode(NULL, wxString("PyLoad"));
 //    

@@ -15,7 +15,6 @@ class DownloadListModelNode;
 class DownloadListModelNode
 {
 public:
-    DownloadListModelNode() {};
     DownloadListModelNode(DownloadListModelNode* parent) : m_parent(parent) {};
     
     virtual ~DownloadListModelNode() {
@@ -105,7 +104,7 @@ private:
 class DownloadListModelNodeBackend : public DownloadListModelNode
 {
 public:
-    DownloadListModelNodeBackend(const wxString name) : DownloadListModelNode(NULL), m_name(name) {};
+    DownloadListModelNodeBackend() : DownloadListModelNode(NULL) {};
     virtual ~DownloadListModelNodeBackend() {};
 
     virtual bool isContainer() const {
@@ -136,7 +135,7 @@ public:
     }
 
     virtual void getName(wxVariant& name) const {
-        name = m_name;
+        name = "Pyload";
     }
 
     virtual void getOrder(wxVariant& order) const {
@@ -191,12 +190,190 @@ private:
     // Neither copy nor assign
     DownloadListModelNodeBackend(const DownloadListModelNodeBackend&);
     void operator=(const DownloadListModelNodeBackend&);
-
-    wxString m_name;
 };
 
 
+class DownloadListModelNodePackage : public DownloadListModelNode
+{
+public:
+    DownloadListModelNodePackage(DownloadListModelNode* parent) : DownloadListModelNode(parent) {};
+    virtual ~DownloadListModelNodePackage() {};
 
+    virtual bool isContainer() const {
+        return true;
+    }
+    
+    virtual bool hasColumns() const {
+        return true;
+    }
+    
+    virtual bool isEnabled() const {
+        return true;
+    }
+
+    virtual void getHoster(wxVariant& hoster) const {
+        wxString hosters("[");
+        std::vector<DownloadListModelNode*>::const_iterator node;
+        for (node=getChildren().begin(); node != getChildren().end(); ++node) {
+            wxVariant variant;
+            (*node)->getHoster(variant);
+            hosters.append(variant.GetString());
+            if (node != getChildren().end()) {
+                hosters.append(";");
+            }
+        }
+        hosters.append("]");
+        hoster = hosters;
+    }
+
+    virtual void getName(wxVariant& name) const {
+        name = wxString();
+    }
+
+    virtual void getOrder(wxVariant& order) const {
+        order = wxString();
+    }
+
+    virtual void getPriority(wxVariant& priority) const {
+        priority = wxString();
+    }
+
+    virtual void getProgress(wxVariant& progress) const {
+        progress = wxString();
+    }
+
+    virtual void getProgressText(wxVariant& progressText) const {
+        progressText = wxString();
+    }
+
+    virtual void getStatus(wxVariant& status) const {
+        status = wxString();
+    }
+
+    virtual void setHoster(const wxVariant& hoster) {
+
+    }
+
+    virtual void setName(const wxVariant& name) {
+
+    }
+
+    virtual void setOrder(const wxVariant& order) {
+
+    }
+
+    virtual void setPriority(const wxVariant& priority) {
+
+    }
+
+    virtual void setProgress(const wxVariant& progress) {
+
+    }
+
+    virtual void setProgressText(const wxVariant& progressText) {
+
+    }
+
+    virtual void setStatus(const wxVariant& status) {
+
+    }
+
+private:
+    // Neither copy nor assign
+    DownloadListModelNodePackage(const DownloadListModelNodePackage&);
+    void operator=(const DownloadListModelNodePackage&);
+};
+
+class DownloadListModelNodeFile : public DownloadListModelNode
+{
+public:
+    DownloadListModelNodeFile(DownloadListModelNode* parent) : DownloadListModelNode(parent) {};
+    virtual ~DownloadListModelNodeFile() {};
+
+    virtual bool isContainer() const {
+        return true;
+    }
+    
+    virtual bool hasColumns() const {
+        return true;
+    }
+    
+    virtual bool isEnabled() const {
+        return true;
+    }
+
+    virtual void getHoster(wxVariant& hoster) const {
+        wxString hosters("[");
+        std::vector<DownloadListModelNode*>::const_iterator node;
+        for (node=getChildren().begin(); node != getChildren().end(); ++node) {
+            wxVariant variant;
+            (*node)->getHoster(variant);
+            hosters.append(variant.GetString());
+            if (node != getChildren().end()) {
+                hosters.append(";");
+            }
+        }
+        hosters.append("]");
+        hoster = hosters;
+    }
+
+    virtual void getName(wxVariant& name) const {
+        name = wxString();
+    }
+
+    virtual void getOrder(wxVariant& order) const {
+        order = wxString();
+    }
+
+    virtual void getPriority(wxVariant& priority) const {
+        priority = wxString();
+    }
+
+    virtual void getProgress(wxVariant& progress) const {
+        progress = wxString();
+    }
+
+    virtual void getProgressText(wxVariant& progressText) const {
+        progressText = wxString();
+    }
+
+    virtual void getStatus(wxVariant& status) const {
+        status = wxString();
+    }
+
+    virtual void setHoster(const wxVariant& hoster) {
+
+    }
+
+    virtual void setName(const wxVariant& name) {
+
+    }
+
+    virtual void setOrder(const wxVariant& order) {
+
+    }
+
+    virtual void setPriority(const wxVariant& priority) {
+
+    }
+
+    virtual void setProgress(const wxVariant& progress) {
+
+    }
+
+    virtual void setProgressText(const wxVariant& progressText) {
+
+    }
+
+    virtual void setStatus(const wxVariant& status) {
+
+    }
+
+private:
+    // Neither copy nor assign
+    DownloadListModelNodeFile(const DownloadListModelNodeFile&);
+    void operator=(const DownloadListModelNodeFile&);
+};
 
 //class DownloadListModelNode
 //{
