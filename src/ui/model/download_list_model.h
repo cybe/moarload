@@ -12,7 +12,7 @@ private:
     DownloadListModel(const DownloadListModel& rhs);
     DownloadListModel& operator=(const DownloadListModel& rhs);
     
-    DownloadListModelNode*   m_root;
+    DownloadListModelNode*   m_backendNode;
 
 public:
     DownloadListModel();
@@ -28,13 +28,13 @@ public:
                 return wxT("string");
                 break;
             case 1 :
-                return wxT("long");
+                return wxT("string");
                 break;
             case 2 :
                 return wxT("string");
                 break;
             case 3 :
-                return wxT("long");
+                return wxT("string");
                 break;
             case 4 :
                 return wxT("string");

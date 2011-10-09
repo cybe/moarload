@@ -207,7 +207,7 @@ wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent)
 
     // column 1 of the view control:
 
-    tr = new wxDataViewTextRenderer("long", wxDATAVIEW_CELL_INERT);
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column1 =
         new wxDataViewColumn("#", tr, 1, 30, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
@@ -224,7 +224,7 @@ wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent)
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column2);
 
-        tr = new wxDataViewTextRenderer("long", wxDATAVIEW_CELL_INERT);
+        tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column3 =
         new wxDataViewColumn("Priority", tr, 3, 150, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |

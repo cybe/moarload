@@ -3,49 +3,51 @@
 
 DownloadListModel::DownloadListModel()
 {
-    m_root = new DownloadListModelNode(NULL, wxString("PyLoad"));
+    m_backendNode = new DownloadListModelNodeBackend("Pyload");
     
-    DownloadListModelNode* m_pop = new DownloadListModelNode( m_root, 874, "XXXXXX", "You are not alone", 843, "You are not alone", "You are not alone", 23, true );
-    //DownloadListModelNode* m_pop = new DownloadListModelNode( m_root, "XXXXXX");
-    
-    // liste von paketen
-    // iter liste
-    // setze parent auf root
-    // estelle node
-    // gehe für jedes package alle dateien durch
-    // erstelle dateien als nodes mit mutter paket
-    // packete appende files
-    
-    m_pop->Append(
-        new DownloadListModelNode( m_pop, 874, "Michael Jackson", "You are not alone", 843, "You are not alone", "You are not alone", 23 ) );
-    m_root->Append( m_pop );
+//    m_root = new DownloadListModelNode(NULL, wxString("PyLoad"));
+//    
+//    DownloadListModelNode* m_pop = new DownloadListModelNode( m_root, 874, "XXXXXX", "You are not alone", 843, "You are not alone", "You are not alone", 23, true );
+//    //DownloadListModelNode* m_pop = new DownloadListModelNode( m_root, "XXXXXX");
+//    
+//    // liste von paketen
+//    // iter liste
+//    // setze parent auf root
+//    // estelle node
+//    // gehe für jedes package alle dateien durch
+//    // erstelle dateien als nodes mit mutter paket
+//    // packete appende files
+//    
+//    m_pop->Append(
+//        new DownloadListModelNode( m_pop, 874, "Michael Jackson", "You are not alone", 843, "You are not alone", "You are not alone", 23 ) );
+//    m_root->Append( m_pop );
 
 }
 
 DownloadListModel::~DownloadListModel()
 {
+    delete m_backendNode;
 }
 
 unsigned int DownloadListModel::GetChildren(const wxDataViewItem& parent, wxDataViewItemArray& array) const
 {
-    DownloadListModelNode* node = (DownloadListModelNode*) parent.GetID();
+    DownloadListModelNode* node = static_cast<DownloadListModelNode*>(parent.GetID());
+    
     if (!node) {
-        array.Add(wxDataViewItem((void*) m_root));
+        array.Add(wxDataViewItem(static_cast<void*>(m_backendNode)));
         return 1;
     }
 
-    if (node->GetChildCount() == 0) {
+    if (node->getChildCount() == 0) {
         return 0;
     }
 
-    unsigned int count = node->GetChildren().GetCount();
-
-    for (unsigned int pos = 0; pos < count; pos++) {
-        DownloadListModelNode* child = node->GetChildren().Item(pos);
-        array.Add(wxDataViewItem((void*) child));
+    std::vector<DownloadListModelNode*>::const_iterator child;
+    for (child = node->getChildren().begin(); child != node->getChildren().end(); ++child) {
+        array.Add(wxDataViewItem(static_cast<void*>(*child)));
     }
 
-    return count;
+    return node->getChildCount();
 }
 
 wxDataViewItem DownloadListModel::GetParent(const wxDataViewItem& item) const
@@ -55,39 +57,39 @@ wxDataViewItem DownloadListModel::GetParent(const wxDataViewItem& item) const
         return wxDataViewItem(0);
     }
 
-    DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
+    DownloadListModelNode* node = static_cast<DownloadListModelNode*>(item.GetID());
 
     // "PyLoad" also has no parent
-    if (node->getParentNode() == NULL) {
+    if (node->getParent() == NULL) {
         return wxDataViewItem(0);
     }
 
-    return wxDataViewItem((void*) node->GetParent());
+    return wxDataViewItem(static_cast<void*>(node->getParent()));
 }
 
 void DownloadListModel::GetValue(wxVariant& variant, const wxDataViewItem& item, unsigned int col) const
 {
     wxASSERT(item.IsOk());
 
-    DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
+    DownloadListModelNode* node = static_cast<DownloadListModelNode*>(item.GetID());
     switch (col) {
         case 0:
-            variant = node->getName();
+            node->getName(variant);
         break;
         case 1:
-            variant = (long) node->getOrder();
+            node->getOrder(variant);
         break;
         case 2:
-            variant = node->getHoster();
+            node->getHoster(variant);
             break;
         case 3:
-            variant = (long) node->getPriority();
+            node->getPriority(variant);
             break;
         case 4:
-            variant = node->getStatus();
+            node->getStatus(variant);
             break;
         case 5:
-            variant = node->getProgressText();
+            node->getProgressText(variant);
             break;
 
         default:
@@ -101,31 +103,31 @@ bool DownloadListModel::IsContainer(const wxDataViewItem& item) const
     if (!item.IsOk())
         return true;
 
-    DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
-    return node->IsContainer();
+    DownloadListModelNode* node = static_cast<DownloadListModelNode*>(item.GetID());
+    return node->isContainer();
 }
-bool DownloadListModel::HasContainerColumns(const wxDataViewItem&	item) const
+bool DownloadListModel::HasContainerColumns(const wxDataViewItem& item) const
 {
-    return true;
+    DownloadListModelNode* node = static_cast<DownloadListModelNode*>(item.GetID());
+    return node->isContainer();
 } 
 
 bool DownloadListModel::IsEnabled(const wxDataViewItem& item, unsigned int col) const
 {
     wxASSERT(item.IsOk());
 
-    DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
-
-    return true;
+    DownloadListModelNode* node = static_cast<DownloadListModelNode*>(item.GetID());
+    return node->isEnabled();
 }
 
 bool DownloadListModel::SetValue(const wxVariant& variant, const wxDataViewItem& item, unsigned int col)
 {
     wxASSERT(item.IsOk());
 
-    DownloadListModelNode* node = (DownloadListModelNode*) item.GetID();
+    DownloadListModelNode* node = static_cast<DownloadListModelNode*>(item.GetID());
     switch (col) {
         case 0:
-            node->setOrder(variant.GetLong());
+            node->setOrder(variant.GetString());
             return true;
         case 1:
             node->setName(variant.GetString());
@@ -134,7 +136,7 @@ bool DownloadListModel::SetValue(const wxVariant& variant, const wxDataViewItem&
             node->setHoster(variant.GetString());
             return true;
         case 3:
-            node->setPriority(variant.GetLong());
+            node->setPriority(variant.GetString());
             return true;
         case 4:
             node->setStatus(variant.GetString());
