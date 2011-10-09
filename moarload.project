@@ -47,6 +47,8 @@
         <File Name="src/ui/model/download_list_model_node.cpp"/>
         <File Name="src/ui/model/download_list_model.h"/>
         <File Name="src/ui/model/download_list_model.cpp"/>
+        <File Name="src/ui/model/node.h"/>
+        <File Name="src/ui/model/node.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="services">
@@ -56,6 +58,8 @@
       <File Name="src/services/pyload_data_store.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Dynamic Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="">
@@ -75,6 +79,8 @@
       <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
+      
       
       ]]>
       </Environment>
@@ -114,9 +120,7 @@
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="no"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[
-      
-      ]]>
+        <![CDATA[]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
@@ -127,7 +131,7 @@
       </PreBuild>
       <PostBuild/>
       <CustomBuild Enabled="yes">
-        <RebuildCommand/>
+        <RebuildCommand>make clean &amp;&amp; make -j 2</RebuildCommand>
         <CleanCommand>make clean</CleanCommand>
         <BuildCommand>make -j 2</BuildCommand>
         <PreprocessFileCommand/>
@@ -147,6 +151,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>

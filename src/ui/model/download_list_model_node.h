@@ -4,6 +4,7 @@
 #include <wx/dynarray.h>
 #include <wx/string.h>
 
+#include "node.h"
 #include "../../net/thrift/pyload_types.h"
 
 class DownloadListModelNode;
