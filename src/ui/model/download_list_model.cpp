@@ -8,7 +8,6 @@ DownloadListModel::DownloadListModel()
 {
     PyloadDataStore ds;
     ds.updateQueuePackageData();
-    //LOG(logIO) << ds.getQueuePackages().at(0).name;
     
     m_backendNode = new DownloadListModelNodeBackend();
     

@@ -2,6 +2,7 @@
 #define DOWNLOAD_LIST_MODEL_NODE_H
 
 #include <vector>
+#include <set>
 
 #include <wx/dynarray.h>
 #include <wx/string.h>
@@ -17,20 +18,20 @@ class DownloadListModelNode
 {
 public:
     DownloadListModelNode(DownloadListModelNode* parent) : m_parent(parent) {};
-    
+
     virtual ~DownloadListModelNode() {
         deleteChildren();
     };
-    
-    DownloadListModelNode* getParent() const {
+
+    DownloadListModelNode* getParent() {
         return m_parent;
     }
 
-    const std::vector<DownloadListModelNode*>& getChildren() const {
+    std::vector<DownloadListModelNode*>& getChildren() {
         return m_children;
     }
-    
-    const DownloadListModelNode* getNthChild(unsigned int n) const {
+
+    DownloadListModelNode* getNthChild(unsigned int n) {
         try {
             return m_children.at(n);
         } catch (std::out_of_range& e) {
@@ -38,7 +39,7 @@ public:
             throw;
         }
     }
-    
+
     void insertChild(DownloadListModelNode* child, unsigned int n) {
         std::vector<DownloadListModelNode*>::iterator node;
         try {
@@ -49,19 +50,19 @@ public:
         }
 
     }
-    
+
     void appendChild(DownloadListModelNode* child) {
         m_children.push_back(child);
     }
-    
+
     const unsigned int getChildCount() const {
         return m_children.size();
     }
-    
+
     void setParent(DownloadListModelNode* parent) {
         m_parent = parent;
     }
-    
+
     void setChildren(std::vector<DownloadListModelNode*> children) {
         deleteChildren();
         m_children = children;
@@ -70,8 +71,9 @@ public:
     virtual bool isContainer() const = 0;
     virtual bool hasColumns() const = 0;
     virtual bool isEnabled() const = 0;
-    virtual void getHoster(wxVariant& hoster) const = 0;
+    virtual void getHoster(wxVariant& hoster) = 0;
     virtual void setHoster(const wxVariant& hoster) = 0;
+    virtual void getHosterSet(std::set<std::string>& hoster) = 0;
     virtual void getName(wxVariant& name) const = 0;
     virtual void setName(const wxVariant& name) = 0;
     virtual void getOrder(wxVariant& order) const = 0;
@@ -89,7 +91,7 @@ private:
     // Neither copy nor assign
     DownloadListModelNode(const DownloadListModelNode&);
     void operator=(const DownloadListModelNode&);
-    
+
     virtual void deleteChildren() {
         std::vector<DownloadListModelNode*>::iterator node;
         for (node = m_children.begin(); node != m_children.end(); ++node) {
@@ -97,7 +99,7 @@ private:
         }
         m_children.clear();
     };
-    
+
     DownloadListModelNode* m_parent;
     std::vector<DownloadListModelNode*> m_children;
 };
@@ -111,28 +113,35 @@ public:
     virtual bool isContainer() const {
         return true;
     }
-    
+
     virtual bool hasColumns() const {
         return true;
     }
-    
+
     virtual bool isEnabled() const {
         return true;
     }
 
-    virtual void getHoster(wxVariant& hoster) const {
-        wxString hosters("[");
-        std::vector<DownloadListModelNode*>::const_iterator node;
-        for (node=getChildren().begin(); node != getChildren().end(); ++node) {
-            wxVariant variant;
-            (*node)->getHoster(variant);
-            hosters.append(variant.GetString());
-            if (node != getChildren().end()) {
-                hosters.append(";");
-            }
+    virtual void getHoster(wxVariant& hoster) {
+        std::set<std::string> hosterSet;
+        getHosterSet(hosterSet);
+
+        wxString hosterString("[");
+
+        std::set<std::string>::iterator host;
+        for (host = hosterSet.begin(); host != hosterSet.end(); ++host) {
+            hosterString.append(*host).append(";");
         }
-        hosters.append("]");
-        hoster = hosters;
+        hosterString.RemoveLast();
+        hosterString.append("]");
+        hoster = hosterString;
+    }
+
+    virtual void getHosterSet(std::set<std::string>& hoster) {
+        std::vector<DownloadListModelNode*>::iterator node;
+        for (node = getChildren().begin(); node != getChildren().end(); ++node) {
+            (*node)->getHosterSet(hoster);
+        }
     }
 
     virtual void getName(wxVariant& name) const {
@@ -203,28 +212,35 @@ public:
     virtual bool isContainer() const {
         return true;
     }
-    
+
     virtual bool hasColumns() const {
         return true;
     }
-    
+
     virtual bool isEnabled() const {
         return true;
     }
 
-    virtual void getHoster(wxVariant& hoster) const {
-        wxString hosters("[");
-        std::vector<DownloadListModelNode*>::const_iterator node;
-        for (node=getChildren().begin(); node != getChildren().end(); ++node) {
-            wxVariant variant;
-            (*node)->getHoster(variant);
-            hosters.append(variant.GetString());
-            if (node != getChildren().end()) {
-                hosters.append(";");
-            }
+    virtual void getHoster(wxVariant& hoster) {
+        std::set<std::string> hosterSet;
+        getHosterSet(hosterSet);
+
+        wxString hosterString("[");
+
+        std::set<std::string>::iterator host;
+        for (host = hosterSet.begin(); host != hosterSet.end(); ++host) {
+            hosterString.append(*host).append(";");
         }
-        hosters.append("]");
-        hoster = hosters;
+        hosterString.RemoveLast();
+        hosterString.append("]");
+        hoster = hosterString;
+    }
+
+    virtual void getHosterSet(std::set<std::string>& hoster) {
+        std::vector<DownloadListModelNode*>::iterator node;
+        for (node = getChildren().begin(); node != getChildren().end(); ++node) {
+            (*node)->getHosterSet(hoster);
+        }
     }
 
     virtual void getName(wxVariant& name) const {
@@ -283,7 +299,7 @@ private:
     // Neither copy nor assign
     DownloadListModelNodePackage(const DownloadListModelNodePackage&);
     void operator=(const DownloadListModelNodePackage&);
-    
+
     PackageData m_packageData;
 };
 
@@ -296,17 +312,21 @@ public:
     virtual bool isContainer() const {
         return false;
     }
-    
+
     virtual bool hasColumns() const {
         return true;
     }
-    
+
     virtual bool isEnabled() const {
         return true;
     }
 
-    virtual void getHoster(wxVariant& hoster) const {
+    virtual void getHoster(wxVariant& hoster) {
         hoster = m_fileData.plugin;
+    }
+
+    virtual void getHosterSet(std::set<std::string>& hoster) {
+        hoster.insert(m_fileData.plugin);
     }
 
     virtual void getName(wxVariant& name) const {
@@ -365,7 +385,7 @@ private:
     // Neither copy nor assign
     DownloadListModelNodeFile(const DownloadListModelNodeFile&);
     void operator=(const DownloadListModelNodeFile&);
-    
+
     FileData m_fileData;
 };
 
