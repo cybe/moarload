@@ -9,37 +9,33 @@
 #include <wx/listbox.h>
 //*)
 
-class PageDownloadView: public wxPanel
-{
-	public:
+class PageDownloadView: public wxPanel {
+public:
+    PageDownloadView(wxWindow* parent, wxWindowID id = wxID_ANY);
+    virtual ~PageDownloadView();
 
-		PageDownloadView(wxWindow* parent,wxWindowID id=wxID_ANY);
-		virtual ~PageDownloadView();
+    //(*Declarations(PageDownloadView)
+    wxSplitterWindow* filterAndDownloadsSplitter;
+    wxListBox* filterList;
+    wxListCtrl* downloadList;
+    wxPanel* filterPanel;
+    wxPanel* downloadsListPanel;
+    //*)
 
-		//(*Declarations(PageDownloadView)
-		wxSplitterWindow* filterAndDownloadsSplitter;
-		wxListBox* filterList;
-		wxListCtrl* downloadList;
-		wxPanel* filterPanel;
-		wxPanel* downloadsListPanel;
-		//*)
+protected:
+    //(*Identifiers(PageDownloadView)
+    static const long ID_FILTER_LIST;
+    static const long ID_FILTER_PANEL;
+    static const long ID_DOWNLOAD_LIST;
+    static const long ID_DOWNLOAD_LIST_PANEL;
+    static const long ID_FILTER_AND_DOWNLOADS_SPLITTER;
+    //*)
 
-	protected:
+private:
+    //(*Handlers(PageDownloadView)
+    //*)
 
-		//(*Identifiers(PageDownloadView)
-		static const long ID_FILTER_LIST;
-		static const long ID_FILTER_PANEL;
-		static const long ID_DOWNLOAD_LIST;
-		static const long ID_DOWNLOAD_LIST_PANEL;
-		static const long ID_FILTER_AND_DOWNLOADS_SPLITTER;
-		//*)
-
-	private:
-
-		//(*Handlers(PageDownloadView)
-		//*)
-
-		DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

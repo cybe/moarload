@@ -15,29 +15,25 @@
 
 enum Method {GET, POST};
 
-struct HttpRequest
-{
+struct HttpRequest {
     Method method;
     std::string url;
     std::multimap<std::string, std::string> header;
     std::string data;
 };
 
-struct HttpResponse
-{
+struct HttpResponse {
     std::multimap<std::string, std::string> header;
     std::string body;
 };
 
 
-class HttpClient
-{
+class HttpClient {
 public:
     HttpClient();
     virtual ~HttpClient();
     HttpResponse dispatch(const HttpRequest& httpRequest);
 
-protected:
 private:
     boost::network::http::client client;
     std::vector<Cookie> cookies;

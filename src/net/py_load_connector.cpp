@@ -1,11 +1,9 @@
 #include "py_load_connector.h"
 
-PyLoadConnector::PyLoadConnector()
-{
+PyLoadConnector::PyLoadConnector() {
     //ctor
 }
 
-PyLoadConnector::~PyLoadConnector()
-{
+PyLoadConnector::~PyLoadConnector() {
     //dtor
 }

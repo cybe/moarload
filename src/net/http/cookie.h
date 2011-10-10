@@ -3,8 +3,7 @@
 
 #include <string>
 
-class Cookie
-{
+class Cookie {
 public:
     Cookie();
     virtual ~Cookie();
@@ -13,7 +12,6 @@ public:
     std::string build() const;
     bool isValid(const std::string& path, const std::string& domain) const;
 
-protected:
 private:
     std::string name;
     std::string value;

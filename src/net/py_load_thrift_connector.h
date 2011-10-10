@@ -5,8 +5,7 @@
 #include "thrift/pyload.h"
 
 
-class PyLoadThriftConnector : public PyLoadConnector
-{
+class PyLoadThriftConnector : public PyLoadConnector {
 public:
     PyLoadThriftConnector(const std::string& hostname,
                           const unsigned short port);
@@ -83,7 +82,6 @@ public:
     virtual void getAllInfo(std::map<PluginName, std::map<std::string, std::string> > & _return);
     virtual void getInfoByPlugin(std::map<std::string, std::string> & _return, const PluginName& plugin);
 
-protected:
 private:
     PyloadClient* client;
 };

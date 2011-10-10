@@ -18,8 +18,7 @@
 // main in wxWidgets
 IMPLEMENT_APP(Main)
 
-bool Main::OnInit()
-{
+bool Main::OnInit() {
     configureLogging();
 
     LOG(logINFO) << "- moarload start -";
@@ -27,49 +26,22 @@ bool Main::OnInit()
     //(*AppInitialize
     bool wxsOK = true;
     wxInitAllImageHandlers();
-    if (wxsOK)
-    {
+    if (wxsOK) {
         MainFrameView* view = new MainFrameView(0);
         view->Show();
         SetTopWindow(view);
     }
     //*)
 
-    //testing
-
-//    ConfigurationService cs("moarload.ini");
-//    LOG(logIO) << cs.getBackendType();
-//
-//    LOG(logIO) << "-----http:";
-//    PyLoadConnector* con = new PyLoadHttpConnector(cs.getHttpHostname(), cs.getHttpPort());
-//    bool loginSuccesfull = con->login("buildserver", "buildserver");
-//    LOG(logIO) << "Login: " << loginSuccesfull;
-//    std::string version;
-//    con->getServerVersion(version);
-//    LOG(logIO) << "version: " << version;
-//    delete con;
-//
-//    LOG(logIO) << "-----thrift:";
-//    con = new PyLoadThriftConnector(cs.getThriftHostname(), cs.getThriftPort());
-//    loginSuccesfull = con->login("buildserver", "buildserver");
-//    LOG(logIO) << "Login: " << loginSuccesfull;
-//    con->getServerVersion(version);
-//    LOG(logIO) << "version: " << version;
-//    delete con;
-    
-    
-    
     return wxsOK;
 }
 
-int Main::OnExit()
-{
+int Main::OnExit() {
     LOG(logINFO) << "- moarload exit -" << std::endl;
     return 1;
 }
 
-void Main::configureLogging()
-{
+void Main::configureLogging() {
     Logger::setPidName("main");
     Logger::reportingLevel() = logIO;
     FILE* log_fd = fopen("moarload.log", "a");

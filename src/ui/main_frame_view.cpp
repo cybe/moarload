@@ -15,8 +15,7 @@ enum wxbuildinfoformat {
     short_f, long_f
 };
 
-wxString wxbuildinfo(wxbuildinfoformat format)
-{
+wxString wxbuildinfo(wxbuildinfoformat format) {
     wxString wxbuild(wxVERSION_STRING);
 
     if (format == long_f) {
@@ -64,9 +63,7 @@ BEGIN_EVENT_TABLE(MainFrameView, wxFrame)
     //*)
 END_EVENT_TABLE()
 
-MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
-{
-
+MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     //(*Initialize(MainFrameView)
     wxMenuItem* MenuItem2;
     wxBoxSizer* mainFrameSizer;
@@ -153,36 +150,32 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id)
     mainToolBar->Realize();
     SetToolBar(mainToolBar);
 
-//    Connect(ID_LISTBOX1, wxEVT_COMMAND_LISTBOX_SELECTED, (wxObjectEventFunction)&MainFrameView::OnListBox1Select1);
+    // Connect(ID_LISTBOX1, wxEVT_COMMAND_LISTBOX_SELECTED, (wxObjectEventFunction)&MainFrameView::OnListBox1Select1);
     Connect(idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnQuit);
     Connect(idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnAbout);
     //*)
 }
 
-MainFrameView::~MainFrameView()
-{
+MainFrameView::~MainFrameView() {
     //(*Destroy(MainFrameView)
     //*)
 }
 
-void MainFrameView::OnQuit(wxCommandEvent& event)
-{
+void MainFrameView::OnQuit(wxCommandEvent& event) {
     Close();
 }
 
-void MainFrameView::OnAbout(wxCommandEvent& event)
-{
+void MainFrameView::OnAbout(wxCommandEvent& event) {
     wxString msg = wxbuildinfo(long_f);
     wxMessageBox(msg, _("Welcome to..."));
 }
 
-wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent)
-{
+wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent) {
     downloadDataViewCtrl = new wxDataViewCtrl(parent, ID_CUSTOM1);
     //wxASSERT(!downloadDataViewCtrl);
 
     DownloadListModel* downloadListModel = new DownloadListModel;
-    
+
     downloadDataViewCtrl->AssociateModel(downloadListModel);
 
 #if wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
@@ -206,7 +199,6 @@ wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent)
 #endif
 
     // column 1 of the view control:
-
     tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column1 =
         new wxDataViewColumn("#", tr, 1, 30, wxALIGN_LEFT,
@@ -216,7 +208,6 @@ wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent)
     downloadDataViewCtrl->AppendColumn(column1);
 
     // column 2 of the view control:
-
     tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column2 =
         new wxDataViewColumn("Hoster", tr, 2, 150, wxALIGN_LEFT,
@@ -224,32 +215,32 @@ wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent)
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column2);
 
-        tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+    // column 3 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column3 =
         new wxDataViewColumn("Priority", tr, 3, 150, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column3);
-    
-        tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+
+    // column 4 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column4 =
         new wxDataViewColumn("Status", tr, 4, 150, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column4);
-    
-        tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+
+    // column 5 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column5 =
         new wxDataViewColumn("Progress", tr, 5, 150, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column5);
-    
+
     // select initially the ninth symphony:
     //m_ctrl[0]->Select(m_music_model->GetNinthItem());
 
     return downloadDataViewCtrl;
-
-
-    //wxDataViewModel* model = new DownloadListModel();
 }

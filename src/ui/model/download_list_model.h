@@ -5,13 +5,11 @@
 
 #include "download_list_model_node.h"
 
-class DownloadListModel : public wxDataViewModel
-{
-
+class DownloadListModel : public wxDataViewModel {
 private:
     DownloadListModel(const DownloadListModel& rhs);
     DownloadListModel& operator=(const DownloadListModel& rhs);
-    
+
     DownloadListModelNode*   m_backendNode;
 
 public:
@@ -45,20 +43,17 @@ public:
             default :
                 return wxT("string");
         }
-        
     }
 
     virtual void GetValue(wxVariant& variant,
                           const wxDataViewItem& item, unsigned int col) const;
     virtual bool SetValue(const wxVariant& variant,
                           const wxDataViewItem& item, unsigned int col);
-
     virtual bool IsEnabled(const wxDataViewItem& item,
                            unsigned int col) const;
-
     virtual wxDataViewItem GetParent(const wxDataViewItem& item) const;
     virtual bool IsContainer(const wxDataViewItem& item) const;
-    virtual bool HasContainerColumns (const wxDataViewItem &  item) const;
+    virtual bool HasContainerColumns(const wxDataViewItem&   item) const;
     virtual unsigned int GetChildren(const wxDataViewItem& parent,
                                      wxDataViewItemArray& array) const;
 

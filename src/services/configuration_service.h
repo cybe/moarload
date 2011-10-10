@@ -3,8 +3,7 @@
 
 #include <string>
 
-class ConfigurationService
-{
+class ConfigurationService {
 public:
     ConfigurationService(const std::string& filename);
     virtual ~ConfigurationService();
@@ -21,7 +20,6 @@ public:
     void load();
     void save();
 
-protected:
 private:
     std::string filename;
     std::string backendType;

@@ -14,8 +14,7 @@
 
 class DownloadListModelNode;
 
-class DownloadListModelNode
-{
+class DownloadListModelNode {
 public:
     DownloadListModelNode(DownloadListModelNode* parent) : m_parent(parent) {};
 
@@ -106,8 +105,7 @@ private:
 
 
 
-class DownloadListModelNodeBackend : public DownloadListModelNode
-{
+class DownloadListModelNodeBackend : public DownloadListModelNode {
 public:
     DownloadListModelNodeBackend() : DownloadListModelNode(NULL) {};
     virtual ~DownloadListModelNodeBackend() {};
@@ -206,8 +204,7 @@ private:
 
 
 
-class DownloadListModelNodePackage : public DownloadListModelNode
-{
+class DownloadListModelNodePackage : public DownloadListModelNode {
 public:
     DownloadListModelNodePackage(DownloadListModelNode* parent, PackageData& packageData) : DownloadListModelNode(parent), m_packageData(packageData) {};
     virtual ~DownloadListModelNodePackage() {};
@@ -308,8 +305,7 @@ private:
 
 
 
-class DownloadListModelNodeFile : public DownloadListModelNode
-{
+class DownloadListModelNodeFile : public DownloadListModelNode {
 public:
     DownloadListModelNodeFile(DownloadListModelNode* parent, FileData& fileData) : DownloadListModelNode(parent), m_fileData(fileData) {};
     virtual ~DownloadListModelNodeFile() {};

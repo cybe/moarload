@@ -27,8 +27,7 @@ inline int getPid();
 enum TLogLevel {logERROR, logWARNING, logINFO, logDEBUG, logIO, logTRACE};
 
 template <typename T>
-class Log
-{
+class Log {
 public:
     Log();
     virtual ~Log();
@@ -49,13 +48,11 @@ private:
 };
 
 template <typename T>
-Log<T>::Log()
-{
+Log<T>::Log() {
 }
 
 template <typename T>
-std::ostringstream& Log<T>::get(TLogLevel level)
-{
+std::ostringstream& Log<T>::get(TLogLevel level) {
     os << "- " << time();
     os << " <" << getPidName(getPid()) << "> ";
     os << toString(level) << ": ";
@@ -63,38 +60,32 @@ std::ostringstream& Log<T>::get(TLogLevel level)
 }
 
 template <typename T>
-Log<T>::~Log()
-{
+Log<T>::~Log() {
     os << std::endl;
     T::output(os.str());
 }
 
 template <typename T>
-TLogLevel& Log<T>::reportingLevel()
-{
+TLogLevel& Log<T>::reportingLevel() {
     static TLogLevel reportingLevel = logDEBUG;
     return reportingLevel;
 }
 
 template <typename T>
-void Log<T>::setPidName(const std::string& name)
-{
+void Log<T>::setPidName(const std::string& name) {
     boost::unique_lock<boost::shared_mutex> lock(pidNamesMutex);
     pidNames[getPid()] = name;
 }
 
 template <typename T>
-std::string Log<T>::toString(TLogLevel level)
-{
+std::string Log<T>::toString(TLogLevel level) {
     static const char* const buffer[] = {"ERROR", "WARNING", "INFO", "DEBUG", "IO", "TRACE"};
     return buffer[level];
 }
 
 template <typename T>
-TLogLevel Log<T>::fromString(const std::string& level)
-{
-    switch (level)
-    {
+TLogLevel Log<T>::fromString(const std::string& level) {
+    switch (level) {
         case "TRACE" :
             return logTRACE;
         case "IO" :
@@ -121,15 +112,11 @@ template <typename T>
 boost::shared_mutex Log<T>::pidNamesMutex;
 
 template <typename T>
-std::string Log<T>::getPidName(int pid)
-{
+std::string Log<T>::getPidName(int pid) {
     boost::shared_lock<boost::shared_mutex> lock(pidNamesMutex);
-    if (pidNames.find(pid) != pidNames.end())
-    {
+    if (pidNames.find(pid) != pidNames.end()) {
         return pidNames.at(pid);
-    }
-    else
-    {
+    } else {
         lock.unlock();
         std::stringstream buffer;
         buffer << pid;
@@ -137,24 +124,20 @@ std::string Log<T>::getPidName(int pid)
     }
 }
 
-class FileLog
-{
+class FileLog {
 public:
     static FILE*& stream();
     static void output(const std::string& msg);
 };
 
-inline FILE*& FileLog::stream()
-{
+inline FILE*& FileLog::stream() {
     static FILE* pStream = stderr;
     return pStream;
 }
 
-inline void FileLog::output(const std::string& msg)
-{
+inline void FileLog::output(const std::string& msg) {
     FILE* pStream = stream();
-    if (!pStream)
-    {
+    if (!pStream) {
         return;
     }
     fprintf(pStream, "%s", msg.c_str());
@@ -189,25 +172,21 @@ class FILELOG_DECLSPEC Logger : public Log<FileLog> {};
 
 #include <windows.h>
 
-inline std::string time()
-{
+inline std::string time() {
     const int MAX_LEN = 200;
     char buffer[MAX_LEN];
     if (GetTimeFormatA(LOCALE_USER_DEFAULT, 0, 0,
-                       "HH':'mm':'ss", buffer, MAX_LEN) == 0)
-    {
+                       "HH':'mm':'ss", buffer, MAX_LEN) == 0) {
         return "Error in time()";
     }
 
     char result[100] = {0};
     static DWORD first = GetTickCount();
     sprintf_s(result, "%s.%03ld", buffer, (long)(GetTickCount() - first) % 1000);
-    //sprintf(result, "%s", buffer);
     return result;
 }
 
-inline int getPid()
-{
+inline int getPid() {
     return GetCurrentProcessId();
 }
 
@@ -215,8 +194,7 @@ inline int getPid()
 
 #include <sys/time.h>
 
-inline std::string time()
-{
+inline std::string time() {
     char buffer[11];
     time_t t;
     time(&t);
@@ -226,14 +204,12 @@ inline std::string time()
     gettimeofday(&tv, 0);
     char result[100] = {0};
     sprintf(result, "%s.%03ld", buffer, (long)tv.tv_usec / 1000);
-    //sprintf(result, "%s", buffer);
     return result;
 }
 
 #include <sys/syscall.h>
 
-inline int getPid()
-{
+inline int getPid() {
     return syscall(SYS_gettid);
 }
 

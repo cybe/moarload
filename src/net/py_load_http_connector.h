@@ -12,8 +12,7 @@
 
 class HttpClient;
 
-class PyLoadHttpConnector : public PyLoadConnector
-{
+class PyLoadHttpConnector : public PyLoadConnector {
 public:
     PyLoadHttpConnector(const std::string& hostname,
                         const unsigned short port);
@@ -90,7 +89,6 @@ public:
     virtual void getAllInfo(std::map<PluginName, std::map<std::string, std::string> > & _return);
     virtual void getInfoByPlugin(std::map<std::string, std::string> & _return, const PluginName& plugin);
 
-protected:
 private:
     std::string url;
     HttpClient* httpClient;

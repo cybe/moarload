@@ -7,23 +7,19 @@
 
 
 ConfigurationService::ConfigurationService(const std::string& filename) :
-    filename(filename)
-{
+    filename(filename) {
     std::ifstream configfile(filename);
-    if (!configfile)
-    {
+    if (!configfile) {
         writeEmptyConfigFile();
     }
     load();
 }
 
-ConfigurationService::~ConfigurationService()
-{
+ConfigurationService::~ConfigurationService() {
     save();
 }
 
-void ConfigurationService::load()
-{
+void ConfigurationService::load() {
     using boost::property_tree::ptree;
     ptree pt;
     read_ini(filename, pt);
@@ -34,8 +30,7 @@ void ConfigurationService::load()
     httpPort = pt.get<unsigned short>("http.port", 8081);
 }
 
-void ConfigurationService::save()
-{
+void ConfigurationService::save() {
     using boost::property_tree::ptree;
     ptree pt;
     pt.put("global.backendType", backendType);
@@ -46,64 +41,49 @@ void ConfigurationService::save()
     write_ini(filename, pt);
 }
 
-void ConfigurationService::writeEmptyConfigFile()
-{
+void ConfigurationService::writeEmptyConfigFile() {
     std::fstream f;
     f.open(filename, std::ios::out);
     f << std::endl;
     f.close();
 }
 
-std::string ConfigurationService::getBackendType() const
-{
+std::string ConfigurationService::getBackendType() const {
     return backendType;
 }
 
-void ConfigurationService::setBackendType(const std::string& _backendType)
-{
+void ConfigurationService::setBackendType(const std::string& _backendType) {
     backendType = _backendType;
 }
 
-std::string ConfigurationService::getThriftHostname() const
-{
+std::string ConfigurationService::getThriftHostname() const {
     return thriftHostname;
 }
 
-void ConfigurationService::setThriftHostname(const std::string& _thriftHostname)
-{
+void ConfigurationService::setThriftHostname(const std::string& _thriftHostname) {
     thriftHostname = _thriftHostname;
 }
 
-
-unsigned short ConfigurationService::getThriftPort() const
-{
+unsigned short ConfigurationService::getThriftPort() const {
     return thriftPort;
 }
 
-
-void ConfigurationService::setThriftPort(unsigned short _thriftPort)
-{
+void ConfigurationService::setThriftPort(unsigned short _thriftPort) {
     thriftPort = _thriftPort;
 }
 
-
-std::string ConfigurationService::getHttpHostname() const
-{
+std::string ConfigurationService::getHttpHostname() const {
     return httpHostname;
 }
 
-
-void ConfigurationService::setHttpHostname(const std::string& _httpHostname)
-{
+void ConfigurationService::setHttpHostname(const std::string& _httpHostname) {
     httpHostname = _httpHostname;
 }
 
-unsigned short ConfigurationService::getHttpPort() const
-{
+unsigned short ConfigurationService::getHttpPort() const {
     return httpPort;
 }
 
-void ConfigurationService::setHttpPort(unsigned short _httpPort)
-{
+void ConfigurationService::setHttpPort(unsigned short _httpPort) {
     httpPort = _httpPort;
 }

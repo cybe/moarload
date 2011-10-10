@@ -8,9 +8,7 @@
 
 class PyLoadConnector;
 
-class PyloadDataStore
-{
-
+class PyloadDataStore {
 private:
     PyloadDataStore(const PyloadDataStore& rhs);
     PyloadDataStore& operator=(const PyloadDataStore& rhs);
@@ -18,11 +16,9 @@ private:
     PyLoadConnector* m_con;
     ConfigurationService m_cs;
     std::vector<PackageData> m_queuePackages;
-    //const std::vector<PackageData> m_collectorPackages;
 public:
     PyloadDataStore();
     virtual ~PyloadDataStore();
-
     void updateQueuePackageData();
 
     std::vector<PackageData>& getQueuePackages() {

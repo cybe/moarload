@@ -7,18 +7,15 @@
 #include "../../log.h"
 
 
-Cookie::Cookie()
-{
+Cookie::Cookie() {
     //ctor
 }
 
-Cookie::~Cookie()
-{
+Cookie::~Cookie() {
     //dtor
 }
 
-Cookie Cookie::parse(const std::string& cookieString)
-{
+Cookie Cookie::parse(const std::string& cookieString) {
     std::vector<std::string> nameValuePairs;
     boost::split(nameValuePairs, cookieString, boost::is_any_of(";"));
 
@@ -34,29 +31,22 @@ Cookie Cookie::parse(const std::string& cookieString)
     entries.insert(make_pair("version", &cookie.version));
 
     std::vector<std::string>::iterator nameValuePairsIt;
-    for (nameValuePairsIt = nameValuePairs.begin(); nameValuePairsIt != nameValuePairs.end(); ++nameValuePairsIt)
-    {
+    for (nameValuePairsIt = nameValuePairs.begin(); nameValuePairsIt != nameValuePairs.end(); ++nameValuePairsIt) {
         boost::trim_left(*nameValuePairsIt);
 
         std::vector<std::string> nameValuePair;
         boost::split(nameValuePair, *nameValuePairsIt, boost::is_any_of("="));
 
-        if (nameValuePairsIt == nameValuePairs.begin())
-        {
+        if (nameValuePairsIt == nameValuePairs.begin()) {
             cookie.name = nameValuePair.at(0);
             cookie.value = nameValuePair.at(1);
-        }
-        else
-        {
+        } else {
             std::string entryName = nameValuePair.at(0);
             boost::algorithm::to_lower(entryName);
 
-            if (entries.find(entryName) != entries.end())
-            {
+            if (entries.find(entryName) != entries.end()) {
                 *(entries[entryName]) = nameValuePair.at(1);
-            }
-            else
-            {
+            } else {
                 LOG(logWARNING) << "unknown cookie element: " << entryName;
             }
         }
@@ -64,12 +54,10 @@ Cookie Cookie::parse(const std::string& cookieString)
     return cookie;
 }
 
-std::string Cookie::build() const
-{
+std::string Cookie::build() const {
     return name + "=" + value;
 }
 
-bool Cookie::isValid(const std::string& path, const std::string& domain) const
-{
+bool Cookie::isValid(const std::string& path, const std::string& domain) const {
     return true;
 }

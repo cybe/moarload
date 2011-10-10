@@ -3,10 +3,11 @@
 
 #include <string>
 
-namespace util
-{
-    int stringToInt(const std::string& str);
-    std::string intToString(const int i);
+namespace util {
+
+int stringToInt(const std::string& str);
+std::string intToString(const int i);
+
 }
 
 #endif // UTIL_H

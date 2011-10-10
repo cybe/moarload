@@ -14,15 +14,12 @@
 #include <wx/listbox.h>
 //*)
 
-class MainFrameView: public wxFrame
-{
+class MainFrameView: public wxFrame {
 public:
-
     MainFrameView(wxWindow* parent, wxWindowID id = -1);
     virtual ~MainFrameView();
 
 private:
-
     //(*Handlers(MainFrameView)
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
