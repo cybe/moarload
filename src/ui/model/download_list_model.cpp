@@ -18,6 +18,13 @@ DownloadListModel::DownloadListModel()
     {
         DownloadListModelNode* packageNode = new DownloadListModelNodePackage(m_backendNode, *package);
         m_backendNode->appendChild(packageNode);
+        
+        std::vector<FileData> files = package->links;
+        std::vector<FileData>::iterator file;
+        for (file=files.begin() ; file!=files.end(); ++file) {
+            DownloadListModelNode* fileNode = new DownloadListModelNodeFile(packageNode, *file);
+            packageNode->appendChild(fileNode);
+        }
     }
 
     

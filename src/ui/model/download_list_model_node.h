@@ -244,7 +244,6 @@ public:
     }
 
     virtual void getProgressText(wxVariant& progressText) const {
-        LOG(logDEBUG) << m_packageData.sizetotal;
         progressText = wxString::Format(wxT("%i / %i"), m_packageData.sizedone, m_packageData.sizetotal);
     }
 
@@ -291,11 +290,11 @@ private:
 class DownloadListModelNodeFile : public DownloadListModelNode
 {
 public:
-    DownloadListModelNodeFile(DownloadListModelNode* parent) : DownloadListModelNode(parent) {};
+    DownloadListModelNodeFile(DownloadListModelNode* parent, FileData& fileData) : DownloadListModelNode(parent), m_fileData(fileData) {};
     virtual ~DownloadListModelNodeFile() {};
 
     virtual bool isContainer() const {
-        return true;
+        return false;
     }
     
     virtual bool hasColumns() const {
@@ -307,42 +306,31 @@ public:
     }
 
     virtual void getHoster(wxVariant& hoster) const {
-        wxString hosters("[");
-        std::vector<DownloadListModelNode*>::const_iterator node;
-        for (node=getChildren().begin(); node != getChildren().end(); ++node) {
-            wxVariant variant;
-            (*node)->getHoster(variant);
-            hosters.append(variant.GetString());
-            if (node != getChildren().end()) {
-                hosters.append(";");
-            }
-        }
-        hosters.append("]");
-        hoster = hosters;
+        hoster = m_fileData.plugin;
     }
 
     virtual void getName(wxVariant& name) const {
-        name = wxString();
+        name = m_fileData.name;
     }
 
     virtual void getOrder(wxVariant& order) const {
-        order = wxString();
+        order = wxString::Format(wxT("%i"), m_fileData.order);
     }
 
     virtual void getPriority(wxVariant& priority) const {
-        priority = wxString();
+        priority = wxString("todo");
     }
 
     virtual void getProgress(wxVariant& progress) const {
-        progress = wxString();
+        progress = wxString::Format(wxT("todo / %i"), m_fileData.size);
     }
 
     virtual void getProgressText(wxVariant& progressText) const {
-        progressText = wxString();
+        progressText = wxString::Format(wxT("todo / %i"), m_fileData.size);
     }
 
     virtual void getStatus(wxVariant& status) const {
-        status = wxString();
+        status = m_fileData.statusmsg;
     }
 
     virtual void setHoster(const wxVariant& hoster) {
@@ -377,6 +365,8 @@ private:
     // Neither copy nor assign
     DownloadListModelNodeFile(const DownloadListModelNodeFile&);
     void operator=(const DownloadListModelNodeFile&);
+    
+    FileData m_fileData;
 };
 
 //class DownloadListModelNode
