@@ -11,7 +11,11 @@
 				<object class="sizeritem">
 					<object class="wxNotebook" name="ID_MAIN_NOTEBOOK" variable="mainNotebook" member="yes">
 						<object class="notebookpage">
-							<object class="wxPanel" name="ID_DOWNLOAD_PANEL" variable="downloadPanel" member="yes" />
+							<object class="Custom" name="ID_DOWNLOAD_PANEL" subclass="DownloadPanel" variable="downloadPanel" member="yes">
+								<creating_code>$(THIS) = new $(CLASS)($(PARENT));</creating_code>
+								<include_file>download__panel.h</include_file>
+								<local_include>1</local_include>
+							</object>
 							<label>Downloads</label>
 						</object>
 					</object>

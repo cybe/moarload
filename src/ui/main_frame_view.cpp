@@ -69,7 +69,7 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80,56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
     mainFrameSizer = new wxBoxSizer(wxVERTICAL);
     mainNotebook = new wxNotebook(mainFramePanel, ID_MAIN_NOTEBOOK, wxDefaultPosition, wxDefaultSize, 0, _T("ID_MAIN_NOTEBOOK"));
-    downloadPanel = new wxPanel(mainNotebook, ID_DOWNLOAD_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_PANEL"));
+    downloadPanel = new DownloadPanel(mainNotebook);
     mainNotebook->AddPage(downloadPanel, _("Downloads"), false);
     mainFrameSizer->Add(mainNotebook, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     mainFramePanel->SetSizer(mainFrameSizer);

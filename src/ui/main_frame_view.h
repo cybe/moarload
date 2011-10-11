@@ -9,6 +9,7 @@
 #include <wx/panel.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
+#include "download_panel.h"
 //*)
 
 class MainFrameView: public wxFrame {
@@ -48,7 +49,6 @@ private:
 
     //(*Declarations(MainFrameView)
     wxToolBarToolBase* ToolBarItem5;
-    wxPanel* downloadPanel;
     wxStatusBar* mainStatusBar;
     wxToolBarToolBase* ToolBarItem2;
     wxPanel* mainFramePanel;
@@ -56,6 +56,7 @@ private:
     wxToolBar* mainToolBar;
     wxToolBarToolBase* ToolBarItem1;
     wxToolBarToolBase* ToolBarItem3;
+    DownloadPanel* downloadPanel;
     wxNotebook* mainNotebook;
     //*)
 

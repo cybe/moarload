@@ -16,6 +16,7 @@ set(SRCS
     services/pyload_data_store.cpp
     ui/model/download_list_model_node.cpp
     ui/model/download_list_model.cpp
+    ui/download_panel.cpp
     ui/main_frame_view.cpp
 )
 

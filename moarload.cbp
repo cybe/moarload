@@ -233,6 +233,8 @@
 		<Unit filename="src/services/configuration_service.h" />
 		<Unit filename="src/services/pyload_data_store.cpp" />
 		<Unit filename="src/services/pyload_data_store.h" />
+		<Unit filename="src/ui/download_panel.cpp" />
+		<Unit filename="src/ui/download_panel.h" />
 		<Unit filename="src/ui/main_frame_view.cpp" />
 		<Unit filename="src/ui/main_frame_view.h" />
 		<Unit filename="src/ui/model/download_list_model.cpp" />
@@ -249,6 +251,7 @@
 				<gui name="wxWidgets" src="src/ui/main_frame_view.cpp" main="MainFrameView" init_handlers="necessary" language="CPP" />
 				<resources>
 					<wxFrame wxs="wxsmith/main_frame_view.wxs" src="src/ui/main_frame_view.cpp" hdr="src/ui/main_frame_view.h" name="MainFrameView" language="CPP" />
+					<wxPanel wxs="wxsmith/download_panel.wxs" src="src/ui/download_panel.cpp" hdr="src/ui/download_panel.h" name="DownloadPanel" language="CPP" />
 				</resources>
 			</wxsmith>
 			<debugger />
