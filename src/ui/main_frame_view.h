@@ -7,10 +7,8 @@
 #include <wx/notebook.h>
 #include <wx/menu.h>
 #include <wx/panel.h>
-#include <wx/splitter.h>
+#include <wx/statusbr.h>
 #include <wx/frame.h>
-#include <wx/stattext.h>
-#include <wx/listbox.h>
 //*)
 
 class MainFrameView: public wxFrame {
@@ -34,16 +32,8 @@ private:
     //*)
 
     //(*Identifiers(MainFrameView)
-    static const long ID_LISTBOX1;
-    static const long ID_FILTER_PANEL;
-    static const long ID_DOWNLOAD_LIST_PANEL;
-    static const long ID_SPLITTERWINDOW1;
     static const long ID_DOWNLOAD_PANEL;
     static const long ID_MAIN_NOTEBOOK;
-    static const long ID_STATICTEXT1;
-    static const long ID_STATICTEXT2;
-    static const long ID_STATICTEXT3;
-    static const long ID_MAIN_STATUS_PANEL;
     static const long ID_MAIN_FRAME_PANEL;
     static const long idMenuQuit;
     static const long idMenuAbout;
@@ -53,25 +43,19 @@ private:
     static const long ID_TOOLBARITEM5;
     static const long ID_TOOLBARITEM6;
     static const long ID_MAIN_TOOLBAR;
+    static const long ID_MAIN_STATUS_BAR;
     //*)
 
     //(*Declarations(MainFrameView)
     wxToolBarToolBase* ToolBarItem5;
-    wxListBox* ListBox1;
     wxPanel* downloadPanel;
-    wxStaticText* StaticText1;
+    wxStatusBar* mainStatusBar;
     wxToolBarToolBase* ToolBarItem2;
-    wxSplitterWindow* SplitterWindow1;
-    wxStaticText* StaticText3;
     wxPanel* mainFramePanel;
-    wxPanel* downloadListPanel;
     wxToolBarToolBase* ToolBarItem4;
     wxToolBar* mainToolBar;
     wxToolBarToolBase* ToolBarItem1;
-    wxStaticText* StaticText2;
     wxToolBarToolBase* ToolBarItem3;
-    wxPanel* mainStatusPanel;
-    wxPanel* filterPanel;
     wxNotebook* mainNotebook;
     //*)
 

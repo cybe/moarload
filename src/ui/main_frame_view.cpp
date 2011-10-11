@@ -36,16 +36,8 @@ wxString wxbuildinfo(wxbuildinfoformat format) {
 }
 
 //(*IdInit(MainFrameView)
-const long MainFrameView::ID_LISTBOX1 = wxNewId();
-const long MainFrameView::ID_FILTER_PANEL = wxNewId();
-const long MainFrameView::ID_DOWNLOAD_LIST_PANEL = wxNewId();
-const long MainFrameView::ID_SPLITTERWINDOW1 = wxNewId();
 const long MainFrameView::ID_DOWNLOAD_PANEL = wxNewId();
 const long MainFrameView::ID_MAIN_NOTEBOOK = wxNewId();
-const long MainFrameView::ID_STATICTEXT1 = wxNewId();
-const long MainFrameView::ID_STATICTEXT2 = wxNewId();
-const long MainFrameView::ID_STATICTEXT3 = wxNewId();
-const long MainFrameView::ID_MAIN_STATUS_PANEL = wxNewId();
 const long MainFrameView::ID_MAIN_FRAME_PANEL = wxNewId();
 const long MainFrameView::idMenuQuit = wxNewId();
 const long MainFrameView::idMenuAbout = wxNewId();
@@ -55,6 +47,7 @@ const long MainFrameView::ID_TOOLBARITEM4 = wxNewId();
 const long MainFrameView::ID_TOOLBARITEM5 = wxNewId();
 const long MainFrameView::ID_TOOLBARITEM6 = wxNewId();
 const long MainFrameView::ID_MAIN_TOOLBAR = wxNewId();
+const long MainFrameView::ID_MAIN_STATUS_BAR = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(MainFrameView, wxFrame)
@@ -67,11 +60,7 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     wxMenuItem* MenuItem2;
     wxBoxSizer* mainFrameSizer;
     wxMenuItem* MenuItem1;
-    wxBoxSizer* BoxSizer3;
     wxMenu* Menu1;
-    wxBoxSizer* BoxSizer2;
-    wxBoxSizer* mainStatusPanelSizer;
-    wxBoxSizer* BoxSizer1;
     wxMenuBar* mainMenuBar;
     wxMenu* Menu2;
 
@@ -81,47 +70,8 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     mainFrameSizer = new wxBoxSizer(wxVERTICAL);
     mainNotebook = new wxNotebook(mainFramePanel, ID_MAIN_NOTEBOOK, wxDefaultPosition, wxDefaultSize, 0, _T("ID_MAIN_NOTEBOOK"));
     downloadPanel = new wxPanel(mainNotebook, ID_DOWNLOAD_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_PANEL"));
-    BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
-    SplitterWindow1 = new wxSplitterWindow(downloadPanel, ID_SPLITTERWINDOW1, wxDefaultPosition, wxDefaultSize, wxSP_3D, _T("ID_SPLITTERWINDOW1"));
-    SplitterWindow1->SetMinSize(wxSize(10,10));
-    SplitterWindow1->SetMinimumPaneSize(10);
-    filterPanel = new wxPanel(SplitterWindow1, ID_FILTER_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_FILTER_PANEL"));
-    BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-    ListBox1 = new wxListBox(filterPanel, ID_LISTBOX1, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_LISTBOX1"));
-    ListBox1->Append(_("All"));
-    ListBox1->Append(_("Downloading"));
-    ListBox1->Append(_("Completed"));
-    ListBox1->Append(_("Paused"));
-    BoxSizer2->Add(ListBox1, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-    filterPanel->SetSizer(BoxSizer2);
-    BoxSizer2->Fit(filterPanel);
-    BoxSizer2->SetSizeHints(filterPanel);
-    downloadListPanel = new wxPanel(SplitterWindow1, ID_DOWNLOAD_LIST_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_LIST_PANEL"));
-    BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-    downloadListPanel->SetSizer(BoxSizer3);
-    BoxSizer3->Fit(downloadListPanel);
-    BoxSizer3->SetSizeHints(downloadListPanel);
-    SplitterWindow1->SplitVertically(filterPanel, downloadListPanel);
-    BoxSizer1->Add(SplitterWindow1, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-    downloadPanel->SetSizer(BoxSizer1);
-    BoxSizer1->Fit(downloadPanel);
-    BoxSizer1->SetSizeHints(downloadPanel);
     mainNotebook->AddPage(downloadPanel, _("Downloads"), false);
     mainFrameSizer->Add(mainNotebook, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    mainStatusPanel = new wxPanel(mainFramePanel, ID_MAIN_STATUS_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_STATUS_PANEL"));
-    mainStatusPanel->SetMinSize(wxSize(-1,24));
-    mainStatusPanel->SetMaxSize(wxSize(-1,24));
-    mainStatusPanelSizer = new wxBoxSizer(wxHORIZONTAL);
-    StaticText1 = new wxStaticText(mainStatusPanel, ID_STATICTEXT1, _("Label"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
-    mainStatusPanelSizer->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    StaticText2 = new wxStaticText(mainStatusPanel, ID_STATICTEXT2, _("Label"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
-    mainStatusPanelSizer->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    StaticText3 = new wxStaticText(mainStatusPanel, ID_STATICTEXT3, _("Label"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
-    mainStatusPanelSizer->Add(StaticText3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    mainStatusPanel->SetSizer(mainStatusPanelSizer);
-    mainStatusPanelSizer->Fit(mainStatusPanel);
-    mainStatusPanelSizer->SetSizeHints(mainStatusPanel);
-    mainFrameSizer->Add(mainStatusPanel, 0, wxEXPAND|wxALIGN_BOTTOM|wxALIGN_CENTER_HORIZONTAL, 0);
     mainFramePanel->SetSizer(mainFrameSizer);
     mainFrameSizer->Fit(mainFramePanel);
     mainFrameSizer->SetSizeHints(mainFramePanel);
@@ -145,6 +95,12 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     ToolBarItem5 = mainToolBar->AddTool(ID_TOOLBARITEM6, _("Reconnect Now"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->Realize();
     SetToolBar(mainToolBar);
+    mainStatusBar = new wxStatusBar(this, ID_MAIN_STATUS_BAR, wxST_SIZEGRIP, _T("ID_MAIN_STATUS_BAR"));
+    int __wxStatusBarWidths_1[4] = { -10, -10, -10, -10 };
+    int __wxStatusBarStyles_1[4] = { wxSB_FLAT, wxSB_FLAT, wxSB_FLAT, wxSB_FLAT };
+    mainStatusBar->SetFieldsCount(4,__wxStatusBarWidths_1);
+    mainStatusBar->SetStatusStyles(4,__wxStatusBarStyles_1);
+    SetStatusBar(mainStatusBar);
 
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnAbout);
