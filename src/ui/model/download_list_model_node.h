@@ -256,11 +256,11 @@ public:
     }
 
     virtual void getProgress(wxVariant& progress) const {
-        progress = wxString::Format(wxT("%i / %i"), m_packageData.sizedone, m_packageData.sizetotal);
+        progress = wxString::Format(wxT("%ld / %ld"), m_packageData.sizedone, m_packageData.sizetotal);
     }
 
     virtual void getProgressText(wxVariant& progressText) const {
-        progressText = wxString::Format(wxT("%i / %i"), m_packageData.sizedone, m_packageData.sizetotal);
+        progressText = wxString::Format(wxT("%ld / %ld"), m_packageData.sizedone, m_packageData.sizetotal);
     }
 
     virtual void getStatus(wxVariant& status) const {
@@ -343,11 +343,11 @@ public:
     }
 
     virtual void getProgress(wxVariant& progress) const {
-        progress = wxString::Format(wxT("todo / %i"), m_fileData.size);
+        progress = wxString::Format(wxT("todo / %ld"), m_fileData.size);
     }
 
     virtual void getProgressText(wxVariant& progressText) const {
-        progressText = wxString::Format(wxT("todo / %i"), m_fileData.size);
+        progressText = wxString::Format(wxT("todo / %ld"), m_fileData.size);
     }
 
     virtual void getStatus(wxVariant& status) const {
