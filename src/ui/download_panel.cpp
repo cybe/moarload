@@ -67,7 +67,7 @@ wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID 
     downloadDataViewCtrl->EnableDropTarget(wxDF_UNICODETEXT);
 #endif // wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
 
-    // column 0 of the view control:
+    // column 0: name
     wxDataViewTextRenderer* tr =
         new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column0 =
@@ -82,40 +82,39 @@ wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID 
     column0->SetAsSortKey();
 #endif
 
-    // column 1 of the view control:
+    // column 1: #
     tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column1 =
-        new wxDataViewColumn("#", tr, 1, 30, wxALIGN_LEFT,
+        new wxDataViewColumn("#", tr, 1, 30, wxALIGN_RIGHT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
                              wxDATAVIEW_COL_RESIZABLE);
-    column1->SetMinWidth(20);
     downloadDataViewCtrl->AppendColumn(column1);
 
-    // column 2 of the view control:
+    // column 2: hoster
     tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column2 =
-        new wxDataViewColumn("Hoster", tr, 2, 150, wxALIGN_LEFT,
+        new wxDataViewColumn("Hoster", tr, 2, 200, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column2);
 
-    // column 3 of the view control:
+    // column 3: priority
     tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column3 =
-        new wxDataViewColumn("Priority", tr, 3, 150, wxALIGN_LEFT,
+        new wxDataViewColumn("Priority", tr, 3, 80, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column3);
 
-    // column 4 of the view control:
+    // column 4: status
     tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column4 =
-        new wxDataViewColumn("Status", tr, 4, 150, wxALIGN_LEFT,
+        new wxDataViewColumn("Status", tr, 4, 80, wxALIGN_LEFT,
                              wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
                              wxDATAVIEW_COL_RESIZABLE);
     downloadDataViewCtrl->AppendColumn(column4);
 
-    // column 5 of the view control:
+    // column 5: progress
     tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
     wxDataViewColumn* column5 =
         new wxDataViewColumn("Progress", tr, 5, 150, wxALIGN_LEFT,
