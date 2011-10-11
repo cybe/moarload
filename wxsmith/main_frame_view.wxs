@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxFrame" name="MainFrameView">
 		<title>Moarload</title>
-		<size>640,480</size>
+		<size>800,600</size>
 		<id_arg>0</id_arg>
 		<object class="wxPanel" name="ID_MAIN_FRAME_PANEL" variable="mainFramePanel" member="yes">
 			<pos>80,56</pos>
@@ -15,6 +15,7 @@
 								<creating_code>$(THIS) = new $(CLASS)($(PARENT));</creating_code>
 								<include_file>download__panel.h</include_file>
 								<local_include>1</local_include>
+								<style></style>
 							</object>
 							<label>Downloads</label>
 						</object>

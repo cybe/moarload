@@ -2,7 +2,9 @@
 #define DOWNLOAD_PANEL_H
 
 //(*Headers(DownloadPanel)
+#include <wx/sizer.h>
 #include <wx/panel.h>
+#include <wx/listbox.h>
 //*)
 
 class DownloadPanel: public wxPanel
@@ -13,11 +15,13 @@ class DownloadPanel: public wxPanel
 		virtual ~DownloadPanel();
 
 		//(*Declarations(DownloadPanel)
+		wxListBox* filterListBox;
 		//*)
 
 	protected:
 
 		//(*Identifiers(DownloadPanel)
+		static const long ID_FILTER_LIST_BOX;
 		//*)
 
 	private:

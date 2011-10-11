@@ -63,9 +63,9 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     wxMenu* Menu1;
     wxMenuBar* mainMenuBar;
     wxMenu* Menu2;
-
+    
     Create(parent, wxID_ANY, _("Moarload"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
-    SetClientSize(wxSize(640,480));
+    SetClientSize(wxSize(800,600));
     mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80,56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
     mainFrameSizer = new wxBoxSizer(wxVERTICAL);
     mainNotebook = new wxNotebook(mainFramePanel, ID_MAIN_NOTEBOOK, wxDefaultPosition, wxDefaultSize, 0, _T("ID_MAIN_NOTEBOOK"));
@@ -101,7 +101,7 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     mainStatusBar->SetFieldsCount(4,__wxStatusBarWidths_1);
     mainStatusBar->SetStatusStyles(4,__wxStatusBarStyles_1);
     SetStatusBar(mainStatusBar);
-
+    
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnAbout);
     //*)

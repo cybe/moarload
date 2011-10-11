@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
-	<object class="wxPanel" name="DownloadPanel" />
+	<object class="wxPanel" name="DownloadPanel">
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<object class="sizeritem">
+				<object class="wxListBox" name="ID_FILTER_LIST_BOX" variable="filterListBox" member="yes">
+					<content>
+						<item>[ All ]</item>
+						<item>Finished</item>
+						<item>Offline</item>
+						<item>Online</item>
+						<item>Queued</item>
+						<item>Skipped</item>
+						<item>Waiting</item>
+						<item>TempOffline</item>
+						<item>Starting</item>
+						<item>Failed</item>
+						<item>Aborted</item>
+						<item>Decrypting</item>
+						<item>Custom</item>
+						<item>Downloading</item>
+						<item>Processing</item>
+						<item>Unknown</item>
+					</content>
+					<style>wxLB_SINGLE</style>
+				</object>
+				<flag>wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>1</border>
+			</object>
+		</object>
+	</object>
 </wxsmith>
