@@ -24,7 +24,7 @@ DownloadPanel::DownloadPanel(wxWindow* parent, wxWindowID id) {
     Create(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     filterListBox = new wxListBox(this, ID_FILTER_LIST_BOX, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_FILTER_LIST_BOX"));
-    filterListBox->SetSelection(filterListBox->Append(_("[ All ]")));
+    filterListBox->SetSelection( filterListBox->Append(_("[ All ]")) );
     filterListBox->Append(_("Finished"));
     filterListBox->Append(_("Offline"));
     filterListBox->Append(_("Online"));
@@ -40,9 +40,9 @@ DownloadPanel::DownloadPanel(wxWindow* parent, wxWindowID id) {
     filterListBox->Append(_("Downloading"));
     filterListBox->Append(_("Processing"));
     filterListBox->Append(_("Unknown"));
-    BoxSizer1->Add(filterListBox, 0, wxALL | wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 1);
+    BoxSizer1->Add(filterListBox, 0, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
     downloadControl = buildDownloadControl(this, ID_DOWNLOAD_CONTROL);
-    BoxSizer1->Add(downloadControl, 1, wxALL | wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 1);
+    BoxSizer1->Add(downloadControl, 1, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
     SetSizer(BoxSizer1);
     BoxSizer1->Fit(this);
     BoxSizer1->SetSizeHints(this);
@@ -55,7 +55,7 @@ DownloadPanel::~DownloadPanel() {
 }
 
 wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID id) {
-    wxDataViewCtrl* downloadDataViewCtrl = new wxDataViewCtrl(parent, id);
+    wxDataViewCtrl* downloadDataViewCtrl = new wxDataViewCtrl(parent, id, wxDefaultPosition, wxDefaultSize, wxDV_MULTIPLE | wxDV_ROW_LINES);
     //wxASSERT(!downloadDataViewCtrl);
 
     DownloadListModel* downloadListModel = new DownloadListModel;
@@ -125,5 +125,21 @@ wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID 
     // select initially the ninth symphony:
     //m_ctrl[0]->Select(m_music_model->GetNinthItem());
 
+    wxDataViewItemArray children;
+    downloadListModel->GetChildren(NULL, children);
+    expandContainerNodesRec(downloadDataViewCtrl, downloadListModel, children);
+
     return downloadDataViewCtrl;
+}
+
+void DownloadPanel::expandContainerNodesRec(wxDataViewCtrl* control, DownloadListModel* model, wxDataViewItemArray& nodes) {
+    size_t nodesCount = nodes.GetCount();
+    for (size_t i = 0; i < nodesCount; ++i) {
+        control->Expand(nodes[i]);
+        wxDataViewItemArray children;
+        model->GetChildren(nodes[i], children);
+        if (children.GetCount() > 0) {
+            expandContainerNodesRec(control, model, children);
+        }
+    }
 }

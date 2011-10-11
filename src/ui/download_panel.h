@@ -8,6 +8,8 @@
 #include <wx/listbox.h>
 //*)
 
+class DownloadListModel;
+
 class DownloadPanel: public wxPanel {
 public:
     DownloadPanel(wxWindow* parent, wxWindowID id = wxID_ANY);
@@ -26,10 +28,10 @@ protected:
 
 private:
     //(*Handlers(DownloadPanel)
-    void OnfilterListBoxSelect(wxCommandEvent& event);
     //*)
 
     wxDataViewCtrl* buildDownloadControl(wxPanel* parent, wxWindowID id = wxID_ANY);
+    void expandContainerNodesRec(wxDataViewCtrl* control, DownloadListModel* model, wxDataViewItemArray& children);
 
     DECLARE_EVENT_TABLE()
 };
