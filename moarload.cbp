@@ -231,10 +231,14 @@
 		<Unit filename="src/net/thrift/pyload_types.h" />
 		<Unit filename="src/services/configuration_service.cpp" />
 		<Unit filename="src/services/configuration_service.h" />
-		<Unit filename="src/ui/download_list_data_model.cpp" />
-		<Unit filename="src/ui/download_list_data_model.h" />
+		<Unit filename="src/services/pyload_data_store.cpp" />
+		<Unit filename="src/services/pyload_data_store.h" />
 		<Unit filename="src/ui/main_frame_view.cpp" />
 		<Unit filename="src/ui/main_frame_view.h" />
+		<Unit filename="src/ui/model/download_list_model.cpp" />
+		<Unit filename="src/ui/model/download_list_model.h" />
+		<Unit filename="src/ui/model/download_list_model_node.cpp" />
+		<Unit filename="src/ui/model/download_list_model_node.h" />
 		<Unit filename="src/util.cpp" />
 		<Unit filename="src/util.h" />
 		<Unit filename="wxsmith/main_frame_view.wxs" />

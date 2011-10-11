@@ -38,7 +38,6 @@ wxString wxbuildinfo(wxbuildinfoformat format) {
 //(*IdInit(MainFrameView)
 const long MainFrameView::ID_LISTBOX1 = wxNewId();
 const long MainFrameView::ID_FILTER_PANEL = wxNewId();
-const long MainFrameView::ID_CUSTOM1 = wxNewId();
 const long MainFrameView::ID_DOWNLOAD_LIST_PANEL = wxNewId();
 const long MainFrameView::ID_SPLITTERWINDOW1 = wxNewId();
 const long MainFrameView::ID_DOWNLOAD_PANEL = wxNewId();
@@ -77,14 +76,14 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     wxMenu* Menu2;
 
     Create(parent, wxID_ANY, _("Moarload"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
-    SetClientSize(wxSize(800, 600));
-    mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80, 56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
+    SetClientSize(wxSize(640,480));
+    mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80,56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
     mainFrameSizer = new wxBoxSizer(wxVERTICAL);
     mainNotebook = new wxNotebook(mainFramePanel, ID_MAIN_NOTEBOOK, wxDefaultPosition, wxDefaultSize, 0, _T("ID_MAIN_NOTEBOOK"));
     downloadPanel = new wxPanel(mainNotebook, ID_DOWNLOAD_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_PANEL"));
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     SplitterWindow1 = new wxSplitterWindow(downloadPanel, ID_SPLITTERWINDOW1, wxDefaultPosition, wxDefaultSize, wxSP_3D, _T("ID_SPLITTERWINDOW1"));
-    SplitterWindow1->SetMinSize(wxSize(10, 10));
+    SplitterWindow1->SetMinSize(wxSize(10,10));
     SplitterWindow1->SetMinimumPaneSize(10);
     filterPanel = new wxPanel(SplitterWindow1, ID_FILTER_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_FILTER_PANEL"));
     BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
@@ -93,39 +92,36 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     ListBox1->Append(_("Downloading"));
     ListBox1->Append(_("Completed"));
     ListBox1->Append(_("Paused"));
-    BoxSizer2->Add(ListBox1, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 0);
+    BoxSizer2->Add(ListBox1, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
     filterPanel->SetSizer(BoxSizer2);
     BoxSizer2->Fit(filterPanel);
     BoxSizer2->SetSizeHints(filterPanel);
     downloadListPanel = new wxPanel(SplitterWindow1, ID_DOWNLOAD_LIST_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_DOWNLOAD_LIST_PANEL"));
     BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-    //Custom1 = new wxDataViewCtrl(downloadListPanel,ID_CUSTOM1);
-    //Custom1->AssociateModel(model);
-    BoxSizer3->Add(BuildDataViewCtrl(downloadListPanel), 1, wxALL | wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
     downloadListPanel->SetSizer(BoxSizer3);
     BoxSizer3->Fit(downloadListPanel);
     BoxSizer3->SetSizeHints(downloadListPanel);
     SplitterWindow1->SplitVertically(filterPanel, downloadListPanel);
-    BoxSizer1->Add(SplitterWindow1, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 0);
+    BoxSizer1->Add(SplitterWindow1, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
     downloadPanel->SetSizer(BoxSizer1);
     BoxSizer1->Fit(downloadPanel);
     BoxSizer1->SetSizeHints(downloadPanel);
     mainNotebook->AddPage(downloadPanel, _("Downloads"), false);
-    mainFrameSizer->Add(mainNotebook, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
+    mainFrameSizer->Add(mainNotebook, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     mainStatusPanel = new wxPanel(mainFramePanel, ID_MAIN_STATUS_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_STATUS_PANEL"));
-    mainStatusPanel->SetMinSize(wxSize(-1, 24));
-    mainStatusPanel->SetMaxSize(wxSize(-1, 24));
+    mainStatusPanel->SetMinSize(wxSize(-1,24));
+    mainStatusPanel->SetMaxSize(wxSize(-1,24));
     mainStatusPanelSizer = new wxBoxSizer(wxHORIZONTAL);
     StaticText1 = new wxStaticText(mainStatusPanel, ID_STATICTEXT1, _("Label"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
-    mainStatusPanelSizer->Add(StaticText1, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
+    mainStatusPanelSizer->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     StaticText2 = new wxStaticText(mainStatusPanel, ID_STATICTEXT2, _("Label"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
-    mainStatusPanelSizer->Add(StaticText2, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
+    mainStatusPanelSizer->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     StaticText3 = new wxStaticText(mainStatusPanel, ID_STATICTEXT3, _("Label"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
-    mainStatusPanelSizer->Add(StaticText3, 1, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
+    mainStatusPanelSizer->Add(StaticText3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     mainStatusPanel->SetSizer(mainStatusPanelSizer);
     mainStatusPanelSizer->Fit(mainStatusPanel);
     mainStatusPanelSizer->SetSizeHints(mainStatusPanel);
-    mainFrameSizer->Add(mainStatusPanel, 0, wxEXPAND | wxALIGN_BOTTOM | wxALIGN_CENTER_HORIZONTAL, 0);
+    mainFrameSizer->Add(mainStatusPanel, 0, wxEXPAND|wxALIGN_BOTTOM|wxALIGN_CENTER_HORIZONTAL, 0);
     mainFramePanel->SetSizer(mainFrameSizer);
     mainFrameSizer->Fit(mainFramePanel);
     mainFrameSizer->SetSizeHints(mainFramePanel);
@@ -139,20 +135,19 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     Menu2->Append(MenuItem2);
     mainMenuBar->Append(Menu2, _("Help"));
     SetMenuBar(mainMenuBar);
-    mainToolBar = new wxToolBar(this, ID_MAIN_TOOLBAR, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | wxTB_TEXT | wxNO_BORDER, _T("ID_MAIN_TOOLBAR"));
-    ToolBarItem1 = mainToolBar->AddTool(ID_TOOLBARITEM1, _("Start/Stop"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_FORWARD")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    mainToolBar = new wxToolBar(this, ID_MAIN_TOOLBAR, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_TEXT|wxNO_BORDER, _T("ID_MAIN_TOOLBAR"));
+    ToolBarItem1 = mainToolBar->AddTool(ID_TOOLBARITEM1, _("Start/Stop"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_FORWARD")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->AddSeparator();
-    ToolBarItem2 = mainToolBar->AddTool(ID_TOOLBARITEM3, _("Stop Next"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_DOWN")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
-    ToolBarItem3 = mainToolBar->AddTool(ID_TOOLBARITEM4, _("Auto Reconnect"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
-    ToolBarItem4 = mainToolBar->AddTool(ID_TOOLBARITEM5, _("Auto Clipboard"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_PASTE")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem2 = mainToolBar->AddTool(ID_TOOLBARITEM3, _("Stop Next"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_DOWN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem3 = mainToolBar->AddTool(ID_TOOLBARITEM4, _("Auto Reconnect"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem4 = mainToolBar->AddTool(ID_TOOLBARITEM5, _("Auto Clipboard"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_PASTE")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->AddSeparator();
-    ToolBarItem5 = mainToolBar->AddTool(ID_TOOLBARITEM6, _("Reconnect Now"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem5 = mainToolBar->AddTool(ID_TOOLBARITEM6, _("Reconnect Now"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->Realize();
     SetToolBar(mainToolBar);
 
-    // Connect(ID_LISTBOX1, wxEVT_COMMAND_LISTBOX_SELECTED, (wxObjectEventFunction)&MainFrameView::OnListBox1Select1);
-    Connect(idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnQuit);
-    Connect(idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnAbout);
+    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnQuit);
+    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnAbout);
     //*)
 }
 
@@ -170,77 +165,10 @@ void MainFrameView::OnAbout(wxCommandEvent& event) {
     wxMessageBox(msg, _("Welcome to..."));
 }
 
-wxDataViewCtrl* MainFrameView::BuildDataViewCtrl(wxPanel* parent) {
-    downloadDataViewCtrl = new wxDataViewCtrl(parent, ID_CUSTOM1);
-    //wxASSERT(!downloadDataViewCtrl);
+void MainFrameView::OnmainNotebookPageChanged2(wxNotebookEvent& event)
+{
+}
 
-    DownloadListModel* downloadListModel = new DownloadListModel;
-
-    downloadDataViewCtrl->AssociateModel(downloadListModel);
-
-#if wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
-    downloadDataViewCtrl->EnableDragSource(wxDF_UNICODETEXT);
-    downloadDataViewCtrl->EnableDropTarget(wxDF_UNICODETEXT);
-#endif // wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
-
-    // column 0 of the view control:
-    wxDataViewTextRenderer* tr =
-        new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
-    wxDataViewColumn* column0 =
-        new wxDataViewColumn("Name", tr, 0, 200, wxALIGN_LEFT,
-                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
-                             wxDATAVIEW_COL_RESIZABLE);
-    downloadDataViewCtrl->AppendColumn(column0);
-
-#if 0
-    // Call this and sorting is enabled
-    // immediatly upon start up.
-    column0->SetAsSortKey();
-#endif
-
-    // column 1 of the view control:
-    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
-    wxDataViewColumn* column1 =
-        new wxDataViewColumn("#", tr, 1, 30, wxALIGN_LEFT,
-                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
-                             wxDATAVIEW_COL_RESIZABLE);
-    column1->SetMinWidth(20);
-    downloadDataViewCtrl->AppendColumn(column1);
-
-    // column 2 of the view control:
-    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
-    wxDataViewColumn* column2 =
-        new wxDataViewColumn("Hoster", tr, 2, 150, wxALIGN_LEFT,
-                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
-                             wxDATAVIEW_COL_RESIZABLE);
-    downloadDataViewCtrl->AppendColumn(column2);
-
-    // column 3 of the view control:
-    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
-    wxDataViewColumn* column3 =
-        new wxDataViewColumn("Priority", tr, 3, 150, wxALIGN_LEFT,
-                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
-                             wxDATAVIEW_COL_RESIZABLE);
-    downloadDataViewCtrl->AppendColumn(column3);
-
-    // column 4 of the view control:
-    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
-    wxDataViewColumn* column4 =
-        new wxDataViewColumn("Status", tr, 4, 150, wxALIGN_LEFT,
-                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
-                             wxDATAVIEW_COL_RESIZABLE);
-    downloadDataViewCtrl->AppendColumn(column4);
-
-    // column 5 of the view control:
-    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
-    wxDataViewColumn* column5 =
-        new wxDataViewColumn("Progress", tr, 5, 150, wxALIGN_LEFT,
-                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
-                             wxDATAVIEW_COL_RESIZABLE);
-    downloadDataViewCtrl->AppendColumn(column5);
-
-    // select initially the ninth symphony:
-    //m_ctrl[0]->Select(m_music_model->GetNinthItem());
-
-    return downloadDataViewCtrl;
+void MainFrameView::OnCustom1Paint(wxPaintEvent& event)
+{
 }

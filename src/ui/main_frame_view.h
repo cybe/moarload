@@ -2,7 +2,6 @@
 #define MAIN_FRAME_VIEW_H
 
 //(*Headers(MainFrameView)
-#include <wx/dataview.h>
 #include <wx/toolbar.h>
 #include <wx/sizer.h>
 #include <wx/notebook.h>
@@ -30,13 +29,13 @@ private:
     void OnListBox1Select(wxCommandEvent& event);
     void OnListBox1Select1(wxCommandEvent& event);
     void OnmainNotebookPageChanged1(wxNotebookEvent& event);
+    void OnmainNotebookPageChanged2(wxNotebookEvent& event);
+    void OnCustom1Paint(wxPaintEvent& event);
     //*)
-    wxDataViewCtrl* BuildDataViewCtrl(wxPanel* parent);
 
     //(*Identifiers(MainFrameView)
     static const long ID_LISTBOX1;
     static const long ID_FILTER_PANEL;
-    static const long ID_CUSTOM1;
     static const long ID_DOWNLOAD_LIST_PANEL;
     static const long ID_SPLITTERWINDOW1;
     static const long ID_DOWNLOAD_PANEL;
@@ -73,7 +72,6 @@ private:
     wxToolBarToolBase* ToolBarItem3;
     wxPanel* mainStatusPanel;
     wxPanel* filterPanel;
-    wxDataViewCtrl* downloadDataViewCtrl;
     wxNotebook* mainNotebook;
     //*)
 

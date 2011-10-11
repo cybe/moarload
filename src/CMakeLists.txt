@@ -17,7 +17,6 @@ set(SRCS
     ui/model/download_list_model_node.cpp
     ui/model/download_list_model.cpp
     ui/main_frame_view.cpp
-    ui/page_download_view.cpp
 )
 
 
