@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxPanel" name="DownloadPanel">
+		<id_arg>0</id_arg>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<object class="sizeritem">
 				<object class="wxListBox" name="ID_FILTER_LIST_BOX" variable="filterListBox" member="yes">
@@ -26,6 +27,16 @@
 				</object>
 				<flag>wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>1</border>
+			</object>
+			<object class="sizeritem">
+				<object class="Custom" name="ID_DOWNLOAD_CONTROL" subclass="wxDataViewCtrl" variable="downloadControl" member="yes">
+					<creating_code>$(THIS) = buildDownloadControl($(PARENT), $(ID));</creating_code>
+					<include_file>wx/dataview.h</include_file>
+					<style></style>
+				</object>
+				<flag>wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>1</border>
+				<option>1</option>
 			</object>
 		</object>
 	</object>

@@ -5,8 +5,11 @@
 #include <wx/intl.h>
 //*)
 
+#include "model/download_list_model.h"
+
 //(*IdInit(DownloadPanel)
 const long DownloadPanel::ID_FILTER_LIST_BOX = wxNewId();
+const long DownloadPanel::ID_DOWNLOAD_CONTROL = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(DownloadPanel,wxPanel)
@@ -18,8 +21,8 @@ DownloadPanel::DownloadPanel(wxWindow* parent,wxWindowID id)
 {
 	//(*Initialize(DownloadPanel)
 	wxBoxSizer* BoxSizer1;
-	
-	Create(parent, id, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("id"));
+
+	Create(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
 	filterListBox = new wxListBox(this, ID_FILTER_LIST_BOX, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_FILTER_LIST_BOX"));
 	filterListBox->SetSelection( filterListBox->Append(_("[ All ]")) );
@@ -39,6 +42,8 @@ DownloadPanel::DownloadPanel(wxWindow* parent,wxWindowID id)
 	filterListBox->Append(_("Processing"));
 	filterListBox->Append(_("Unknown"));
 	BoxSizer1->Add(filterListBox, 0, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
+	downloadControl = buildDownloadControl(this, ID_DOWNLOAD_CONTROL);
+	BoxSizer1->Add(downloadControl, 1, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
@@ -51,3 +56,77 @@ DownloadPanel::~DownloadPanel()
 	//*)
 }
 
+wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID id) {
+    wxDataViewCtrl* downloadDataViewCtrl = new wxDataViewCtrl(parent, id);
+    //wxASSERT(!downloadDataViewCtrl);
+
+    DownloadListModel* downloadListModel = new DownloadListModel;
+
+    downloadDataViewCtrl->AssociateModel(downloadListModel);
+
+#if wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
+    downloadDataViewCtrl->EnableDragSource(wxDF_UNICODETEXT);
+    downloadDataViewCtrl->EnableDropTarget(wxDF_UNICODETEXT);
+#endif // wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
+
+    // column 0 of the view control:
+    wxDataViewTextRenderer* tr =
+        new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+    wxDataViewColumn* column0 =
+        new wxDataViewColumn("Name", tr, 0, 200, wxALIGN_LEFT,
+                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
+                             wxDATAVIEW_COL_RESIZABLE);
+    downloadDataViewCtrl->AppendColumn(column0);
+
+#if 0
+    // Call this and sorting is enabled
+    // immediatly upon start up.
+    column0->SetAsSortKey();
+#endif
+
+    // column 1 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+    wxDataViewColumn* column1 =
+        new wxDataViewColumn("#", tr, 1, 30, wxALIGN_LEFT,
+                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
+                             wxDATAVIEW_COL_RESIZABLE);
+    column1->SetMinWidth(20);
+    downloadDataViewCtrl->AppendColumn(column1);
+
+    // column 2 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+    wxDataViewColumn* column2 =
+        new wxDataViewColumn("Hoster", tr, 2, 150, wxALIGN_LEFT,
+                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
+                             wxDATAVIEW_COL_RESIZABLE);
+    downloadDataViewCtrl->AppendColumn(column2);
+
+    // column 3 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+    wxDataViewColumn* column3 =
+        new wxDataViewColumn("Priority", tr, 3, 150, wxALIGN_LEFT,
+                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
+                             wxDATAVIEW_COL_RESIZABLE);
+    downloadDataViewCtrl->AppendColumn(column3);
+
+    // column 4 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+    wxDataViewColumn* column4 =
+        new wxDataViewColumn("Status", tr, 4, 150, wxALIGN_LEFT,
+                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
+                             wxDATAVIEW_COL_RESIZABLE);
+    downloadDataViewCtrl->AppendColumn(column4);
+
+    // column 5 of the view control:
+    tr = new wxDataViewTextRenderer("string", wxDATAVIEW_CELL_INERT);
+    wxDataViewColumn* column5 =
+        new wxDataViewColumn("Progress", tr, 5, 150, wxALIGN_LEFT,
+                             wxDATAVIEW_COL_SORTABLE | wxDATAVIEW_COL_REORDERABLE |
+                             wxDATAVIEW_COL_RESIZABLE);
+    downloadDataViewCtrl->AppendColumn(column5);
+
+    // select initially the ninth symphony:
+    //m_ctrl[0]->Select(m_music_model->GetNinthItem());
+
+    return downloadDataViewCtrl;
+}
