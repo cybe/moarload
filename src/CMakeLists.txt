@@ -7,6 +7,7 @@ set(SRCS
     net/py_load_connector.cpp
     net/py_load_http_connector.cpp
     net/py_load_thrift_connector.cpp
+    net/request_queue.cpp
     net/http/cookie.cpp
     net/http/http_client.cpp
     net/thrift/pyload.cpp
