@@ -27,6 +27,7 @@
       <File Name="src/net/request_queue.cpp"/>
       <File Name="src/net/request_queue.h"/>
       <File Name="src/net/request.h"/>
+      <File Name="src/net/request.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="lib">
       <VirtualDirectory Name="json">
@@ -57,6 +58,8 @@
       <File Name="src/services/configuration_service.h"/>
       <File Name="src/services/pyload_data_store.h"/>
       <File Name="src/services/pyload_data_store.cpp"/>
+      <File Name="src/services/pyload_requester.h"/>
+      <File Name="src/services/pyload_requester.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>

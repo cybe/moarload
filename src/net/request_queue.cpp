@@ -1,5 +1,7 @@
 #include "request_queue.h"
 
+#include "request.h"
+
 RequestQueue::RequestQueue() {
     //ctor
 }
@@ -10,18 +12,19 @@ RequestQueue::~RequestQueue() {
     }
 }
 
-void RequestQueue::addRequest(const std::string request) {
+void RequestQueue::addRequest(Request* request) {
     boost::unique_lock<boost::mutex> lock(m_mutex);
+    request->execute(NULL);
     m_requests.push(request);
     m_cond.notify_all();
 }
 
-std::string RequestQueue::getNextRequest() {
+Request* RequestQueue::getNextRequest() {
     boost::unique_lock<boost::mutex> lock(m_mutex);
     while (m_requests.empty()) {
         m_cond.wait(lock);
     }
-    std::string request = m_requests.front();
+    Request* request = m_requests.front();
     m_requests.pop();
     return request;
 }

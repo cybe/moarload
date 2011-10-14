@@ -8,6 +8,7 @@
 #include "net/py_load_thrift_connector.h"
 #include "services/configuration_service.h"
 #include "services/pyload_data_store.h"
+#include "services/pyload_requester.h"
 
 //(*AppHeaders
 #include "ui/main_frame_view.h"
@@ -32,6 +33,9 @@ bool Main::OnInit() {
         SetTopWindow(view);
     }
     //*)
+    
+    PyloadDataStore ds;
+    PyloadRequester r(ds);
 
     return wxsOK;
 }

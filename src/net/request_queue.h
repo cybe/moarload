@@ -2,17 +2,18 @@
 #define REQUEST_QUEUE_H
 
 #include <queue>
-#include <string>
 
 #include <boost/thread.hpp>
+
+class Request;
 
 class RequestQueue {
 public:
     RequestQueue();
     virtual ~RequestQueue();
 
-    void addRequest(const std::string request);
-    std::string getNextRequest();
+    void addRequest(Request* request);
+    Request* getNextRequest();
 
 private:
     // Neither copy nor assign
@@ -21,7 +22,7 @@ private:
 
     boost::mutex m_mutex;
     boost::condition_variable_any m_cond;
-    std::queue<std::string> m_requests;
+    std::queue<Request*> m_requests;
 };
 
 #endif // REQUEST_QUEUE_H

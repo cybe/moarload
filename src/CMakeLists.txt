@@ -7,6 +7,7 @@ set(SRCS
     net/py_load_connector.cpp
     net/py_load_http_connector.cpp
     net/py_load_thrift_connector.cpp
+    net/request.cpp
     net/request_queue.cpp
     net/http/cookie.cpp
     net/http/http_client.cpp
@@ -15,6 +16,7 @@ set(SRCS
     net/thrift/pyload_types.cpp
     services/configuration_service.cpp
     services/pyload_data_store.cpp
+    services/pyload_requester.cpp
     ui/model/download_list_model_node.cpp
     ui/model/download_list_model.cpp
     ui/download_panel.cpp
