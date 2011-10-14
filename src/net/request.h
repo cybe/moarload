@@ -19,7 +19,7 @@ protected:
 
 class GetEventsRequest : public Request {
 public:
-    GetEventsRequest(PyloadDataStore& store, std::string uuid) : Request::Request(store), m_uuid(uuid) {};
+    GetEventsRequest(PyloadDataStore& store, std::string uuid) : Request(store), m_uuid(uuid) {};
     virtual ~GetEventsRequest() {};
     virtual void execute(PyLoadConnector* con);
 
