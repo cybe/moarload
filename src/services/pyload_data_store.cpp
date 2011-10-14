@@ -3,6 +3,7 @@
 #include "../log.h"
 #include "../net/py_load_connector.h"
 #include "../net/py_load_thrift_connector.h"
+#include "../net/request.h"
 
 PyloadDataStore::PyloadDataStore() :
     m_cs("moarload.ini") {
@@ -13,6 +14,14 @@ PyloadDataStore::PyloadDataStore() :
     std::string version;
     m_con->getServerVersion(version);
     LOG(logIO) << "version: " << version;
+
+    class : public Request {
+    public:
+        void execute(PyLoadConnector* con) {
+            LOG(logIO) << "time? " << con->isTimeDownload();
+        }
+    } r;
+    r.execute(m_con);
 }
 
 PyloadDataStore::~PyloadDataStore() {

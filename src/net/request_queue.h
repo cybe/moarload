@@ -1,3 +1,6 @@
+#ifndef REQUEST_QUEUE_H
+#define REQUEST_QUEUE_H
+
 #include <queue>
 #include <string>
 
@@ -20,3 +23,5 @@ private:
     boost::condition_variable_any m_cond;
     std::queue<std::string> m_requests;
 };
+
+#endif // REQUEST_QUEUE_H

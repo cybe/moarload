@@ -26,6 +26,7 @@
       <File Name="src/net/py_load_thrift_connector.h"/>
       <File Name="src/net/request_queue.cpp"/>
       <File Name="src/net/request_queue.h"/>
+      <File Name="src/net/request.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="lib">
       <VirtualDirectory Name="json">
@@ -85,6 +86,7 @@
       
       
       
+      
       ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -124,6 +126,7 @@
       <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="no"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
       
       
       ]]>
