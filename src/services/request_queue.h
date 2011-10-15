@@ -22,7 +22,7 @@ private:
     void operator=(const RequestQueue&);
 
     boost::mutex m_mutex;
-    boost::condition_variable_any m_cond;
+    boost::condition_variable m_cond;
     std::queue<Request*> m_requests;
 };
 

@@ -17,6 +17,7 @@ protected:
     PyloadDataStore& m_store;
     
 private:
+    // Neither copy nor assign
     Request(const Request&);
     void operator=(const Request&);
 };
@@ -28,6 +29,7 @@ public:
     virtual void execute(PyLoadConnector* pyloadConnection);
 
 private:
+    // Neither copy nor assign
     GetEventsRequest(const GetEventsRequest&);
     void operator=(const GetEventsRequest&);
     std::string m_uuid;
@@ -40,6 +42,7 @@ public:
     virtual void execute(PyLoadConnector* pyloadConnection);
     
 private:
+    // Neither copy nor assign
     GetQueuePackagesRequest(const GetQueuePackagesRequest&);
     void operator=(const GetQueuePackagesRequest&);
 };
