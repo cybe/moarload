@@ -15,6 +15,10 @@ public:
 
 protected:
     PyloadDataStore& m_store;
+    
+private:
+    Request(const Request&);
+    void operator=(const Request&);
 };
 
 class GetEventsRequest : public Request {
@@ -34,12 +38,10 @@ public:
     GetQueuePackagesRequest(PyloadDataStore& store) : Request(store) {};
     virtual ~GetQueuePackagesRequest() {};
     virtual void execute(PyLoadConnector* pyloadConnection);
-
+    
 private:
-    // Neither copy nor assign
     GetQueuePackagesRequest(const GetQueuePackagesRequest&);
     void operator=(const GetQueuePackagesRequest&);
-
 };
 
 #endif // REQUEST_H

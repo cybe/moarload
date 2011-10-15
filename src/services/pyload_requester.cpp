@@ -18,21 +18,25 @@ RequestWorker::~RequestWorker() {
 }
 
 void RequestWorker::run() {
-    Logger::setPidName("net");
-    LOG(logDEBUG) << "request execution thread started";
-    m_pyloadConnection = new PyLoadThriftConnector(m_hostname,
-                                                   m_port);
-    bool loginSuccesfull = m_pyloadConnection->login("buildserver", "buildserver");
-    std::string loginMessage("Login to thrift failed");
-    if (loginSuccesfull) {
-        loginMessage = "Login to thrift succesfull";
-    }
-    LOG(logINFO) << loginMessage;
+    try {
+        Logger::setPidName("net");
+        LOG(logDEBUG) << "request execution thread started";
+        m_pyloadConnection = new PyLoadThriftConnector(m_hostname,
+                                                       m_port);
+        bool loginSuccesfull = m_pyloadConnection->login("buildserver", "buildserver");
+        std::string loginMessage("Login to thrift failed");
+        if (loginSuccesfull) {
+            loginMessage = "Login to thrift succesfull";
+        }
+        LOG(logINFO) << loginMessage;
 
-    while (true) {
-        Request* r = m_requestQueue.getNextRequest();
-        r->execute(m_pyloadConnection);
-        delete r;
+        while (true) {
+            Request* r = m_requestQueue.getNextRequest();
+            r->execute(m_pyloadConnection);
+            delete r;
+        }
+    } catch (boost::thread_interrupted&) {
+        LOG(logDEBUG) << "received thread interruption signal";
     }
 }
 
