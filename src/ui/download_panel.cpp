@@ -61,6 +61,7 @@ wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID 
     DownloadListModel* downloadListModel = new DownloadListModel;
 
     downloadDataViewCtrl->AssociateModel(downloadListModel);
+    downloadListModel->DecRef();
 
 #if wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
     downloadDataViewCtrl->EnableDragSource(wxDF_UNICODETEXT);

@@ -1,15 +1,13 @@
 #include "download_list_model.h"
 
 #include "../../log.h"
-#include "../../services/pyload_data_store.h"
-#include "../../services/pyload_requester.h"
-#include "../../net/request.h"
+//#include "../../services/pyload_data_store.h"
+//#include "../../services/pyload_requester.h"
+//#include "../../net/request.h"
 
 
 DownloadListModel::DownloadListModel() {
-    PyloadDataStore ds;
-    PyloadRequester r(ds);
-    r.startThread();
+
     //r.sendRequest(new GetQueuePackagesRequest(ds));
 
     m_backendNode = new DownloadListModelNodeBackend();
@@ -48,6 +46,7 @@ DownloadListModel::DownloadListModel() {
 }
 
 DownloadListModel::~DownloadListModel() {
+    LOG(logDEBUG) << "~DownloadListModel()";
     delete m_backendNode;
 }
 

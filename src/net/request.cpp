@@ -14,7 +14,7 @@ void GetEventsRequest::execute(PyLoadConnector* pyloadConnection) {
 }
 
 void GetQueuePackagesRequest::execute(PyLoadConnector* pyloadConnection) {
-    LOG(logDEBUG) << "GetQueuePackagesRequest: " << pyloadConnection;
+    LOG(logDEBUG) << "GetQueuePackagesRequest"
     std::vector<PackageData> data;
     pyloadConnection->getQueueData(data);
     m_store.setQueuePackages(data);

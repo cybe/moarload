@@ -12,12 +12,18 @@
 #include "download_panel.h"
 //*)
 
+#include "../services/pyload_data_store.h"
+#include "../services/pyload_requester.h"
+
 class MainFrameView: public wxFrame {
 public:
     MainFrameView(wxWindow* parent, wxWindowID id = -1);
     virtual ~MainFrameView();
 
 private:
+    PyloadDataStore m_dataStore;
+    PyloadRequester m_requester;
+    
     //(*Handlers(MainFrameView)
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);

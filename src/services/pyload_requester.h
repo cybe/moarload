@@ -14,7 +14,7 @@ class Request;
 class RequestWorker {
 public:
     RequestWorker(RequestQueue& requestQueue,
-                  const std::string& hostname,
+                  const std::string hostname,
                   const unsigned short port);
     virtual ~RequestWorker();
     void run();
@@ -23,7 +23,7 @@ private:
     // Neither copy nor assign
     RequestWorker(const RequestWorker&);
     void operator=(const RequestWorker&);
-    std::string m_hostname;
+    const std::string m_hostname;
     const unsigned short m_port;
     RequestQueue& m_requestQueue;
     PyLoadConnector* m_pyloadConnection;
@@ -31,17 +31,15 @@ private:
 
 class PyloadRequester {
 public:
-    PyloadRequester(PyloadDataStore& store);
+    PyloadRequester();
     virtual ~PyloadRequester();
     void sendRequest(Request* request);
-    void startThread();
 
 private:
     // Neither copy nor assign
     PyloadRequester(const PyloadRequester&);
     void operator=(const PyloadRequester&);
 
-    PyloadDataStore& m_store;
     ConfigurationService m_cs;
     RequestQueue m_requestQueue;
     RequestWorker m_requestWorker;
