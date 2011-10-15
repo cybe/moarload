@@ -1,7 +1,7 @@
 #include "pyload_requester.h"
 
 #include "../net/py_load_thrift_connector.h"
-#include "../net/request.h"
+#include "request.h"
 #include "../log.h"
 
 RequestWorker::RequestWorker(RequestQueue& requestQueue,

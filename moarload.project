@@ -24,10 +24,6 @@
       <File Name="src/net/py_load_connector.h"/>
       <File Name="src/net/py_load_http_connector.cpp"/>
       <File Name="src/net/py_load_thrift_connector.h"/>
-      <File Name="src/net/request_queue.cpp"/>
-      <File Name="src/net/request_queue.h"/>
-      <File Name="src/net/request.h"/>
-      <File Name="src/net/request.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="lib">
       <VirtualDirectory Name="json">
@@ -60,6 +56,10 @@
       <File Name="src/services/pyload_data_store.cpp"/>
       <File Name="src/services/pyload_requester.h"/>
       <File Name="src/services/pyload_requester.cpp"/>
+      <File Name="src/services/request.cpp"/>
+      <File Name="src/services/request.h"/>
+      <File Name="src/services/request_queue.cpp"/>
+      <File Name="src/services/request_queue.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
@@ -83,6 +83,7 @@
       <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
       
       
       
@@ -129,7 +130,8 @@
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="no"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[]]>
+        <![CDATA[
+      ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>

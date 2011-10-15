@@ -233,6 +233,12 @@
 		<Unit filename="src/services/configuration_service.h" />
 		<Unit filename="src/services/pyload_data_store.cpp" />
 		<Unit filename="src/services/pyload_data_store.h" />
+		<Unit filename="src/services/pyload_requester.cpp" />
+		<Unit filename="src/services/pyload_requester.h" />
+		<Unit filename="src/services/request.cpp" />
+		<Unit filename="src/services/request.h" />
+		<Unit filename="src/services/request_queue.cpp" />
+		<Unit filename="src/services/request_queue.h" />
 		<Unit filename="src/ui/download_panel.cpp" />
 		<Unit filename="src/ui/download_panel.h" />
 		<Unit filename="src/ui/main_frame_view.cpp" />

@@ -3,8 +3,8 @@
 #include <vector>
 
 #include "../log.h"
-#include "py_load_connector.h"
-#include "thrift/pyload_types.h"
+#include "../net/py_load_connector.h"
+#include "../net/thrift/pyload_types.h"
 
 void GetEventsRequest::execute(PyLoadConnector* pyloadConnection) {
     LOG(logDEBUG) << "GetEventsRequest";

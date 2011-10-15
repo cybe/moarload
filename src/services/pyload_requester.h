@@ -5,7 +5,7 @@
 
 #include "pyload_data_store.h"
 #include "configuration_service.h"
-#include "../net/request_queue.h"
+#include "request_queue.h"
 
 
 class PyLoadConnector;
