@@ -46,7 +46,6 @@ DownloadListModel::DownloadListModel() {
 }
 
 DownloadListModel::~DownloadListModel() {
-    LOG(logDEBUG) << "~DownloadListModel()";
     delete m_backendNode;
 }
 

@@ -47,7 +47,9 @@ PyloadRequester::PyloadRequester() :
 
 
 PyloadRequester::~PyloadRequester() {
-    // todo: threads beenden
+    LOG(logDEBUG) << "stopping request execution thread";
+    m_requestExecutionThread.interrupt();
+    m_requestExecutionThread.join();
 }
 
 void PyloadRequester::sendRequest(Request* request) {
