@@ -7,9 +7,9 @@
 RequestWorker::RequestWorker(RequestQueue& requestQueue,
                              const std::string& hostname,
                              const unsigned short port) :
-    m_requestQueue(requestQueue),
     m_hostname(hostname),
     m_port(port),
+    m_requestQueue(requestQueue),
     m_pyloadConnection(NULL) {
 }
 
@@ -18,6 +18,11 @@ RequestWorker::~RequestWorker() {
 }
 
 void RequestWorker::run() {
+    for (int i = 0; i < 100; i++) {
+        LOG(logIO) << "port: " << m_port;
+        boost::this_thread::sleep(boost::posix_time::millisec(1));
+    }
+    boost::this_thread::sleep(boost::posix_time::millisec(100));
     m_pyloadConnection = new PyLoadThriftConnector(m_hostname,
                                                    m_port);
     bool loginSuccesfull = m_pyloadConnection->login("buildserver", "buildserver");
@@ -26,6 +31,11 @@ void RequestWorker::run() {
         loginMessage = "Login to thrift succesfull";
     }
     LOG(logINFO) << loginMessage;
+    for (int i = 0; i < 20; i++) {
+        std::string version;
+        m_pyloadConnection->getServerVersion(version);
+        LOG(logINFO) << version;
+    }
 
     //    while (true) {
     //        Request* r = m_requestQueue.getNextRequest();
@@ -40,7 +50,6 @@ PyloadRequester::PyloadRequester(PyloadDataStore& store) :
     m_requestWorker(m_requestQueue,
                     m_cs.getThriftHostname(),
                     m_cs.getThriftPort()) {
-    //m_requestExecutionThread(&RequestWorker::run, &m_requestWorker) {
 }
 
 
@@ -55,4 +64,5 @@ void PyloadRequester::sendRequest(Request* request) {
 void PyloadRequester::startThread() {
     LOG(logDEBUG) << "starting worker thread";
     m_requestExecutionThread = boost::thread(&RequestWorker::run, &m_requestWorker);
+    //m_requestWorker.run();
 }

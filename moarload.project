@@ -90,6 +90,7 @@
       
       
       
+      
       ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -128,18 +129,14 @@
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="no"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[
-      
-      
-      
-      ]]>
+        <![CDATA[]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
       </Debugger>
       <PreBuild>
-        <Command Enabled="yes">cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..</Command>
+        <Command Enabled="yes">cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ..</Command>
       </PreBuild>
       <PostBuild/>
       <CustomBuild Enabled="yes">
