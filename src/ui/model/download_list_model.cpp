@@ -2,15 +2,19 @@
 
 #include "../../log.h"
 #include "../../services/pyload_data_store.h"
+#include "../../services/pyload_requester.h"
+#include "../../net/request.h"
 
 
 DownloadListModel::DownloadListModel() {
     PyloadDataStore ds;
-    ds.updateQueuePackageData();
+    PyloadRequester r(ds);
+    r.startThread();
+    //r.sendRequest(new GetQueuePackagesRequest(ds));
 
     m_backendNode = new DownloadListModelNodeBackend();
 
-    std::vector<PackageData> packages = ds.getQueuePackages();
+    std::vector<PackageData> packages; // = ds.getQueuePackages();
     std::vector<PackageData>::iterator package;
     for (package = packages.begin() ; package != packages.end(); ++package) {
         DownloadListModelNode* packageNode = new DownloadListModelNodePackage(m_backendNode, *package);

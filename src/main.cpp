@@ -34,9 +34,6 @@ bool Main::OnInit() {
     }
     //*)
     
-    PyloadDataStore ds;
-    PyloadRequester r(ds);
-
     return wxsOK;
 }
 

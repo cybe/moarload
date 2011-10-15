@@ -4,36 +4,29 @@
 #include <string>
 #include <vector>
 
-#include "../services/configuration_service.h"
-#include "../net/thrift/pyload_types.h"
-#include "../net/request_queue.h"
+#include <boost/thread/shared_mutex.hpp>
 
-class PyLoadConnector;
+#include "../net/thrift/pyload_types.h"
 
 class PyloadDataStore {
 private:
     PyloadDataStore(const PyloadDataStore& rhs);
     PyloadDataStore& operator=(const PyloadDataStore& rhs);
-
-    PyLoadConnector* m_con;
-    ConfigurationService m_cs;
-    std::vector<PackageData> m_queuePackages;
     
-    RequestQueue m_requestQueue;
+    boost::shared_mutex m_mutex;
+
+    std::vector<PackageData> m_queuePackages;
     std::vector<EventInfo> m_events;
     
 public:
     PyloadDataStore();
     virtual ~PyloadDataStore();
-    void updateQueuePackageData();
 
-    std::vector<PackageData>& getQueuePackages() {
-        return m_queuePackages;
-    }
+    void setEvents(const std::vector<EventInfo>& events);
+    const std::vector<EventInfo> getEvents();
     
-    void requestEvents(std::string uuid);
-    void setEvents(std::vector<EventInfo>& events);
-    std::vector<EventInfo> getEvents();
+    void setQueuePackages(const std::vector<PackageData>& queuePackages);
+    const std::vector<PackageData> getQueuePackages();
 };
 
 #endif // PYLOAD_DATA_STORE_H

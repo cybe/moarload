@@ -8,21 +8,22 @@
 
 PyLoadThriftConnector::PyLoadThriftConnector(const std::string& hostname,
                                              const unsigned short port) :
+    //transport(NULL),
     client(NULL) {
     using namespace apache::thrift;
     using namespace apache::thrift::protocol;
     using namespace apache::thrift::transport;
 
     boost::shared_ptr<TSocket> socket(new TSocket(hostname, port));
-    boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
+    transport = boost::shared_ptr<TTransport>(new TBufferedTransport(socket));
     boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
 
     client = new PyloadClient(protocol);
     transport->open();
-    // todo: close transport
 }
 
 PyLoadThriftConnector::~PyLoadThriftConnector() {
+    transport->close();
     delete client;
 }
 

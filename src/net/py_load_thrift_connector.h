@@ -1,6 +1,8 @@
 #ifndef PY_LOAD_THRIFT_CONNECTOR_H
 #define PY_LOAD_THRIFT_CONNECTOR_H
 
+#include <transport/TBufferTransports.h>
+
 #include "py_load_connector.h"
 #include "thrift/pyload.h"
 
@@ -83,6 +85,7 @@ public:
     virtual void getInfoByPlugin(std::map<std::string, std::string> & _return, const PluginName& plugin);
 
 private:
+    boost::shared_ptr<apache::thrift::transport::TTransport> transport;
     PyloadClient* client;
 };
 

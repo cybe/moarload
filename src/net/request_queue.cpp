@@ -1,5 +1,7 @@
 #include "request_queue.h"
 
+#include <boost/thread/locks.hpp>
+
 #include "request.h"
 
 RequestQueue::RequestQueue() {
@@ -14,8 +16,8 @@ RequestQueue::~RequestQueue() {
 
 void RequestQueue::addRequest(Request* request) {
     boost::unique_lock<boost::mutex> lock(m_mutex);
-    request->execute(NULL);
     m_requests.push(request);
+    //lock.unlock();
     m_cond.notify_all();
 }
 
