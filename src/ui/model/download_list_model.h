@@ -57,7 +57,7 @@ public:
                            unsigned int col) const;
     virtual wxDataViewItem GetParent(const wxDataViewItem& item) const;
     virtual bool IsContainer(const wxDataViewItem& item) const;
-    virtual bool HasContainerColumns(const wxDataViewItem&   item) const;
+    virtual bool HasContainerColumns(const wxDataViewItem& item) const;
     virtual unsigned int GetChildren(const wxDataViewItem& parent,
                                      wxDataViewItemArray& array) const;
 

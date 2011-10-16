@@ -113,7 +113,7 @@ bool DownloadListModel::IsContainer(const wxDataViewItem& item) const {
 }
 bool DownloadListModel::HasContainerColumns(const wxDataViewItem& item) const {
     DownloadListModelNode* node = static_cast<DownloadListModelNode*>(item.GetID());
-    return node->isContainer();
+    return node->hasColumns();
 }
 
 bool DownloadListModel::IsEnabled(const wxDataViewItem& item, unsigned int col) const {
