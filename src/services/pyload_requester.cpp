@@ -1,8 +1,13 @@
 #include "pyload_requester.h"
 
+#include <boost/thread/thread.hpp>
+
 #include "../net/py_load_thrift_connector.h"
 #include "request.h"
 #include "../log.h"
+
+
+// RequestWorker
 
 RequestWorker::RequestWorker(RequestQueue& requestQueue,
                              const std::string hostname,
@@ -40,17 +45,49 @@ void RequestWorker::run() {
     }
 }
 
-PyloadRequester::PyloadRequester() :
-    m_cs("moarload.ini"),
-    m_requestWorker(m_requestQueue,
-                    m_cs.getThriftHostname(),
-                    m_cs.getThriftPort()) {
-    LOG(logDEBUG) << "starting request execution thread";
-    m_requestExecutionThread = boost::thread(&RequestWorker::run, &m_requestWorker);
+
+RecurringRequestsWorker::RecurringRequestsWorker(RequestQueue& requestQueue,
+                                                 PyloadDataStore& dataStore) :
+    m_requestQueue(requestQueue),
+    m_dataStore(dataStore) {
 }
 
 
+// RecurringRequestsWorker
+
+void RecurringRequestsWorker::run() {
+    try {
+        Logger::setPidName("loop");
+        LOG(logDEBUG) << "recurring requests thread started";
+        while (true) {
+            m_requestQueue.addRequest(new GetEventsRequest(m_dataStore, "pyload-uuid"));
+            boost::this_thread::sleep(boost::posix_time::seconds(1));
+        }
+    } catch (boost::thread_interrupted&) {
+        LOG(logDEBUG) << "received thread interruption signal";
+    }
+}
+
+
+// PyloadRequester
+
+PyloadRequester::PyloadRequester(PyloadDataStore& dataStore) :
+    m_cs("moarload.ini"),
+    m_dataStore(dataStore),
+    m_requestWorker(m_requestQueue,
+                    m_cs.getThriftHostname(),
+                    m_cs.getThriftPort()),
+    m_recurringRequestsWorker(m_requestQueue, m_dataStore) {
+    LOG(logDEBUG) << "starting request execution thread";
+    m_requestExecutionThread = boost::thread(&RequestWorker::run, &m_requestWorker);
+    LOG(logDEBUG) << "starting recurring requests execution thread";
+    m_recurringRequestsExecutionThread = boost::thread(&RecurringRequestsWorker::run, &m_recurringRequestsWorker);
+}
+
 PyloadRequester::~PyloadRequester() {
+    LOG(logDEBUG) << "stopping recurring requests execution thread";
+    m_recurringRequestsExecutionThread.interrupt();
+    m_recurringRequestsExecutionThread.join();
     LOG(logDEBUG) << "stopping request execution thread";
     m_requestExecutionThread.interrupt();
     m_requestExecutionThread.join();

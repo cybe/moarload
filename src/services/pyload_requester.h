@@ -29,9 +29,26 @@ private:
     PyLoadConnector* m_pyloadConnection;
 };
 
+
+class RecurringRequestsWorker {
+public:
+    RecurringRequestsWorker(RequestQueue& requestQueue, PyloadDataStore& m_dataStore);
+    virtual ~RecurringRequestsWorker() {};
+    void run();
+    
+private:
+    // Neither copy nor assign
+    RecurringRequestsWorker(const RecurringRequestsWorker&);
+    void operator=(const RecurringRequestsWorker&);
+    
+    RequestQueue& m_requestQueue;
+    PyloadDataStore& m_dataStore;
+};
+
+
 class PyloadRequester {
 public:
-    PyloadRequester();
+    PyloadRequester(PyloadDataStore& dataStore);
     virtual ~PyloadRequester();
     void sendRequest(Request* request);
 
@@ -41,9 +58,12 @@ private:
     void operator=(const PyloadRequester&);
 
     ConfigurationService m_cs;
+    PyloadDataStore& m_dataStore;
     RequestQueue m_requestQueue;
     RequestWorker m_requestWorker;
+    RecurringRequestsWorker m_recurringRequestsWorker;
     boost::thread m_requestExecutionThread;
+    boost::thread m_recurringRequestsExecutionThread;
 };
 
 #endif // PYLOAD_REQUESTER_H
