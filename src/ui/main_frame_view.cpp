@@ -2,6 +2,8 @@
 #include <wx/msgdlg.h>
 
 #include "model/download_list_model.h"
+#include "../services/request.h"
+
 //(*InternalHeaders(MainFrameView)
 #include <wx/string.h>
 #include <wx/intl.h>
@@ -56,6 +58,7 @@ BEGIN_EVENT_TABLE(MainFrameView, wxFrame)
 END_EVENT_TABLE()
 
 MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
+    m_requester.sendRequest(new GetQueuePackagesRequest(m_dataStore));
     //(*Initialize(MainFrameView)
     wxMenuItem* MenuItem2;
     wxBoxSizer* mainFrameSizer;
@@ -65,13 +68,13 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     wxMenu* Menu2;
 
     Create(parent, wxID_ANY, _("Moarload"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
-    SetClientSize(wxSize(800, 600));
-    mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80, 56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
+    SetClientSize(wxSize(800,600));
+    mainFramePanel = new wxPanel(this, ID_MAIN_FRAME_PANEL, wxPoint(80,56), wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_MAIN_FRAME_PANEL"));
     mainFrameSizer = new wxBoxSizer(wxVERTICAL);
     mainNotebook = new wxNotebook(mainFramePanel, ID_MAIN_NOTEBOOK, wxDefaultPosition, wxDefaultSize, 0, _T("ID_MAIN_NOTEBOOK"));
-    downloadPanel = new DownloadPanel(mainNotebook);
+    downloadPanel = new DownloadPanel(mainNotebook, m_dataStore);
     mainNotebook->AddPage(downloadPanel, _("Downloads"), false);
-    mainFrameSizer->Add(mainNotebook, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 5);
+    mainFrameSizer->Add(mainNotebook, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     mainFramePanel->SetSizer(mainFrameSizer);
     mainFrameSizer->Fit(mainFramePanel);
     mainFrameSizer->SetSizeHints(mainFramePanel);
@@ -85,25 +88,25 @@ MainFrameView::MainFrameView(wxWindow* parent, wxWindowID id) {
     Menu2->Append(MenuItem2);
     mainMenuBar->Append(Menu2, _("Help"));
     SetMenuBar(mainMenuBar);
-    mainToolBar = new wxToolBar(this, ID_MAIN_TOOLBAR, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | wxTB_TEXT | wxNO_BORDER, _T("ID_MAIN_TOOLBAR"));
-    ToolBarItem1 = mainToolBar->AddTool(ID_TOOLBARITEM1, _("Start/Stop"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_FORWARD")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    mainToolBar = new wxToolBar(this, ID_MAIN_TOOLBAR, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_TEXT|wxNO_BORDER, _T("ID_MAIN_TOOLBAR"));
+    ToolBarItem1 = mainToolBar->AddTool(ID_TOOLBARITEM1, _("Start/Stop"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_FORWARD")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->AddSeparator();
-    ToolBarItem2 = mainToolBar->AddTool(ID_TOOLBARITEM3, _("Stop Next"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_DOWN")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
-    ToolBarItem3 = mainToolBar->AddTool(ID_TOOLBARITEM4, _("Auto Reconnect"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
-    ToolBarItem4 = mainToolBar->AddTool(ID_TOOLBARITEM5, _("Auto Clipboard"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_PASTE")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem2 = mainToolBar->AddTool(ID_TOOLBARITEM3, _("Stop Next"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_GO_DOWN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem3 = mainToolBar->AddTool(ID_TOOLBARITEM4, _("Auto Reconnect"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem4 = mainToolBar->AddTool(ID_TOOLBARITEM5, _("Auto Clipboard"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_PASTE")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->AddSeparator();
-    ToolBarItem5 = mainToolBar->AddTool(ID_TOOLBARITEM6, _("Reconnect Now"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")), wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+    ToolBarItem5 = mainToolBar->AddTool(ID_TOOLBARITEM6, _("Reconnect Now"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_ERROR")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
     mainToolBar->Realize();
     SetToolBar(mainToolBar);
     mainStatusBar = new wxStatusBar(this, ID_MAIN_STATUS_BAR, wxST_SIZEGRIP, _T("ID_MAIN_STATUS_BAR"));
     int __wxStatusBarWidths_1[4] = { -10, -10, -10, -10 };
     int __wxStatusBarStyles_1[4] = { wxSB_FLAT, wxSB_FLAT, wxSB_FLAT, wxSB_FLAT };
-    mainStatusBar->SetFieldsCount(4, __wxStatusBarWidths_1);
-    mainStatusBar->SetStatusStyles(4, __wxStatusBarStyles_1);
+    mainStatusBar->SetFieldsCount(4,__wxStatusBarWidths_1);
+    mainStatusBar->SetStatusStyles(4,__wxStatusBarStyles_1);
     SetStatusBar(mainStatusBar);
 
-    Connect(idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnQuit);
-    Connect(idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MainFrameView::OnAbout);
+    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnQuit);
+    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&MainFrameView::OnAbout);
     //*)
 }
 

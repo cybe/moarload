@@ -3,17 +3,20 @@
 
 #include <wx/dataview.h>
 
+#include "../../services/pyload_data_store.h"
 #include "download_list_model_node.h"
 
 class DownloadListModel : public wxDataViewModel {
 private:
     DownloadListModel(const DownloadListModel& rhs);
     DownloadListModel& operator=(const DownloadListModel& rhs);
+    void updateQueuePackages();
 
-    DownloadListModelNode*   m_backendNode;
+    PyloadDataStore& m_dataStore;
+    DownloadListModelNode* m_backendNode;
 
 public:
-    DownloadListModel();
+    DownloadListModel(PyloadDataStore& dataStore);
     virtual ~DownloadListModel();
 
     virtual unsigned int GetColumnCount() const {

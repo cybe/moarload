@@ -17,14 +17,15 @@ BEGIN_EVENT_TABLE(DownloadPanel, wxPanel)
     //*)
 END_EVENT_TABLE()
 
-DownloadPanel::DownloadPanel(wxWindow* parent, wxWindowID id) {
+DownloadPanel::DownloadPanel(wxWindow* parent, PyloadDataStore& pyloadDataStore, wxWindowID id) :
+    m_dataStore(pyloadDataStore) {
     //(*Initialize(DownloadPanel)
     wxBoxSizer* BoxSizer1;
 
     Create(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     filterListBox = new wxListBox(this, ID_FILTER_LIST_BOX, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_FILTER_LIST_BOX"));
-    filterListBox->SetSelection(filterListBox->Append(_("[ All ]")));
+    filterListBox->SetSelection( filterListBox->Append(_("[ All ]")) );
     filterListBox->Append(_("Finished"));
     filterListBox->Append(_("Offline"));
     filterListBox->Append(_("Online"));
@@ -40,9 +41,9 @@ DownloadPanel::DownloadPanel(wxWindow* parent, wxWindowID id) {
     filterListBox->Append(_("Downloading"));
     filterListBox->Append(_("Processing"));
     filterListBox->Append(_("Unknown"));
-    BoxSizer1->Add(filterListBox, 0, wxALL | wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 1);
+    BoxSizer1->Add(filterListBox, 0, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
     downloadControl = buildDownloadControl(this, ID_DOWNLOAD_CONTROL);
-    BoxSizer1->Add(downloadControl, 1, wxALL | wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 1);
+    BoxSizer1->Add(downloadControl, 1, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
     SetSizer(BoxSizer1);
     BoxSizer1->Fit(this);
     BoxSizer1->SetSizeHints(this);
@@ -58,7 +59,7 @@ wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID 
     wxDataViewCtrl* downloadDataViewCtrl = new wxDataViewCtrl(parent, id, wxDefaultPosition, wxDefaultSize, wxDV_MULTIPLE | wxDV_ROW_LINES);
     //wxASSERT(!downloadDataViewCtrl);
 
-    DownloadListModel* downloadListModel = new DownloadListModel;
+    DownloadListModel* downloadListModel = new DownloadListModel(m_dataStore);
 
     downloadDataViewCtrl->AssociateModel(downloadListModel);
     downloadListModel->DecRef();

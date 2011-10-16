@@ -31,6 +31,10 @@
         <File Name="src/lib/json/jsoncpp.cpp"/>
         <File Name="src/lib/json/json.h"/>
       </VirtualDirectory>
+      <VirtualDirectory Name="signals">
+        <File Name="src/lib/signals/delegate.h"/>
+        <File Name="src/lib/signals/signal.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <File Name="src/main.h"/>
     <File Name="src/main.cpp"/>
@@ -93,6 +97,7 @@
       
       
       
+      
       ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -131,7 +136,8 @@
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(ProjectPath)build/src/moarload" IntermediateDirectory="" Command="./moarload" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(ProjectPath)build/src/" PauseExecWhenProcTerminates="no"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[]]>
+        <![CDATA[
+      ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>

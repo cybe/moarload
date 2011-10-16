@@ -4,7 +4,11 @@
 
 #include "../log.h"
 
-PyloadDataStore::PyloadDataStore() {}
+PyloadDataStore::PyloadDataStore() {
+    //    Bind(wxEVT_NETWORK, &PyloadDataStore::onQueuePackagesUpdated, this, ID_QUEUE_PACKAGES);
+    Connect(ID_QUEUE_PACKAGES, wxEVT_NETWORK,
+            wxCommandEventHandler(PyloadDataStore::onQueuePackagesUpdated), NULL, this);
+}
 
 PyloadDataStore::~PyloadDataStore() {}
 
@@ -21,9 +25,17 @@ const std::vector<EventInfo> PyloadDataStore::getEvents() {
 void PyloadDataStore::setQueuePackages(const std::vector<PackageData>& queuePackages) {
     boost::unique_lock<boost::shared_mutex> lock(m_mutex);
     m_queuePackages = queuePackages;
+    lock.unlock();
+    wxCommandEvent* event = new wxCommandEvent(wxEVT_NETWORK, ID_QUEUE_PACKAGES);
+    QueueEvent(event);
 }
 
 const std::vector<PackageData> PyloadDataStore::getQueuePackages() {
     boost::shared_lock<boost::shared_mutex> lock(m_mutex);
     return m_queuePackages;
+}
+
+void PyloadDataStore::onQueuePackagesUpdated(wxCommandEvent& event) {
+    LOG(logDEBUG) << "onQueuePackagesUpdated";
+    m_queuePackagesUpdate();
 }

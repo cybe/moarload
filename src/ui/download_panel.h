@@ -8,11 +8,13 @@
 #include <wx/listbox.h>
 //*)
 
+#include "../services/pyload_data_store.h"
+
 class DownloadListModel;
 
 class DownloadPanel: public wxPanel {
 public:
-    DownloadPanel(wxWindow* parent, wxWindowID id = wxID_ANY);
+    DownloadPanel(wxWindow* parent, PyloadDataStore& pyloadDataStore, wxWindowID id = wxID_ANY);
     virtual ~DownloadPanel();
 
     //(*Declarations(DownloadPanel)
@@ -28,7 +30,10 @@ protected:
 
 private:
     //(*Handlers(DownloadPanel)
+    void OnPaint(wxPaintEvent& event);
     //*)
+
+    PyloadDataStore& m_dataStore;
 
     wxDataViewCtrl* buildDownloadControl(wxPanel* parent, wxWindowID id = wxID_ANY);
     void expandContainerNodesRec(wxDataViewCtrl* control, DownloadListModel* model, wxDataViewItemArray& children);

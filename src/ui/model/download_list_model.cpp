@@ -1,30 +1,17 @@
 #include "download_list_model.h"
 
-#include "../../log.h"
 //#include "../../services/pyload_data_store.h"
 //#include "../../services/pyload_requester.h"
 //#include "../../net/request.h"
 
 
-DownloadListModel::DownloadListModel() {
+DownloadListModel::DownloadListModel(PyloadDataStore& dataStore) :
+    m_dataStore(dataStore),
+    m_backendNode(new DownloadListModelNodeBackend()) {
 
     //r.sendRequest(new GetQueuePackagesRequest(ds));
 
-    m_backendNode = new DownloadListModelNodeBackend();
-
-    std::vector<PackageData> packages; // = ds.getQueuePackages();
-    std::vector<PackageData>::iterator package;
-    for (package = packages.begin() ; package != packages.end(); ++package) {
-        DownloadListModelNode* packageNode = new DownloadListModelNodePackage(m_backendNode, *package);
-        m_backendNode->appendChild(packageNode);
-
-        std::vector<FileData> files = package->links;
-        std::vector<FileData>::iterator file;
-        for (file = files.begin() ; file != files.end(); ++file) {
-            DownloadListModelNode* fileNode = new DownloadListModelNodeFile(packageNode, *file);
-            packageNode->appendChild(fileNode);
-        }
-    }
+    m_dataStore.getQueuePackagesUpdate().Connect(this, &DownloadListModel::updateQueuePackages);
 
     //    m_root = new DownloadListModelNode(NULL, wxString("PyLoad"));
     //
@@ -163,4 +150,26 @@ bool DownloadListModel::SetValue(const wxVariant& variant, const wxDataViewItem&
             LOG(logWARNING) <<  "DownloadListModel::SetValue: wrong column" << col ;
     }
     return false;
+}
+
+
+void DownloadListModel::updateQueuePackages() {
+    LOG(logDEBUG) << "DownloadListModel::updateQueuePackages";
+
+    std::vector<PackageData> packages = m_dataStore.getQueuePackages();
+    std::vector<PackageData>::iterator package;
+    for (package = packages.begin() ; package != packages.end(); ++package) {
+        DownloadListModelNode* packageNode = new DownloadListModelNodePackage(m_backendNode, *package);
+        m_backendNode->appendChild(packageNode);
+        ItemAdded(wxDataViewItem(static_cast<void*>(m_backendNode)), wxDataViewItem(static_cast<void*>(packageNode)));
+
+        std::vector<FileData> files = package->links;
+        std::vector<FileData>::iterator file;
+        for (file = files.begin() ; file != files.end(); ++file) {
+            DownloadListModelNode* fileNode = new DownloadListModelNodeFile(packageNode, *file);
+            packageNode->appendChild(fileNode);
+            ItemAdded(wxDataViewItem(static_cast<void*>(packageNode)), wxDataViewItem(static_cast<void*>(fileNode)));
+        }
+    }
+    ItemChanged(wxDataViewItem(static_cast<void*>(m_backendNode)));
 }
