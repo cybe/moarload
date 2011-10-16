@@ -8,6 +8,9 @@
 #include <vector>
 
 #include <boost/thread/shared_mutex.hpp>
+#ifdef Yield
+    #undef Yield
+#endif
 #include <wx/event.h>
 
 #include "../lib/signals/signal.h"
