@@ -36,7 +36,6 @@ private:
     PyloadDataStore& m_dataStore;
 
     wxDataViewCtrl* buildDownloadControl(wxPanel* parent, wxWindowID id = wxID_ANY);
-    void expandContainerNodesRec(wxDataViewCtrl* control, DownloadListModel* model, wxDataViewItemArray& children);
 
     DECLARE_EVENT_TABLE()
 };

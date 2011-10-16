@@ -5,9 +5,10 @@
 //#include "../../net/request.h"
 
 
-DownloadListModel::DownloadListModel(PyloadDataStore& dataStore) :
+DownloadListModel::DownloadListModel(PyloadDataStore& dataStore, wxDataViewCtrl* downloadDataViewCtrl) :
     m_dataStore(dataStore),
-    m_backendNode(new DownloadListModelNodeBackend()) {
+    m_backendNode(new DownloadListModelNodeBackend()),
+    m_downloadDataViewCtrl(downloadDataViewCtrl) {
 
     //r.sendRequest(new GetQueuePackagesRequest(ds));
 
@@ -156,12 +157,19 @@ bool DownloadListModel::SetValue(const wxVariant& variant, const wxDataViewItem&
 void DownloadListModel::updateQueuePackages() {
     LOG(logDEBUG) << "DownloadListModel::updateQueuePackages";
 
+    wxDataViewItemArray nodesToExpand;
+    wxDataViewItem backendNodeItem(static_cast<void*>(m_backendNode));
+    ItemChanged(backendNodeItem);
+    nodesToExpand.Add(backendNodeItem);
+
     std::vector<PackageData> packages = m_dataStore.getQueuePackages();
     std::vector<PackageData>::iterator package;
     for (package = packages.begin() ; package != packages.end(); ++package) {
         DownloadListModelNode* packageNode = new DownloadListModelNodePackage(m_backendNode, *package);
         m_backendNode->appendChild(packageNode);
-        ItemAdded(wxDataViewItem(static_cast<void*>(m_backendNode)), wxDataViewItem(static_cast<void*>(packageNode)));
+        wxDataViewItem packageNodeItem(static_cast<void*>(packageNode));
+        ItemAdded(backendNodeItem, packageNodeItem);
+        nodesToExpand.Add(packageNodeItem);
 
         std::vector<FileData> files = package->links;
         std::vector<FileData>::iterator file;
@@ -171,5 +179,8 @@ void DownloadListModel::updateQueuePackages() {
             ItemAdded(wxDataViewItem(static_cast<void*>(packageNode)), wxDataViewItem(static_cast<void*>(fileNode)));
         }
     }
-    ItemChanged(wxDataViewItem(static_cast<void*>(m_backendNode)));
+
+    for (size_t i = 0; i < nodesToExpand.GetCount(); ++i) {
+        m_downloadDataViewCtrl->Expand(nodesToExpand[i]);
+    }
 }

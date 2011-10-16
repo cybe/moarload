@@ -59,7 +59,7 @@ wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID 
     wxDataViewCtrl* downloadDataViewCtrl = new wxDataViewCtrl(parent, id, wxDefaultPosition, wxDefaultSize, wxDV_MULTIPLE | wxDV_ROW_LINES);
     //wxASSERT(!downloadDataViewCtrl);
 
-    DownloadListModel* downloadListModel = new DownloadListModel(m_dataStore);
+    DownloadListModel* downloadListModel = new DownloadListModel(m_dataStore, downloadDataViewCtrl);
 
     downloadDataViewCtrl->AssociateModel(downloadListModel);
     downloadListModel->DecRef();
@@ -127,20 +127,5 @@ wxDataViewCtrl* DownloadPanel::buildDownloadControl(wxPanel* parent, wxWindowID 
     // select initially the ninth symphony:
     //m_ctrl[0]->Select(m_music_model->GetNinthItem());
 
-    wxDataViewItemArray children;
-    downloadListModel->GetChildren(NULL, children);
-    expandContainerNodesRec(downloadDataViewCtrl, downloadListModel, children);
-
     return downloadDataViewCtrl;
-}
-
-void DownloadPanel::expandContainerNodesRec(wxDataViewCtrl* control, DownloadListModel* model, wxDataViewItemArray& nodes) {
-    for (size_t i = 0; i < nodes.GetCount(); ++i) {
-        if (model->IsContainer(nodes[i])) {
-            control->Expand(nodes[i]);
-            wxDataViewItemArray children;
-            model->GetChildren(nodes[i], children);
-            expandContainerNodesRec(control, model, children);
-        }
-    }
 }

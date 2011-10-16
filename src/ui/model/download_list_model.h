@@ -14,9 +14,10 @@ private:
 
     PyloadDataStore& m_dataStore;
     DownloadListModelNode* m_backendNode;
+    wxDataViewCtrl* m_downloadDataViewCtrl;
 
 public:
-    DownloadListModel(PyloadDataStore& dataStore);
+    DownloadListModel(PyloadDataStore& dataStore, wxDataViewCtrl* downloadDataViewCtrl);
     virtual ~DownloadListModel();
 
     virtual unsigned int GetColumnCount() const {
