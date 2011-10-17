@@ -27,6 +27,7 @@ private:
     boost::shared_mutex m_mutex;
     std::vector<PackageData> m_queuePackages;
     std::vector<EventInfo> m_events;
+    ServerStatus m_serverStatus;
 
 public:
     PyloadDataStore();
@@ -40,6 +41,9 @@ public:
     Signals::Signal0<void>& getQueuePackagesUpdate() {
         return m_queuePackagesUpdate;
     }
+    
+    void setServerStatus(const ServerStatus& serverStatus);
+    const ServerStatus& getServerStatus();
 };
 
 #endif // PYLOAD_DATA_STORE_H

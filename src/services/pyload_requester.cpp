@@ -46,14 +46,13 @@ void RequestWorker::run() {
 }
 
 
+// RecurringRequestsWorker
+
 RecurringRequestsWorker::RecurringRequestsWorker(RequestQueue& requestQueue,
                                                  PyloadDataStore& dataStore) :
     m_requestQueue(requestQueue),
     m_dataStore(dataStore) {
 }
-
-
-// RecurringRequestsWorker
 
 void RecurringRequestsWorker::run() {
     try {
@@ -61,6 +60,7 @@ void RecurringRequestsWorker::run() {
         LOG(logDEBUG) << "recurring requests thread started";
         while (true) {
             m_requestQueue.addRequest(new GetEventsRequest(m_dataStore, "pyload-uuid"));
+            m_requestQueue.addRequest(new StatusServerRequest(m_dataStore));
             boost::this_thread::sleep(boost::posix_time::seconds(1));
         }
     } catch (boost::thread_interrupted&) {

@@ -19,3 +19,10 @@ void GetQueuePackagesRequest::execute(PyLoadConnector* pyloadConnection) {
     pyloadConnection->getQueueData(data);
     m_store.setQueuePackages(data);
 }
+
+void StatusServerRequest::execute(PyLoadConnector* pyloadConnection)
+{
+    LOG(logDEBUG) << "StatusServerRequest";
+    ServerStatus status;
+    pyloadConnection->statusServer(status);
+}

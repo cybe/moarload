@@ -12,10 +12,8 @@ public:
     Request(PyloadDataStore& store) : m_store(store) {};
     virtual ~Request() {};
     virtual void execute(PyLoadConnector* pyloadConnection) = 0;
-
 protected:
     PyloadDataStore& m_store;
-    
 private:
     // Neither copy nor assign
     Request(const Request&);
@@ -27,7 +25,6 @@ public:
     GetEventsRequest(PyloadDataStore& store, std::string uuid) : Request(store), m_uuid(uuid) {};
     virtual ~GetEventsRequest() {};
     virtual void execute(PyLoadConnector* pyloadConnection);
-
 private:
     // Neither copy nor assign
     GetEventsRequest(const GetEventsRequest&);
@@ -40,11 +37,21 @@ public:
     GetQueuePackagesRequest(PyloadDataStore& store) : Request(store) {};
     virtual ~GetQueuePackagesRequest() {};
     virtual void execute(PyLoadConnector* pyloadConnection);
-    
 private:
     // Neither copy nor assign
     GetQueuePackagesRequest(const GetQueuePackagesRequest&);
     void operator=(const GetQueuePackagesRequest&);
+};
+
+class StatusServerRequest : public Request {
+public:
+    StatusServerRequest(PyloadDataStore& store) : Request(store) {};
+    virtual ~StatusServerRequest() {};
+    virtual void execute(PyLoadConnector* pyloadConnection) ;
+private:
+    // Neither copy nor assign
+    StatusServerRequest(const StatusServerRequest&);
+    void operator=(const StatusServerRequest&);
 };
 
 #endif // REQUEST_H

@@ -39,3 +39,13 @@ void PyloadDataStore::onQueuePackagesUpdated(wxCommandEvent& event) {
     LOG(logDEBUG) << "onQueuePackagesUpdated";
     m_queuePackagesUpdate();
 }
+
+const ServerStatus& PyloadDataStore::getServerStatus() {
+    boost::shared_lock<boost::shared_mutex> lock(m_mutex);
+    return m_serverStatus;
+}
+
+void PyloadDataStore::setServerStatus(const ServerStatus& serverStatus) {
+    boost::unique_lock<boost::shared_mutex> lock(m_mutex);
+    m_serverStatus = serverStatus;
+}
