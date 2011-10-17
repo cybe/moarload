@@ -25,4 +25,5 @@ void StatusServerRequest::execute(PyLoadConnector* pyloadConnection)
     LOG(logDEBUG) << "StatusServerRequest";
     ServerStatus status;
     pyloadConnection->statusServer(status);
+    m_store.setServerStatus(status);
 }
