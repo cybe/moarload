@@ -41,7 +41,7 @@ void RequestWorker::run() {
             delete r;
         }
     } catch (boost::thread_interrupted&) {
-        LOG(logDEBUG) << "received thread interruption signal";
+        LOG(logDEBUG) << "terminate request execution thread";
     }
 }
 
@@ -64,7 +64,7 @@ void RecurringRequestsWorker::run() {
             boost::this_thread::sleep(boost::posix_time::seconds(1));
         }
     } catch (boost::thread_interrupted&) {
-        LOG(logDEBUG) << "received thread interruption signal";
+        LOG(logDEBUG) << "terminate recurring requests thread";
     }
 }
 
@@ -78,17 +78,13 @@ PyloadRequester::PyloadRequester(PyloadDataStore& dataStore) :
                     m_cs.getThriftHostname(),
                     m_cs.getThriftPort()),
     m_recurringRequestsWorker(m_requestQueue, m_dataStore) {
-    LOG(logDEBUG) << "starting request execution thread";
     m_requestExecutionThread = boost::thread(&RequestWorker::run, &m_requestWorker);
-    LOG(logDEBUG) << "starting recurring requests execution thread";
     m_recurringRequestsExecutionThread = boost::thread(&RecurringRequestsWorker::run, &m_recurringRequestsWorker);
 }
 
 PyloadRequester::~PyloadRequester() {
-    LOG(logDEBUG) << "stopping recurring requests execution thread";
     m_recurringRequestsExecutionThread.interrupt();
     m_recurringRequestsExecutionThread.join();
-    LOG(logDEBUG) << "stopping request execution thread";
     m_requestExecutionThread.interrupt();
     m_requestExecutionThread.join();
 }
